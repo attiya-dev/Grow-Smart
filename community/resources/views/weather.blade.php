@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather - GrowSmart</title>
+<title>{{ __('messages.weather_info') }} - {{ __('messages.grow_smart') }}</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -128,8 +128,14 @@ body {
 /* Loading Spinner */
 #loadingSection {
     text-align: center;
-    padding: 80px 0;
+    padding: 60px 20px;
+    border: 1px dashed #c5d7f2;
+    border-radius: 18px;
+    background: #f8fbff;
+    color: #1f2937;
 }
+#loadingSection i { font-size: 52px; }
+#loadingSection h5 { margin-top: 20px; font-weight: 600; }
 .location-btn {
     background: linear-gradient(135deg, #ff477e, #ff6b9d);
     border: none;
@@ -141,15 +147,9 @@ body {
     transition: 0.3s;
     box-shadow: 0 4px 15px rgba(255,71,126,0.4);
 }
-.location-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,71,126,0.5); }
-.stat-box {
-    background: rgba(255,255,255,0.15);
-    border-radius: 12px;
-    padding: 12px 18px;
-    text-align: center;
+.location-btn:hover {
+    transform: translateY(-1px);
 }
-.stat-box .label { font-size: 12px; opacity: 0.8; }
-.stat-box .value { font-size: 20px; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -158,17 +158,17 @@ body {
 <div id="sidebar">
     <div class="logo">
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        <span class="ms-2">GrowSmartPanel</span>
+        <span class="ms-2">{{ __('messages.grow_smart_panel') }}</span>
     </div>
     <hr>
     <ul>
-        <li><a href="/"><i class="bi bi-house-door"></i><span>Home</span></a></li>
-        <li><a href="/grid"><i class="bi bi-bar-chart"></i><span>Crop Data</span></a></li>
-        <li><a href="/garden"><i class="bi bi-bug"></i><span>Pest Management</span></a></li>
-        <li><a href="/register"><i class="bi bi-people"></i><span>Community</span></a></li>
+        <li><a href="/"><i class="bi bi-house-door"></i><span>{{ __('messages.home') }}</span></a></li>
+        <li><a href="/grid"><i class="bi bi-bar-chart"></i><span>{{ __('messages.crops_data') }}</span></a></li>
+        <li><a href="/garden"><i class="bi bi-bug"></i><span>{{ __('messages.pest_management') }}</span></a></li>
+        <li><a href="/register"><i class="bi bi-people"></i><span>{{ __('messages.community') }}</span></a></li>
         <li class="separator"></li>
-        <li><a href="/soil"><i class="bi bi-cpu"></i><span>AI Soil Analysis</span></a></li>
-        <li><a href="/weather" class="active"><i class="bi bi-cloud-sun"></i><span>Weather Info</span></a></li>
+        <li><a href="/soil"><i class="bi bi-cpu"></i><span>{{ __('messages.ai_soil_analysis') }}</span></a></li>
+        <li><a href="/weather" class="active"><i class="bi bi-cloud-sun"></i><span>{{ __('messages.weather_info') }}</span></a></li>
     </ul>
 </div>
 
@@ -177,7 +177,7 @@ body {
     <div class="topbar">
         <div class="site-name">
             <img src="{{ asset('images/logo1.jpg') }}" alt="Logo">
-            GrowSmart
+            {{ __('messages.grow_smart') }}
         </div>
         <div>
             <i class="bi bi-search me-3"></i>
@@ -186,16 +186,16 @@ body {
     </div>
     <hr>
 
-    <h4 class="mb-1"><i class="bi bi-cloud-sun-fill text-warning me-2"></i>Weather Dashboard</h4>
-    <p class="text-muted mb-4">“View your current location weather and 7-day forecast”</p>
+    <h4 class="mb-1"><i class="bi bi-cloud-sun-fill text-warning me-2"></i>{{ __('messages.weather_dashboard') }}</h4>
+    <p class="text-muted mb-4">{{ __('messages.weather_dashboard_description') }}</p>
 
     {{-- Loading / Permission Section --}}
     <div id="loadingSection">
         <i class="bi bi-geo-alt-fill text-danger" style="font-size:48px;"></i>
-        <h5 class="mt-3 mb-2">“Location Permission Required”</h5>
-        <p class="text-muted mb-4">“Allow your location to view weather information”</p>
+        <h5 class="mt-3 mb-2">{{ __('messages.weather_permission_required') }}</h5>
+        <p class="text-muted mb-4">{{ __('messages.allow_location_weather') }}</p>
         <button class="location-btn" onclick="getLocation()">
-            <i class="bi bi-geo-alt me-2"></i>“Show Weather Using My Location”
+            <i class="bi bi-geo-alt me-2"></i>{{ __('messages.show_weather_using_location') }}
         </button>
         <p class="text-danger mt-3 small" id="locationError" style="display:none;"></p>
     </div>
@@ -219,32 +219,32 @@ body {
                         </div>
                     </div>
                     <div class="weather-meta">
-                        <span><i class="bi bi-thermometer-half"></i>Feels like: <span id="feelsLike">—</span>°C</span>
+                        <span><i class="bi bi-thermometer-half"></i>{{ __('messages.feels_like') }}: <span id="feelsLike">—</span>°C</span>
                     </div>
                 </div>
                 <div class="col-md-6 mt-3 mt-md-0">
                     <div class="row g-3">
                         <div class="col-6">
                             <div class="stat-box">
-                                <div class="label"><i class="bi bi-droplet me-1"></i>Humidity</div>
+                                <div class="label"><i class="bi bi-droplet me-1"></i>{{ __('messages.humidity') }}</div>
                                 <div class="value" id="humidityVal">—</div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="stat-box">
-                                <div class="label"><i class="bi bi-wind me-1"></i>Wind</div>
+                                <div class="label"><i class="bi bi-wind me-1"></i>{{ __('messages.wind') }}</div>
                                 <div class="value" id="windVal">—</div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="stat-box">
-                                <div class="label"><i class="bi bi-eye me-1"></i>Visibility</div>
+                                <div class="label"><i class="bi bi-eye me-1"></i>{{ __('messages.visibility') }}</div>
                                 <div class="value" id="visibilityVal">—</div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="stat-box">
-                                <div class="label"><i class="bi bi-calendar3 me-1"></i>Today</div>
+                                <div class="label"><i class="bi bi-calendar3 me-1"></i>{{ __('messages.today') }}</div>
                                 <div class="value" style="font-size:14px;" id="todayDate">—</div>
                             </div>
                         </div>
@@ -254,7 +254,7 @@ body {
         </div>
 
         {{-- 7-Day Forecast --}}
-        <h5 class="mb-3"><i class="bi bi-calendar-week me-2 text-primary"></i>“7-Day Forecast”</h5>
+        <h5 class="mb-3"><i class="bi bi-calendar-week me-2 text-primary"></i>{{ __('messages.seven_day_forecast') }}</h5>
         <div class="row g-3 mb-4" id="forecastContainer">
             {{-- JS se yahan cards aayenge --}}
         </div>
@@ -270,7 +270,7 @@ body {
         {{-- Refresh button --}}
         <div class="text-center mt-4">
             <button class="location-btn" onclick="getLocation()" style="font-size:14px; padding:10px 24px;">
-                <i class="bi bi-arrow-clockwise me-2"></i>“Refresh Weather Data”
+                <i class="bi bi-arrow-clockwise me-2"></i>{{ __('messages.refresh_weather_data') }}
             </button>
         </div>
     </div>
@@ -293,7 +293,7 @@ function getLocation() {
 
     document.getElementById('loadingSection').innerHTML = `
         <div class="spinner-border text-primary" role="status"></div>
-        <p class="mt-3 text-muted">Location dhundh raha hai...</p>
+        <p class="mt-3 text-muted">Finding your location....</p>
     `;
 
     navigator.geolocation.getCurrentPosition(

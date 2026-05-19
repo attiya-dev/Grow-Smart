@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ app()->getLocale() === 'ur' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,12 @@
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background-color: rgb(72, 188, 72);">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">Community Forum</a>
-        <div>
+        <div class="d-flex gap-2 align-items-center">
+            <!-- Language Switcher -->
+            <x-language-switcher />
+            
             @auth
                 <span class="text-white me-3">Hello, {{ auth()->user()->name }}</span>
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">

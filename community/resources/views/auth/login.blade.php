@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ app()->getLocale() === 'ur' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Forum</title>
+    <title>@lang('messages.login')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -104,24 +105,24 @@
     <div class="signup-box">
 
         <div class="form-section">
-            <h2>Login</h2>
+            <h2>@lang('messages.login')</h2>
 
             <form method="POST" action="/login">
                 @csrf 
                 <div class="input-box">
                      <i class="fa fa-envelope"></i>
-                    <input type="email" placeholder="Your Email" required name="email">
+                    <input type="email" placeholder="@lang('messages.your_email')" required name="email">
                 </div>
                  <div class="input-box">
                  <i class="fa fa-lock"></i>
-                <input type="password" placeholder="Password" required name="password" id="password">
+                <input type="password" placeholder="@lang('messages.password')" required name="password" id="password">
                <i class="fa fa-eye eye-toggle" id="togglePassword"></i>
              </div>
                <button type="submit" class="btn" 
         style="background-color: rgb(72, 188, 72); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-          Login</button><br>
+          @lang('messages.login_button')</button><br>
                 <p class="mt-3">
-             Don't have an account? <a href="/register">Register</a>
+             @lang('messages.dont_have_account') <a href="/register">@lang('messages.register')</a>
                 </p>
             </form>
              <script>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ app()->getLocale() === 'ur' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Forum</title>
+    <title>@lang('messages.register')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -103,41 +104,41 @@
     <div class="signup-box">
 
         <div class="form-section">
-            <h2>Register</h2>
+            <h2>@lang('messages.register')</h2>
 
              <form method="POST" action="/register">
                 @csrf 
 
                 <div class="input-box">
                     <i class="fa fa-user"></i>
-                    <input type="text" placeholder="Your Name" required name="name">
+                    <input type="text" placeholder="@lang('messages.your_name')" required name="name">
                 </div>
 
                 <div class="input-box">
                      <i class="fa fa-envelope"></i>
-                    <input type="email" placeholder="Your Email" required name="email">
+                    <input type="email" placeholder="@lang('messages.your_email')" required name="email">
                 </div>
 
                  <div class="input-box">
                <i class="fa fa-lock"></i>
-                <input type="password" placeholder="Password" required name="password" id="password">
+                <input type="password" placeholder="@lang('messages.password')" required name="password" id="password">
               <i class="fa fa-eye eye-toggle" id="togglePassword"></i>
                </div>
               <div class="input-box">
                      <i class="fa fa-lock"></i>
-                 <input type="password" name="password_confirmation" class="form-control" id="repeatpassword">
+                 <input type="password" name="password_confirmation" class="form-control" id="repeatpassword" placeholder="@lang('messages.confirm_password')">
               <i class="fa fa-eye eye-toggle" id="toggleRepeatPassword"></i>
                     </div>
                 <div class="terms">
                     <input type="checkbox" required>
-                    <label>I agree to all statements in <a href="#">Terms of service</a></label><br><br>
+                    <label>@lang('messages.i_agree_to_terms') <a href="#">@lang('messages.terms_of_service')</a></label><br><br>
                 </div>
 
                <button type="submit" class="btn" 
         style="background-color: rgb(72, 188, 72); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-          REGISTER</button><br>
+          @lang('messages.register_button')</button><br>
                 <p class="mt-3">
-             <p class="mt-3"> Already have an account? <a href="/login">Login</a> </p>
+             <p class="mt-3">@lang('messages.already_have_account') <a href="/login">@lang('messages.login')</a> </p>
                 </p>
             </form>
            <script>

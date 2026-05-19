@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
     'expert' => \App\Http\Middleware\ExpertMiddleware::class,
     'user' => \App\Http\Middleware\UserMiddleware::class,
         ]);
+        
+        // Add SetLocale middleware to run on all web requests
+        $middleware->web(append: \App\Http\Middleware\SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

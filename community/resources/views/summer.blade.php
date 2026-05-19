@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    dir="{{ app()->getLocale() === 'ur' ? 'rtl' : 'ltr' }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,23 +136,23 @@ body {
 <div id="sidebar">
     <div class="logo">
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        <span class="ms-2">GrowSmartPanel</span>
+        <span class="ms-2">@lang('messages.grow_smart_panel')</span>
     </div>
     <hr>
 <ul>
-    <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house-door"></i><span>Home</span></a></li>
+    <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house-door"></i><span>@lang('messages.home')</span></a></li>
     
-    <li><a href="/grid" class="{{ request()->is('grid') ? 'active' : '' }}"><i class="bi bi-bar-chart"></i><span>Crop Data</span></a></li>
+    <li><a href="/grid" class="{{ request()->is('grid') ? 'active' : '' }}"><i class="bi bi-bar-chart"></i><span>@lang('messages.crop_data')</span></a></li>
     
-    <li><a href="/garden" class="{{ request()->is('garden') ? 'active' : '' }}"><i class="bi bi-bug"></i><span>Pest Management</span></a></li>
+    <li><a href="/garden" class="{{ request()->is('garden') ? 'active' : '' }}"><i class="bi bi-bug"></i><span>@lang('messages.pest_management')</span></a></li>
     
-    <li><a href="/register" class="{{ request()->is('register') ? 'active' : '' }}"><i class="bi bi-people"></i><span>Community</span></a></li>
+    <li><a href="/register" class="{{ request()->is('register') ? 'active' : '' }}"><i class="bi bi-people"></i><span>@lang('messages.community')</span></a></li>
     
     <li class="separator"></li>
     
-    <li><a href="/soil" class="{{ request()->is('soil') ? 'active' : '' }}"><i class="bi bi-cpu"></i><span>AI Soil Analysis</span></a></li>
+    <li><a href="/soil" class="{{ request()->is('soil') ? 'active' : '' }}"><i class="bi bi-cpu"></i><span>@lang('messages.ai_soil_analysis')</span></a></li>
     
-    <li><a href="/weather" class="{{ request()->is('weather') ? 'active' : '' }}"><i class="bi bi-cloud-sun"></i><span>Weather Info</span></a></li>
+    <li><a href="/weather" class="{{ request()->is('weather') ? 'active' : '' }}"><i class="bi bi-cloud-sun"></i><span>@lang('messages.weather_info')</span></a></li>
 </ul>
 </div>
 
@@ -162,6 +163,47 @@ body {
             GrowSmart
         </div>
         <div>
+            <!-- Language Toggle Button -->
+            <style>
+                .language-toggle {
+                    display: inline-flex;
+                    gap: 4px;
+                    align-items: center;
+                }
+                .language-toggle a {
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    text-decoration: none;
+                    font-size: 12px;
+                    font-weight: 500;
+                    transition: all 0.2s;
+                    border: 1px solid transparent;
+                }
+                .language-toggle a.active {
+                    background-color: #041e49;
+                    color: white;
+                }
+                .language-toggle a:not(.active) {
+                    background-color: #f0f4f9;
+                    color: #444746;
+                    border: 1px solid #ddd;
+                }
+                .language-toggle a:hover {
+                    background-color: #e1e5e9;
+                }
+            </style>
+            <div class="language-toggle me-3">
+                <a href="{{ route('language.switch', 'en') }}" 
+                   class="{{ app()->getLocale() === 'en' ? 'active' : '' }}"
+                   title="Switch to English">
+                    EN
+                </a>
+                <a href="{{ route('language.switch', 'ur') }}" 
+                   class="{{ app()->getLocale() === 'ur' ? 'active' : '' }}"
+                   title="اردو میں تبدیل کریں">
+                    UR
+                </a>
+            </div>
             <i class="bi bi-search me-3"></i>
             <i class="bi bi-bell"></i>
         </div>

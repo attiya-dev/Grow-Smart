@@ -7,134 +7,229 @@ use Illuminate\Support\Facades\Http;
 
 class WeatherController extends Controller
 {
-    // ✅ STEP 1: Weather page show karo (blade view return karo)
+    /**
+     * ✅ Show Weather Page
+     */
     public function index()
     {
         return view('weather');
     }
 
-    // ✅ STEP 2: Frontend se lat/lon aaye to weather API call karo
+    /**
+     * ✅ Get Weather Data Based on Current Location
+     */
     public function getWeather(Request $request)
     {
         $lat = $request->input('lat');
         $lon = $request->input('lon');
 
-        // OpenWeatherMap API key - .env se uthao
+        // Validate coordinates
+        if (!$lat || !$lon) {
+            return response()->json([
+                'error' => 'Location coordinates are missing.'
+            ], 400);
+        }
+
+        // OpenWeather API Key
         $apiKey = env('OPENWEATHER_API_KEY');
 
-        // --- Current Weather API Call ---
-        $currentUrl = "https://api.openweathermap.org/data/2.5/weather"
-            . "?lat={$lat}&lon={$lon}&appid={$apiKey}&units=metric";
-
-        $currentResponse = Http::get($currentUrl);
-
-        // --- 7-Day Forecast API Call (free plan mein 5 days milte hain, 3-hour interval) ---
-        $forecastUrl = "https://api.openweathermap.org/data/2.5/forecast"
-            . "?lat={$lat}&lon={$lon}&appid={$apiKey}&units=metric";
-
-        $forecastResponse = Http::get($forecastUrl);
-
-        if ($currentResponse->failed() || $forecastResponse->failed()) {
-            return response()->json(['error' => 'Weather data fetch karne mein masla hua.'], 500);
+        if (!$apiKey) {
+            return response()->json([
+                'error' => 'OpenWeather API key is missing.'
+            ], 500);
         }
 
-        $current = $currentResponse->json();
-        $forecastRaw = $forecastResponse->json();
+        try {
 
-        // --- 7 din ka daily forecast nikalo (har din ka ek record) ---
-        $dailyForecast = [];
-        $seenDates = [];
+            /**
+             * ✅ Current Weather API
+             */
+            $currentUrl = "https://api.openweathermap.org/data/2.5/weather"
+                . "?lat={$lat}&lon={$lon}&appid={$apiKey}&units=metric";
 
-        foreach ($forecastRaw['list'] as $item) {
-            $date = date('Y-m-d', $item['dt']);
-            $today = date('Y-m-d');
+            $currentResponse = Http::timeout(10)->get($currentUrl);
 
-            // Aaj ka skip karo, aur sirf ek entry per day lo
-            if ($date === $today || in_array($date, $seenDates)) continue;
+            /**
+             * ✅ Forecast API
+             */
+            $forecastUrl = "https://api.openweathermap.org/data/2.5/forecast"
+                . "?lat={$lat}&lon={$lon}&appid={$apiKey}&units=metric";
 
-            $seenDates[] = $date;
-            $dailyForecast[] = [
-                'date'        => date('D, d M', $item['dt']),
-                'temp_max'    => round($item['main']['temp_max']),
-                'temp_min'    => round($item['main']['temp_min']),
-                'description' => ucfirst($item['weather'][0]['description']),
-                'icon'        => $item['weather'][0]['icon'],
-                'humidity'    => $item['main']['humidity'],
-                'wind'        => $item['wind']['speed'],
-            ];
+            $forecastResponse = Http::timeout(10)->get($forecastUrl);
 
-            if (count($dailyForecast) >= 7) break;
+            // Check API Errors
+            if ($currentResponse->failed() || $forecastResponse->failed()) {
+                return response()->json([
+                    'error' => 'Unable to fetch weather data.'
+                ], 500);
+            }
+
+            $current = $currentResponse->json();
+            $forecastRaw = $forecastResponse->json();
+
+            /**
+             * ✅ Daily Forecast
+             */
+            $dailyForecast = [];
+            $seenDates = [];
+
+            foreach ($forecastRaw['list'] as $item) {
+
+                $date = gmdate('Y-m-d', $item['dt']);
+                $today = gmdate('Y-m-d');
+
+                // Skip today & duplicate dates
+                if ($date === $today || in_array($date, $seenDates)) {
+                    continue;
+                }
+
+                $seenDates[] = $date;
+
+                $dailyForecast[] = [
+                    'date'        => gmdate('D, d M', $item['dt']),
+                    'temp_max'    => round($item['main']['temp_max']),
+                    'temp_min'    => round($item['main']['temp_min']),
+                    'description' => ucfirst($item['weather'][0]['description']),
+                    'icon'        => $item['weather'][0]['icon'],
+                    'humidity'    => $item['main']['humidity'],
+                    'wind'        => $item['wind']['speed'],
+                ];
+
+                // Maximum 7 days
+                if (count($dailyForecast) >= 7) {
+                    break;
+                }
+            }
+
+            /**
+             * ✅ Generate Farming Tips
+             */
+            $tips = $this->generateFarmingTips($current);
+
+            /**
+             * ✅ Final Response
+             */
+            return response()->json([
+                'current' => [
+                    'city'        => $current['name'],
+                    'country'     => $current['sys']['country'],
+                    'temp'        => round($current['main']['temp']),
+                    'feels_like'  => round($current['main']['feels_like']),
+                    'humidity'    => $current['main']['humidity'],
+                    'wind'        => $current['wind']['speed'],
+                    'pressure'    => $current['main']['pressure'],
+                    'description' => ucfirst($current['weather'][0]['description']),
+                    'icon'        => $current['weather'][0]['icon'],
+                    'visibility'  => isset($current['visibility'])
+                        ? round($current['visibility'] / 1000, 1) . ' km'
+                        : 'N/A',
+                ],
+
+                'forecast' => $dailyForecast,
+
+                'tips' => $tips,
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'error' => 'Something went wrong.',
+                'message' => $e->getMessage()
+            ], 500);
         }
-
-        // --- Farming Tips generate karo weather ke basis par ---
-        $tips = $this->generateFarmingTips($current);
-
-        return response()->json([
-            'current'  => [
-                'city'        => $current['name'],
-                'country'     => $current['sys']['country'],
-                'temp'        => round($current['main']['temp']),
-                'feels_like'  => round($current['main']['feels_like']),
-                'humidity'    => $current['main']['humidity'],
-                'wind'        => $current['wind']['speed'],
-                'description' => ucfirst($current['weather'][0]['description']),
-                'icon'        => $current['weather'][0]['icon'],
-                'visibility'  => isset($current['visibility']) ? round($current['visibility'] / 1000, 1) : 'N/A',
-            ],
-            'forecast' => $dailyForecast,
-            'tips'     => $tips,
-        ]);
     }
 
-    // ✅ STEP 3: Weather ke hisaab se farming tips generate karo
+    /**
+     * ✅ Generate Farming Tips According To Weather
+     */
     private function generateFarmingTips(array $weather): array
     {
         $tips = [];
-        $temp        = $weather['main']['temp'];
-        $humidity    = $weather['main']['humidity'];
-        $windSpeed   = $weather['wind']['speed'];
-        $description = strtolower($weather['weather'][0]['main']); // Rain, Clear, Clouds etc.
 
-        // 🌧️ Barish ke tips
-        if (str_contains($description, 'rain') || str_contains($description, 'drizzle')) {
-            $tips[] = '🌧️ Barish ho rahi hai — aaj spray ya pesticides mat karo, ye kaam nahi karte barish mein.';
-            $tips[] = '💧 Zaidi paani se fasal kharab ho sakti hai — drainage check karo.';
-            $tips[] = '🌱 Barish ke baad zameen mein naami rehti hai, isliye agle 1-2 din irrigation rokh lo.';
+        $temp = $weather['main']['temp'];
+        $humidity = $weather['main']['humidity'];
+        $windSpeed = $weather['wind']['speed'];
+
+        // Detailed weather condition
+        $description = strtolower($weather['weather'][0]['description']);
+
+        /**
+         * 🌧️ Rain Tips
+         */
+        if (
+            str_contains($description, 'rain') ||
+            str_contains($description, 'drizzle') ||
+            str_contains($description, 'thunderstorm')
+        ) {
+
+            $tips[] = __('messages.tip_rain_avoid_spray');
+            $tips[] = __('messages.tip_rain_check_drainage');
+            $tips[] = __('messages.tip_rain_reduce_irrigation');
         }
 
-        // ☀️ Garmi ke tips
+        /**
+         * ☀️ Hot Weather Tips
+         */
         if ($temp > 35) {
-            $tips[] = '🌡️ Shadeed garmi hai (' . round($temp) . '°C) — dopahar mein irrigation ya koi bhari kaam se bachao.';
-            $tips[] = '💦 Subah suwere ya shaam ko paani do — din mein paani jald ud jata hai.';
-            $tips[] = '🧴 Seedlings ko garmi se bachao — shade net use karo agar mumkin ho.';
+
+            $tips[] = __('messages.tip_extreme_heat', ['temp' => round($temp)]);
+            $tips[] = __('messages.tip_heat_water_early');
+            $tips[] = __('messages.tip_heat_shade_nets');
         }
 
-        // ❄️ Thandi ke tips
+        /**
+         * ❄️ Cold Weather Tips
+         */
         if ($temp < 10) {
-            $tips[] = '🥶 Thandk hai (' . round($temp) . '°C) — nazuk faslein jaise tamatar ya mirch ko cover karo raat mein.';
-            $tips[] = '🌿 Frost ka khatra hai — seeds germinate nahi hote itni thandi mein, intezaar karo.';
+
+            $tips[] = __('messages.tip_cold_weather', ['temp' => round($temp)]);
+            $tips[] = __('messages.tip_cold_cover_crops');
+            $tips[] = __('messages.tip_frost_risk');
         }
 
-        // 💧 Umidgi ke tips
+        /**
+         * 💧 High Humidity Tips
+         */
         if ($humidity > 80) {
-            $tips[] = '💨 Humidity bohot zyada hai (' . $humidity . '%) — fungal disease ka khatra hai, fungicide spray karo.';
-            $tips[] = '🍃 Paudo ke darmiyan hawa guzarne ki jagah rakho taake fungus na lage.';
+
+            $tips[] = __('messages.tip_high_humidity', ['humidity' => $humidity]);
+            $tips[] = __('messages.tip_high_humidity_airflow');
+            $tips[] = __('messages.tip_fungicide');
         }
 
+        /**
+         * 🏜️ Dry Weather Tips
+         */
         if ($humidity < 30) {
-            $tips[] = '🏜️ Hawa bohot khushk hai — faslein jaldi murjha sakti hain, regular irrigation zaroori hai.';
+
+            $tips[] = __('messages.tip_dry_air');
+            $tips[] = __('messages.tip_dry_increase_irrigation');
         }
 
-        // 💨 Tez hawa ke tips
+        /**
+         * 🌬️ Strong Wind Tips
+         */
         if ($windSpeed > 10) {
-            $tips[] = '🌬️ Tez hawa chal rahi hai — chhidkao (spray) mat karo, chemical idhar udhar ja sakti hai.';
-            $tips[] = '🌾 Unche paudo ko sahara (stakes) do taake girein na.';
+
+            $tips[] = __('messages.tip_strong_wind');
+            $tips[] = __('messages.tip_wind_no_spray');
+            $tips[] = __('messages.tip_wind_support_crops');
         }
 
-        // ☁️ Aam tips agar koi specific condition nahi
+        /**
+         * ☁️ Cloudy Weather Tips
+         */
+        if (str_contains($description, 'cloud')) {
+
+            $tips[] = __('messages.tip_cloudy_monitor');
+        }
+
+        /**
+         * ✅ Default Tips
+         */
         if (empty($tips)) {
-            $tips[] = '✅ Mausam theek hai — fasal ki routine care jaari rakho.';
-            $tips[] = '📋 Aaj fertilizer ya pesticide spray karne ka acha waqt hai.';
+
+            $tips[] = __('messages.tip_favorable_weather');
+            $tips[] = __('messages.tip_good_time_fertilize');
         }
 
         return $tips;
