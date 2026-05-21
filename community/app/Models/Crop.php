@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\CropDetail;
 use Illuminate\Database\Eloquent\Model;
 
 class Crop extends Model
@@ -13,4 +13,8 @@ class Crop extends Model
         'season',
         'type'
     ];
+    public function detail()
+    {
+        return $this->hasOne(CropDetail::class, 'crop_id');
+    }
 }
