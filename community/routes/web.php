@@ -4,18 +4,11 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CropController;
-use App\Http\Controllers\WeatherController;
-use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
-
-// Language switcher routes
-Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/soil', function () {
     return view('soil');
 });
-Route::get('/weather', [WeatherController::class, 'index']);
-Route::post('/weather/data', [WeatherController::class, 'getWeather']);
 Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/grid', [CropController::class, 'grid'])->name('grid');
 Route::get('/summer', [CropController::class, 'summer'])->name('summer');
@@ -103,3 +96,6 @@ Route::post('/admin/question/reject', [AdminController::class, 'rejectQuestion']
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
+    
+Route::get('/crop/{id}', [CropController::class, 'show'])->name('crop.show');
+
