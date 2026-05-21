@@ -62,7 +62,7 @@ class CropSeeder extends Seeder
         'type' => 'indoor'
     ]);
      Crop::create([
-        'name' => 'Tomatoes',
+        'name' => 'Tomato',
         'image' => 'tomatoes.jpg',
         'season' => 'summer',
         'type' => 'indoor'
@@ -86,7 +86,7 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Tumeric',
+        'name' => 'Turmeric',
         'image' => 'tumeric.jpg',
         'season' => 'summer',
         'type' => 'outdoor'
@@ -104,13 +104,13 @@ class CropSeeder extends Seeder
         'type' => 'indoor'
     ]);
     Crop::create([
-        'name' => 'Chillies',
+        'name' => 'Chilli',
         'image' => 'chilies.jpg',
         'season' => 'summer',
         'type' => 'indoor'
     ]);
     Crop::create([
-        'name' => 'Soyabean',
+        'name' => 'Soybean',
         'image' => 'soybeans.jpg',
         'season' => 'summer',
         'type' => 'outdoor'
@@ -176,7 +176,7 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Peaches',
+        'name' => 'Peach',
         'image' => 'peaches.jpg',
         'season' => 'summer',
         'type' => 'outdoor'
@@ -200,7 +200,7 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
      Crop::create([
-        'name' => 'Rapaseed',
+        'name' => 'Rapeseed',
         'image' => 'rapaseed.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
@@ -242,19 +242,19 @@ class CropSeeder extends Seeder
         'type' => 'indoor'
     ]);
      Crop::create([
-        'name' => 'Peas',
+        'name' => 'Pea',
         'image' => 'peas.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
      Crop::create([
-        'name' => 'Carrots',
+        'name' => 'Carrot',
         'image' => 'carrots.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
      Crop::create([
-        'name' => 'Onions',
+        'name' => 'Onion',
         'image' => 'onion.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
@@ -278,7 +278,7 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Beans',
+        'name' => 'Bean',
         'image' => 'beans.jpg',
         'season' => 'winter',
         'type' => 'indoor'
@@ -302,7 +302,7 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Turnips',
+        'name' => 'Turnip',
         'image' => 'turnips.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
@@ -338,7 +338,7 @@ class CropSeeder extends Seeder
         'type' => 'indoor'
     ]);
     Crop::create([
-        'name' => 'Oranges',
+        'name' => 'Orange',
         'image' => 'orange.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
@@ -350,37 +350,37 @@ class CropSeeder extends Seeder
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Lemons',
+        'name' => 'Lemon',
         'image' => 'lemmon.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'GrapeFruits',
+        'name' => 'GrapeFruit',
         'image' => 'grapefruit.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Sweet Limes',
+        'name' => 'Sweet Lime',
         'image' => 'sweet.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Pomegranates',
+        'name' => 'Pomegranate',
         'image' => 'pomegranates.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Apples',
+        'name' => 'Apple',
         'image' => 'apples.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
     ]);
     Crop::create([
-        'name' => 'Dates',
+        'name' => 'Date',
         'image' => 'dates.jpg',
         'season' => 'winter',
         'type' => 'outdoor'
