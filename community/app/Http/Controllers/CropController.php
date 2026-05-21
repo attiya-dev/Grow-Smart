@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Crop;
+use App\Models\CropDetail;
 use Illuminate\Http\Request;
 
 class CropController extends Controller
@@ -33,22 +34,25 @@ public function winter()
 }
 public function grains()
 {
-    $crops = Crop::whereIn('name', ['Rice', 'Maize (Corn)','Sorghum', 'Pearl Millet', 'Mung', 'Soyabean', 'Groundnut','Wheat', 'Barley','Rapaseed', 'Canola', 'Tobacco', 'Lucerne', 'Linseed', 'Sunflower', 'Isabgol'])->get();
+    $crops = Crop::whereIn('name', ['Rice', 'Maize (Corn)','Sorghum', 'Pearl Millet', 'Mung', 'Soybean', 'Groundnut','Wheat', 'Barley','Rapeseed', 'Canola', 'Tobacco', 'Lucerne', 'Linseed', 'SunFlower', 'Isabgol'])->get();
     return view('grains', compact('crops'));
 }
 public function fruit()
 {
-    $crops = Crop::whereIn('name', ['Banana', 'Mango', 'Lychee', 'Watermelon', 'Melon', 'Guava', 'Papaya', 'Peaches','Oranges','Kinnow','Lemons','GrapeFruits','Sweet Limes','Pomegranates','Apples','Dates'])->get();
+    $crops = Crop::whereIn('name', ['Banana', 'Mango', 'Lychee', 'Watermelon', 'Melon', 'Guava', 'Papaya', 'Peach','Orange','Kinnow','Lemon','GrapeFruit','Sweet Lime','Pomegranate','Apple','Date'])->get();
     return view('fruit', compact('crops'));
 }
 public function vegetable()
 {
-    $crops = Crop::whereIn('name', ['Bottle Gourd', 'Okra', 'Tomatoes', 'Pumpkin', 'Bitter Gourd', 'Cucumber', 'Eggplant (Brinjal)','Chillies','Arum','Ginger','Turmeric','Fenugreek (Methi)','Potato','Spinach','Peas','Carrots','Onions','Cauliflower','Cabbage','Radish','Beans','Lettuce','Garlic','Beetroot','Turnips','Coriander','Broccoli','Mint','Fennel'])->get();
+    $crops = Crop::whereIn('name', ['Bottle Gourd', 'Okra', 'Tomato', 'Pumpkin', 'Bitter Gourd', 'Cucumber', 'EggPlant(Brinjal)','Chilli','Arum','Ginger','Turmeric','Fenugreek(Methi)','Potato','Spinach','Pea','Carrot','Onion','CauliFlower','Cabbage','Radish','Bean','Lettuce','Garlic','Beetroot','Turnip','Coriander','Broccoli','Mint','Fennel'])->get();
     return view('vegetable', compact('crops'));
 }
-public function dashboard()
+ public function show(int $id)
 {
-    $crops = Crop::whereIn('name', ['Wheat', 'Rice', 'Cotton', 'SugarCane', 'Mustard', 'SunFlower', 'Pumpkin','Cucumber'])->get();
-    return view('/', compact('crops'));
+     $crop = Crop::findOrFail($id);
+
+    $cropDetail = CropDetail::where('crop_id', $id)->first();
+
+   return view('crop-detail', compact('crop', 'cropDetail'));
 }
 }
