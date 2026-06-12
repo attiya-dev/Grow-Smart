@@ -3,16 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Crop;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function dashboard()
-    {
-        return view('dashboard');
+
+public function dashboard()
+{
+    $month = now()->month;
+
+    if ($month >= 4 && $month <= 9) {
+        // April to September
+        $sliderCrops = Crop::where('season', 'summer')
+                           ->take(10)
+                           ->get();
+    } else {
+        // October to March
+        $sliderCrops = Crop::where('season', 'winter')
+                           ->take(10)
+                           ->get();
     }
+
+    $cropDataCrops = Crop::take(8)->get();
+
+    $pestCrops = Crop::has('pestManagements')
+                     ->take(8)
+                     ->get();
+
+    return view('dashboard', compact(
+        'sliderCrops',
+        'cropDataCrops',
+        'pestCrops'
+    ));
+}
     public function showRegister()
     {
         return view('auth.register');
