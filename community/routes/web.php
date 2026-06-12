@@ -3,6 +3,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\PestManagementController;
 use App\Http\Controllers\CropController;
 use Illuminate\Support\Facades\Route;
 
@@ -98,4 +99,5 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth');
     
 Route::get('/crop/{id}', [CropController::class, 'show'])->name('crop.show');
+Route::get('/crop/{id}/pest', [CropController::class, 'pest'])->name('crop.pest');
 
