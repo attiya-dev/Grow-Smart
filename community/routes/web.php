@@ -6,10 +6,20 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PestManagementController;
 use App\Http\Controllers\CropController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/soil', function () {
-    return view('soil');
+    $userId = null;
+    $token = null;
+    $timestamp = null;
+    if (Auth::check()) {
+        $userId = Auth::id();
+        $timestamp = time();
+        $token = hash_hmac('sha256', $userId . '|' . $timestamp, env('APP_KEY'));
+    }
+    return view('soil', compact('userId', 'token', 'timestamp'));
 });
 Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/grid', [CropController::class, 'grid'])->name('grid');
@@ -103,4 +113,15 @@ Route::get('/crop/{id}', [CropController::class, 'show'])->name('crop.show');
 Route::get('/crop/{id}/pest', [CropController::class, 'pest'])->name('crop.pest');
 Route::get('/weather',[WeatherController::class,'index']);
 Route::post('/weather/data',[WeatherController::class,'getWeather']);
+
+Route::get('/weather', [WeatherController::class, 'index'])->name('weather');
+Route::post('/weather/data', [WeatherController::class, 'getWeather'])->name('weather.data');
+
+Route::get('/language/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ur'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('language.switch');
 
