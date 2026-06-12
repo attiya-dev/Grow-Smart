@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Crop;
 use App\Models\CropDetail;
+use App\Models\PestManagement;
 use Illuminate\Http\Request;
 
 class CropController extends Controller
@@ -54,5 +55,11 @@ public function vegetable()
     $cropDetail = CropDetail::where('crop_id', $id)->first();
 
    return view('crop-detail', compact('crop', 'cropDetail'));
+}
+public function pest(int $id)
+{
+    $crop = Crop::with('pestManagements')->findOrFail($id);
+
+    return view('pest-detail', compact('crop'));
 }
 }
