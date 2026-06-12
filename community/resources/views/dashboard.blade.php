@@ -252,6 +252,75 @@ body {
         padding: 10px !important;
     }
 }
+/* Professional Footer */
+.footer {
+    background: #1f2937;
+    color: white;
+    margin-top: 40px;
+    padding: 40px 25px 15px;
+    border-radius: 15px 15px 0 0;
+}
+
+.footer h5 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #4ade80;
+}
+
+.footer p,
+.footer a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    color: #4ade80;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.footer-links {
+    padding-left: 0;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 12px;
+    font-size: 20px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    color: #4ade80;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-top: 30px;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+.footer .row {
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.15);
+    padding-top: 15px;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -309,205 +378,43 @@ body {
         <h3 id="sliderTitle">All Crops</h3>
     </div>
 
-    <div class="horizontal-slider" id="cropSlider"></div>
-    
-    <br> 
-    <div class="d-flex justify-content-between align-items-center mb-2">
-        <h3>Crops Data</h3>
-        <a href="/grid" style="color:#ff477e; text-decoration:none;">See All</a>
-    </div>
+    <div class="horizontal-slider" id="cropSlider">
 
-    <div class="crop-data-wrapper p-3 mb-4">
-        <div class="row g-3 crop-data">
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="wheat.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/wheat.jpg') }}" alt="Wheat">
-                        <div class="card-info">
-                            <div class="crop-title">Wheat</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+@foreach($sliderCrops as $crop)
 
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="rice.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/rice.jpg') }}" alt="Rice">
-                        <div class="card-info">
-                            <div class="crop-title">Rice</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+<a href="{{ route('crop.show',$crop->id) }}"
+   class="text-decoration-none">
 
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="potatoes.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/cotton.jpg') }}" alt="Cotton">
-                        <div class="card-info">
-                            <div class="crop-title">Cotton</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+    <div class="crop-card"
+         style="min-width:220px;max-width:220px;">
 
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="corn.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/Sugarcane.jpg') }}" alt="SugarCane">
-                        <div class="card-info">
-                            <div class="crop-title">SugarCane</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="soybeans.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/mustard.jpg') }}" alt="Mustard">
-                        <div class="card-info">
-                            <div class="crop-title">Mustard</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="tomatoes.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/sunflower.jpg') }}" alt="SunFlower">
-                        <div class="card-info">
-                            <div class="crop-title">SunFlower</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="apples.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/pumpkin.jpg') }}" alt="Pumpkin">
-                        <div class="card-info">
-                            <div class="crop-title">Pumpkin</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="carrots.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/cucumber.jpg') }}" alt="Cucumber">
-                        <div class="card-info">
-                            <div class="crop-title">Cucumber</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div class="card-badge">
+            Most Common Crop
         </div>
-    </div>
-    
-    <br> 
-    <div class="d-flex justify-content-between align-items-center mb-2">
-        <h3>Pest Management</h3>
-        <a href="garden" style="color:#ff477e; text-decoration:none;">See All</a>
-    </div>
 
-    <div class="crop-data-wrapper p-3 mb-4">
-        <div class="row g-3 crop-data">
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="wheat.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/canola.jpg') }}" alt="Canola">
-                        <div class="card-info">
-                            <div class="crop-title">Canola</div>
-                        </div>
-                    </div>
-                </a>
+        <img src="{{ asset('images/'.$crop->image) }}"
+             alt="{{ $crop->name }}">
+
+        <div class="card-info">
+
+            <div class="crop-title">
+                {{ $crop->name }}
             </div>
 
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="rice.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/radish.jpg') }}" alt="Radish">
-                        <div class="card-info">
-                            <div class="crop-title">Radish</div>
-                        </div>
-                    </div>
-                </a>
+            <div style="font-size:12px;color:#888;">
+                
             </div>
 
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="potatoes.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/potato.jpg') }}" alt="Potato">
-                        <div class="card-info">
-                            <div class="crop-title">Potato</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="corn.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/spinach.jpg') }}" alt="Spinach">
-                        <div class="card-info">
-                            <div class="crop-title">Spinach</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="soybeans.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/peas.jpg') }}" alt="Peas">
-                        <div class="card-info">
-                            <div class="crop-title">Peas</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="tomatoes.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/carrots.jpg') }}" alt="Carrots">
-                        <div class="card-info">
-                            <div class="crop-title">Carrots</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="apples.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/onion.jpg') }}" alt="Onion">
-                        <div class="card-info">
-                            <div class="crop-title">Onion</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-6">
-                <a href="carrots.html" class="text-decoration-none">
-                    <div class="crop-card shadow-sm">
-                        <img src="{{ asset('images/cabbage.jpg') }}" alt="Cabbage">
-                        <div class="card-info">
-                            <div class="crop-title">Cabbage</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
         </div>
+
     </div>
 
-    <br><h3 class="mt-4">Services</h3>
+</a>
+
+@endforeach
+
+</div>
+     <br><h3 class="mt-4">Services</h3>
     <div class="crop-data-wrapper p-3 mb-4">
         <div class="row g-3">
             <div class="col-12 col-md-4">
@@ -547,23 +454,215 @@ body {
             </div>
         </div>
     </div>
+    <br> 
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3>Crops Data</h3>
+        <a href="/grid" style="color:#ff477e; text-decoration:none;">See All</a>
+    </div>
+
+   <div class="crop-data-wrapper p-3 mb-4">
+    <div class="row g-3 crop-data">
+
+        @foreach($cropDataCrops as $crop)
+
+        <div class="col-md-3 col-sm-6 col-6">
+
+            <a href="{{ route('crop.show',$crop->id) }}"
+               class="text-decoration-none">
+
+                <div class="crop-card shadow-sm">
+
+                    <img src="{{ asset('images/'.$crop->image) }}"
+                         alt="{{ $crop->name }}">
+
+                    <div class="card-info">
+
+                        <div class="crop-title">
+                            {{ $crop->name }}
+                        </div>
+
+                        <div class="mt-2">
+
+                            <button class="btn btn-success btn-sm">
+                                View Details
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        @endforeach
+
+    </div>
+</div>
+    <br> 
+     <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3>Pest Management</h3>
+        <a href="/grid" style="color:#ff477e; text-decoration:none;">See All</a>
+    </div>
+    <div class="crop-data-wrapper p-3 mb-4">
+    <div class="row g-3 crop-data">
+
+        @foreach($pestCrops as $crop)
+
+        <div class="col-md-3 col-sm-6 col-6">
+
+            <a href="{{ route('crop.pest',$crop->id) }}"
+               class="text-decoration-none">
+
+                <div class="crop-card shadow-sm">
+
+                    <img src="{{ asset('images/'.$crop->image) }}"
+                         alt="{{ $crop->name }}">
+
+                    <div class="card-info">
+
+                        <div class="crop-title">
+                            {{ $crop->name }}
+                        </div>
+
+                        <div class="mt-2">
+
+                            <button class="btn btn-success btn-sm">
+                                Pest Details
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        @endforeach
+
+    </div>
 </div>
 
-<script>
-// Crop Data
-const cropData = {
-    all: [
-        { name: "Wheat", img: "{{ asset('images/wheat.jpg') }}" },
-        { name: "Rice", img: "{{ asset('images/rice.jpg') }}" },
-        { name: "Potatoes", img: "{{ asset('images/potato.jpg') }}" },
-        { name: "Corn", img: "{{ asset('images/corn.jpg') }}" },
-        { name: "Soybeans", img: "{{ asset('images/soybeans.jpg') }}" }
-    ]
-};
+<!-- Professional Footer -->
+<footer class="footer">
 
-// Sidebar toggle handler
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- About -->
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <h5>
+                    <i class="bi bi-tree-fill"></i>
+                    GrowSmart
+                </h5>
+
+                <p>
+                    GrowSmart is an intelligent agriculture platform
+                    helping farmers with crop information, pest
+                    management, soil analysis, weather forecasting,
+                    and expert community support.
+                </p>
+
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4">
+
+                <h5>Quick Links</h5>
+
+                <ul class="footer-links">
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="/grid">Crop Data</a></li>
+
+                    <li><a href="/garden">Pest Management</a></li>
+
+                    <li><a href="/register">Community</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Services -->
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <h5>Services</h5>
+
+                <ul class="footer-links">
+
+                    <li><a href="/soil">AI Soil Analysis</a></li>
+
+                    <li><a href="/weather">Weather Forecast</a></li>
+
+                    <li><a href="/register">Expert Support</a></li>
+
+                    <li><a href="/grid">Crop Knowledge</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <h5>Contact Us</h5>
+
+                <p>
+                    <i class="bi bi-envelope-fill"></i>
+                    support@growsmart.com
+                </p>
+
+                <p>
+                    <i class="bi bi-telephone-fill"></i>
+                    +92 XXX XXXXXXX
+                </p>
+
+                <p>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Pakistan
+                </p>
+
+                <div class="footer-social mt-3">
+
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © {{ date('Y') }} GrowSmart. All Rights Reserved.
+            <br>
+            Empowering Farmers Through Smart Agriculture.
+
+        </div>
+
+    </div>
+
+</footer>
+</div>
+<script>
+// Sidebar toggle
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
+
     if (window.innerWidth > 768) {
         sidebar.classList.toggle('collapsed');
     } else {
@@ -577,66 +676,42 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Update category
-function updateCategory(category) {
-    const pills = document.querySelectorAll('.filter-pill');
-    pills.forEach(p => p.classList.remove('active'));
-    if(event) event.target.classList.add('active');
-
-    const titles = { all: "All Crops" };
-    document.getElementById('sliderTitle').innerText = titles[category] || "Crops";
-    renderCrops(category);
-}
-
-// Render crops inside slider
-function renderCrops(category) {
-    const slider = document.getElementById('cropSlider');
-    slider.innerHTML = '';
-    if(!cropData[category]) return;
-    
-    cropData[category].forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'crop-card';
-        // Enforce exact explicit width inside the flex slider container
-        card.style.minWidth = '220px';
-        card.style.maxWidth = '220px';
-        card.innerHTML = `
-            <div class="card-badge">Most Common Crops</div>
-            <img src="${item.img}" alt="${item.name}">
-            <div class="card-info">
-                <div class="crop-title">${item.name}</div>
-                <div style="font-size:12px; color:#888;">Commonly grown crops</div>
-            </div>
-        `;
-        slider.appendChild(card);
-    });
-}
-
-// Chain-style continuous loop auto-scroll logic
+// Auto slider animation
 let scrollInterval;
+
 function startAutoScroll() {
+
     const slider = document.getElementById('cropSlider');
-    if (scrollInterval) clearInterval(scrollInterval);
+
+    if (scrollInterval) {
+        clearInterval(scrollInterval);
+    }
 
     scrollInterval = setInterval(() => {
-        if (slider.children.length > 1) {
-            const firstCard = slider.children[0];
-            const cardWidth = firstCard.offsetWidth + 15; // Width of card + gap spacing
 
-            // Animate card smoothly sliding left out of frame
-            firstCard.style.marginLeft = `-${cardWidth}px`;
+        if (slider.children.length > 1) {
+
+            const firstCard = slider.children[0];
+
+            const cardWidth =
+                firstCard.offsetWidth + 15;
+
+            firstCard.style.marginLeft =
+                `-${cardWidth}px`;
 
             setTimeout(() => {
-                // Reset its style changes instantly, then seamlessly push it to the back row
+
                 firstCard.style.marginLeft = '0px';
+
                 slider.appendChild(firstCard);
-            }, 500); 
+
+            }, 500);
+
         }
-    }, 3000); 
+
+    }, 3000);
 }
 
-// Init execution
-renderCrops('all');
 startAutoScroll();
 </script>
 
