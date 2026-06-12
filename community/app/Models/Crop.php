@@ -17,4 +17,8 @@ class Crop extends Model
     {
         return $this->hasOne(CropDetail::class, 'crop_id');
     }
+    public function pestManagements()
+{
+    return $this->hasMany(PestManagement::class);
+}
 }
