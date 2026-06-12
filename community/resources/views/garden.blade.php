@@ -178,7 +178,7 @@ body {
         <div class="row g-3 crop-data">
             @foreach($summerCrops as $crop)
             <div class="col-md-3 col-6">
-                <a href="#" class="text-decoration-none">
+                <a href="{{ route('crop.pest', $crop->id) }}" class="text-decoration-none">
                     <div class="crop-card shadow-sm">
                         <img src="{{ asset('images/' . $crop->image) }}" alt="{{ $crop->name }}">
                         <div class="card-info">
@@ -188,6 +188,12 @@ body {
                                 {{ ucfirst($crop->type) }}
                             </div>
                             @endif
+                             <div class="text-center mt-2">
+                            <a href="{{ route('crop.pest', $crop->id) }}"
+                               class="btn btn-success btn-sm">
+                                View Details
+                            </a>
+                        </div>
                         </div>
                     </div>
                 </a>
@@ -201,7 +207,7 @@ body {
         <div class="row g-3 crop-data">
             @foreach($winterCrops as $crop)
             <div class="col-md-3 col-6">
-                <a href="#" class="text-decoration-none">
+                <a href="{{ route('crop.pest', $crop->id) }}" class="text-decoration-none">
                     <div class="crop-card shadow-sm">
                         <img src="{{ asset('images/' . $crop->image) }}" alt="{{ $crop->name }}">
                         <div class="card-info">
@@ -211,6 +217,12 @@ body {
                                 {{ ucfirst($crop->type) }}
                             </div>
                             @endif
+                             <div class="text-center mt-2">
+                            <a href="{{ route('crop.pest', $crop->id) }}"
+                               class="btn btn-success btn-sm">
+                                View Details
+                            </a>
+                        </div>
                         </div>
                     </div>
                 </a>
