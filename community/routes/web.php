@@ -6,7 +6,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PestManagementController;
 use App\Http\Controllers\CropController;
-use App\Http\Controllers\WeatherController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
