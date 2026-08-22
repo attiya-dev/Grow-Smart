@@ -1,6 +1,4 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\LanguageController;
@@ -10,6 +8,21 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\CropController;
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/soil', function () {
+    $userId = null;
+    $token = null;
+    $timestamp = null;
+    if (Auth::check()) {
+        $userId = Auth::id();
+        $timestamp = time();
+        $token = hash_hmac('sha256', $userId . '|' . $timestamp, env('APP_KEY'));
+    }
+    return view('soil', compact('userId', 'token', 'timestamp'));
+});
 
 Route::get('/', [AuthController::class, 'home'])->name('home');
 
@@ -259,8 +272,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/account-settings/password', [AccountSettingsController::class, 'updatePassword'])
         ->name('account.password.update');
 
-    Route::get('/language/{language}', [LanguageController::class, 'change'])
-        ->name('language.change');
 });
 
 Route::view('/privacy-policy', 'privacy-policy')
@@ -268,3 +279,11 @@ Route::view('/privacy-policy', 'privacy-policy')
 
 Route::view('/about-us', 'about-us')
     ->name('about.us');
+Route::get('/language/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ur'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('language.switch');
+
