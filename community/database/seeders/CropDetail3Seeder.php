@@ -1767,7 +1767,6 @@ Modern technologies help increase yield, improve quality, and reduce crop losses
 
                     'importance_of_crop' => $detail['importance_of_crop'],
 
-                    'modern_technologies' => $detail['modern_technologies'],
                 ]);
             }
          }
