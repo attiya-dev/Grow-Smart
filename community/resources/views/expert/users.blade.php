@@ -1,58 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#eef5ee;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    margin-top:40px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.title h1{
+    color:#1b5e20;
+    font-size:38px;
+}
+
+.title p{
+    color:#666;
+    font-size:18px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h2{
+    color:#2e7d32;
+    margin-bottom:20px;
+}
+
+.count{
+    font-size:50px;
+    font-weight:bold;
+    color:#ff9800;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 30px;
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#145a18;
+}
+
+.no-question{
+    color:red;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+</style>
+
 <div class="container">
-    <h4 class="mb-3">All Users</h4>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Questions status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $index => $user)
-                    @php
-                        $unanswered = $user->questions()->doesntHave('answers')->count();
-                    @endphp
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            @if($unanswered > 0)
-                                <span class="badge bg-warning text-dark">{{ $unanswered }}</span>
-                            @else
-                                <span class="badge bg-success">All Answered</span>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('expert.user.questions', $user->id) }}"
-                               class="btn btn-sm {{ $unanswered > 0 ? 'btn-warning' : 'btn-success' }}">
-                               View Questions
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+<div class="title">
+
+<h1>Expert Dashboard</h1>
+
+<p>Select a category to answer community questions.</p>
+
 </div>
-@endsection
 
-</body>
-</html>
+<div class="cards">
+
+    <!-- Crop -->
+
+    <div class="card">
+
+        <h2>🌾 Crop Questions</h2>
+
+        @if($cropCount > 0)
+
+            <div class="count">
+
+                {{ $cropCount }}
+
+            </div>
+
+        @else
+
+            <div class="no-question">
+
+                No Questions Asked
+
+            </div>
+
+        @endif
+
+        <a href="{{ route('expert.crop.users') }}" class="btn">
+
+            Open
+
+        </a>
+
+    </div>
+
+
+    <!-- Fruit -->
+
+    <div class="card">
+
+        <h2>🍎 Fruit Questions</h2>
+
+        @if($fruitCount > 0)
+
+            <div class="count">
+
+                {{ $fruitCount }}
+
+            </div>
+
+        @else
+
+            <div class="no-question">
+
+                No Questions Asked
+
+            </div>
+
+        @endif
+
+        <a href="{{ route('expert.fruit.users') }}" class="btn">
+
+            Open
+
+        </a>
+
+    </div>
+
+
+    <!-- Vegetable -->
+
+    <div class="card">
+
+        <h2>🥕 Vegetable Questions</h2>
+
+        @if($vegetableCount > 0)
+
+            <div class="count">
+
+                {{ $vegetableCount }}
+
+            </div>
+
+        @else
+
+            <div class="no-question">
+
+                No Questions Asked
+
+            </div>
+
+        @endif
+
+        <a href="{{ route('expert.vegetable.users') }}" class="btn">
+
+            Open
+
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+@endsection
