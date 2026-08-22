@@ -1,24 +1,28 @@
 <?php
 
 namespace App\Models;
-use App\Models\CropDetail;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Crop extends Model
 {
-     protected $table = 'crops';
-     protected $fillable = [
+    protected $table = 'crops';
+
+    protected $fillable = [
         'image',
         'name',
         'season',
-        'type'
+        'type',
+        'category',
     ];
-    public function detail()
+
+    public function cropDetail()
     {
-        return $this->hasOne(CropDetail::class, 'crop_id');
+        return $this->hasOne(CropDetail::class);
     }
+
     public function pestManagements()
-{
-    return $this->hasMany(PestManagement::class);
-}
+    {
+        return $this->hasMany(PestManagement::class);
+    }
 }
