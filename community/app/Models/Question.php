@@ -2,23 +2,43 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $table = 'questions';
+    use HasFactory;
+
     protected $fillable = [
-    'user_id',
-    'question_text',
-    'question_image',
-    'status'
-];
+
+        'user_id',
+
+        'category',
+
+        'question_text',
+
+        'question_image',
+
+        'question_voice',
+
+        'status',
+
+    ];
 
 
+    protected $casts = [
+
+        'question_voice' => 'array',
+
+    ];
+
+
+   
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
 
     public function answers()
     {
