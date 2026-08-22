@@ -31,7 +31,6 @@ return new class extends Migration
             $table->longText('crop_varieties');
             $table->longText('nutritional_value');
             $table->longText('importance_of_crop');
-            $table->longText('modern_technologies');
             $table->timestamps();
         });
     }
