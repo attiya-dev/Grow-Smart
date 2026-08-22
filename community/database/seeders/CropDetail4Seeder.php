@@ -1769,7 +1769,6 @@ Modern technologies help farmers improve Isabgol production, maintain seed quali
 
                     'importance_of_crop' => $detail['importance_of_crop'],
 
-                    'modern_technologies' => $detail['modern_technologies'],
                 ]);
             }
          }
