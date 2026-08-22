@@ -2,1212 +2,655 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GrowSmart | Smart Agriculture</title>
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
-
-        /* =========================================================
-           GLOBAL
-        ========================================================= */
-
         * {
             box-sizing: border-box;
         }
 
         :root {
-
             --forest-dark: #102C27;
             --forest: #183A35;
             --primary: #2E6B57;
             --primary-light: #6F9581;
-
             --sage: #DDE9E2;
             --sage-light: #EEF4F0;
-
             --cream: #F7F6F1;
             --white: #FFFFFF;
-
             --text: #263832;
             --muted: #718079;
-
             --gold: #B9955A;
             --gold-light: #F1E8D7;
         }
-
 
         html {
             scroll-behavior: smooth;
         }
 
-
         body {
-
             margin: 0;
-
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: var(--cream);
-
             color: var(--text);
-
             overflow-x: hidden;
         }
-
 
         a {
             text-decoration: none;
         }
 
-
-        /* =========================================================
-           NAVBAR
-        ========================================================= */
-
         .navbar-main {
-
             position: absolute;
-
             top: 0;
             left: 0;
             right: 0;
-
             z-index: 1000;
-
             padding: 18px 5%;
-
             background: transparent;
         }
 
-
         .navbar-inner {
-
             max-width: 1400px;
-
             margin: auto;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
         }
 
-
-        /* =========================================================
-           LOGO
-        ========================================================= */
-
         .brand {
-
             display: flex;
-
             align-items: center;
-
             gap: 11px;
-
             color: white;
-
             font-size: 21px;
-
             font-weight: 700;
-
             letter-spacing: 0.2px;
         }
 
-
         .brand:hover {
-
             color: white;
         }
 
-
         .brand img {
-
             width: 44px;
-
             height: 44px;
-
             object-fit: cover;
-
             border-radius: 11px;
-
-            border: 2px solid rgba(255,255,255,0.25);
+            border: 2px solid rgba(255, 255, 255, 0.25);
         }
 
-
-        /* =========================================================
-           NAVIGATION
-        ========================================================= */
-
         .nav-right {
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
         }
 
-
         .nav-link-custom {
-
             color: #E4EEE9;
-
             font-size: 14px;
-
             padding: 10px 15px;
-
             transition: 0.25s;
         }
-
 
         .nav-link-custom:hover {
-
             color: white;
         }
 
-
         .nav-login {
-
             color: white;
-
-            border: 1px solid rgba(255,255,255,0.30);
-
-            background: rgba(255,255,255,0.08);
-
+            border: 1px solid rgba(255, 255, 255, 0.30);
+            background: rgba(255, 255, 255, 0.08);
             padding: 10px 19px;
-
             border-radius: 9px;
-
             font-size: 13px;
-
             font-weight: 600;
-
             transition: 0.25s;
-
             backdrop-filter: blur(8px);
         }
 
-
         .nav-login:hover {
-
-            background: rgba(255,255,255,0.16);
-
+            background: rgba(255, 255, 255, 0.16);
             color: white;
         }
 
-
         .nav-register {
-
             color: var(--forest-dark);
-
             background: #F3ECDF;
-
             padding: 10px 19px;
-
             border-radius: 9px;
-
             font-size: 13px;
-
             font-weight: 650;
-
             transition: 0.25s;
         }
 
-
         .nav-register:hover {
-
             background: white;
-
             color: var(--forest-dark);
-
             transform: translateY(-1px);
         }
 
-
-        /* =========================================================
-           HERO
-        ========================================================= */
-
         .hero {
-
             min-height: 100vh;
-
             height: 100vh;
-
             position: relative;
-
             display: flex;
-
             align-items: center;
-
             overflow: hidden;
-
             background:
-
                 linear-gradient(
                     90deg,
-                    rgba(9,35,29,0.96) 0%,
-                    rgba(15,54,43,0.88) 38%,
-                    rgba(20,62,49,0.54) 68%,
-                    rgba(20,62,49,0.18) 100%
+                    rgba(9, 35, 29, 0.96) 0%,
+                    rgba(15, 54, 43, 0.88) 38%,
+                    rgba(20, 62, 49, 0.54) 68%,
+                    rgba(20, 62, 49, 0.18) 100%
                 ),
-
-                url("{{ asset('images/agriculture.jpg') }}")
-
-                center center / cover no-repeat;
+                url("{{ asset('images/agriculture.jpg') }}") center center / cover no-repeat;
         }
 
-
-        /* =========================================================
-           HERO OVERLAY
-        ========================================================= */
-
         .hero::before {
-
             content: "";
-
             position: absolute;
-
             inset: 0;
-
             background:
-
                 radial-gradient(
                     circle at 80% 30%,
-                    rgba(255,255,255,0.08),
+                    rgba(255, 255, 255, 0.08),
                     transparent 30%
                 );
-
             pointer-events: none;
         }
 
-
-        /* =========================================================
-           DECORATIVE CIRCLE
-        ========================================================= */
-
         .hero::after {
-
             content: "";
-
             position: absolute;
-
             width: 500px;
-
             height: 500px;
-
             border-radius: 50%;
-
             right: -200px;
-
             bottom: -250px;
-
-            border: 1px solid rgba(255,255,255,0.10);
-
-            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.025);
         }
 
-
-        /* =========================================================
-           HERO CONTAINER
-        ========================================================= */
-
         .hero-container {
-
             width: 100%;
-
             max-width: 1400px;
-
             margin: auto;
-
             padding: 90px 5% 45px;
-
             position: relative;
-
             z-index: 5;
         }
 
-
         .hero-content {
-
             max-width: 700px;
         }
 
-
-        /* =========================================================
-           BADGE
-        ========================================================= */
-
         .hero-badge {
-
             display: inline-flex;
-
             align-items: center;
-
             gap: 8px;
-
             padding: 8px 14px;
-
             margin-bottom: 18px;
-
             border-radius: 30px;
-
             color: #E8F0EB;
-
-            background: rgba(255,255,255,0.09);
-
-            border: 1px solid rgba(255,255,255,0.16);
-
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             backdrop-filter: blur(10px);
-
             font-size: 12px;
-
             font-weight: 500;
         }
 
-
         .hero-badge i {
-
             color: #D6B16E;
         }
 
-
-        /* =========================================================
-           HEADING
-        ========================================================= */
-
         .hero h1 {
-
             margin: 0;
-
             color: white;
-
             font-size: clamp(42px, 5vw, 68px);
-
             line-height: 1.03;
-
             letter-spacing: -2px;
-
             font-weight: 750;
         }
 
-
         .hero h1 span {
-
             color: #D6E5DB;
         }
 
-
-        /* =========================================================
-           DESCRIPTION
-        ========================================================= */
-
         .hero-description {
-
             max-width: 610px;
-
             margin-top: 20px;
-
             margin-bottom: 25px;
-
             color: #D6E4DE;
-
             font-size: 15px;
-
             line-height: 1.7;
         }
 
-
-        /* =========================================================
-           BUTTONS
-        ========================================================= */
-
         .hero-buttons {
-
             display: flex;
-
             align-items: center;
-
             gap: 13px;
-
             flex-wrap: wrap;
         }
 
-
         .btn-register {
-
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 9px;
-
             padding: 13px 22px;
-
             background: #F3ECDF;
-
             color: var(--forest-dark);
-
             border-radius: 10px;
-
             font-size: 14px;
-
             font-weight: 650;
-
             transition: 0.25s;
         }
-
 
         .btn-register:hover {
-
             background: white;
-
             color: var(--forest-dark);
-
             transform: translateY(-3px);
-
-            box-shadow:
-                0 10px 25px rgba(0,0,0,0.18);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
         }
 
-
         .btn-login {
-
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 9px;
-
             padding: 12px 21px;
-
             color: white;
-
-            background: rgba(255,255,255,0.07);
-
-            border: 1px solid rgba(255,255,255,0.24);
-
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.24);
             border-radius: 10px;
-
             font-size: 14px;
-
             font-weight: 550;
-
             backdrop-filter: blur(8px);
-
             transition: 0.25s;
         }
 
-
         .btn-login:hover {
-
-            background: rgba(255,255,255,0.15);
-
+            background: rgba(255, 255, 255, 0.15);
             color: white;
-
             transform: translateY(-3px);
         }
 
-
-        /* =========================================================
-           TRUST TEXT
-        ========================================================= */
-
         .hero-note {
-
             display: flex;
-
             align-items: center;
-
             gap: 9px;
-
             margin-top: 22px;
-
             color: #AFC3BA;
-
             font-size: 12px;
         }
 
-
         .hero-note i {
-
             color: #A9C6B5;
-
             font-size: 15px;
         }
 
-
-        /* =========================================================
-           ABOUT SECTION
-        ========================================================= */
-
         .about {
-
             padding: 90px 5%;
-
             background: var(--cream);
         }
 
-
         .about-container {
-
             max-width: 1100px;
-
             margin: auto;
-
             text-align: center;
         }
 
-
         .about-label {
-
             color: var(--primary);
-
             font-size: 11px;
-
             font-weight: 700;
-
             text-transform: uppercase;
-
             letter-spacing: 1.8px;
-
             margin-bottom: 12px;
         }
 
-
         .about h2 {
-
             margin: 0 auto 18px;
-
             max-width: 750px;
-
             color: var(--forest-dark);
-
             font-size: clamp(30px, 4vw, 44px);
-
             line-height: 1.15;
-
             font-weight: 700;
         }
 
-
         .about p {
-
             max-width: 750px;
-
             margin: auto;
-
             color: var(--muted);
-
             font-size: 15px;
-
             line-height: 1.85;
         }
 
-
-        /* =========================================================
-           CTA SECTION
-        ========================================================= */
-
         .cta-section {
-
             padding: 25px 5% 90px;
-
             background: var(--cream);
         }
 
-
         .cta-box {
-
             max-width: 1200px;
-
             min-height: 300px;
-
             margin: auto;
-
             padding: 55px;
-
             border-radius: 22px;
-
             position: relative;
-
             overflow: hidden;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
-
-            background:
-
-                linear-gradient(
-                    120deg,
-                    #183A35,
-                    #285D4D
-                );
-
-            box-shadow:
-                0 18px 45px rgba(18,46,42,0.12);
+            background: linear-gradient(120deg, #183A35, #285D4D);
+            box-shadow: 0 18px 45px rgba(18, 46, 42, 0.12);
         }
-
 
         .cta-box::before {
-
             content: "";
-
             position: absolute;
-
             width: 300px;
-
             height: 300px;
-
             border-radius: 50%;
-
             left: -130px;
-
             top: -140px;
-
-            border: 1px solid rgba(255,255,255,0.10);
-
-            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.025);
         }
-
 
         .cta-box::after {
-
             content: "";
-
             position: absolute;
-
             width: 250px;
-
             height: 250px;
-
             border-radius: 50%;
-
             right: -100px;
-
             bottom: -150px;
-
-            background: rgba(185,149,90,0.10);
+            background: rgba(185, 149, 90, 0.10);
         }
 
-
         .cta-content {
-
             position: relative;
-
             z-index: 2;
         }
 
-
         .cta-content h2 {
-
             color: white;
-
             font-size: clamp(28px, 4vw, 40px);
-
             margin-bottom: 12px;
-
             font-weight: 700;
         }
 
-
         .cta-content p {
-
             max-width: 600px;
-
             margin: 0 auto 25px;
-
             color: #C8D9D1;
-
             font-size: 14px;
-
             line-height: 1.7;
         }
 
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
         footer {
-
             background: var(--forest-dark);
-
             padding: 35px 5% 22px;
-
             color: white;
         }
 
-
         .footer-container {
-
             max-width: 1200px;
-
             margin: auto;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             gap: 20px;
         }
 
-
         .footer-brand {
-
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
             color: white;
-
             font-size: 17px;
-
             font-weight: 650;
         }
 
-
         .footer-brand img {
-
             width: 34px;
-
             height: 34px;
-
             object-fit: cover;
-
             border-radius: 8px;
         }
 
-
         .footer-text {
-
             margin: 6px 0 0;
-
             color: #829A91;
-
             font-size: 11px;
         }
 
-
         .footer-copy {
-
             color: #718A80;
-
             font-size: 11px;
-
             text-align: right;
         }
 
-
-        /* =========================================================
-           ANIMATION
-        ========================================================= */
-
         .fade-up {
-
-            animation:
-                fadeUp 0.9s ease forwards;
+            animation: fadeUp 0.9s ease forwards;
         }
 
-
         @keyframes fadeUp {
-
             from {
-
                 opacity: 0;
-
-                transform:
-                    translateY(25px);
+                transform: translateY(25px);
             }
 
             to {
-
                 opacity: 1;
-
-                transform:
-                    translateY(0);
+                transform: translateY(0);
             }
         }
 
-
-        /* =========================================================
-           LAPTOP / TABLET
-        ========================================================= */
-
         @media (max-width: 992px) {
-
             .navbar-main {
-
                 padding: 16px 25px;
             }
 
-
             .hero-container {
-
                 padding-left: 6%;
-
                 padding-right: 6%;
             }
 
-
             .hero-content {
-
                 max-width: 650px;
             }
 
-
             .hero h1 {
-
                 font-size: 56px;
             }
-
         }
 
-
-        /* =========================================================
-           MOBILE
-        ========================================================= */
-
         @media (max-width: 768px) {
-
             .navbar-main {
-
                 padding: 16px 20px;
             }
 
-
             .nav-link-custom {
-
                 display: none;
             }
 
-
             .nav-login {
-
                 padding: 9px 14px;
             }
-
 
             .nav-register {
-
                 padding: 9px 14px;
             }
 
-
             .brand {
-
                 font-size: 18px;
             }
 
-
             .brand img {
-
                 width: 39px;
-
                 height: 39px;
             }
 
-
             .hero {
-
                 min-height: 100svh;
-
                 height: auto;
-
                 background-position: 62% center;
             }
 
-
             .hero-container {
-
                 padding: 115px 25px 45px;
             }
 
-
             .hero-content {
-
                 max-width: 620px;
             }
 
-
             .hero h1 {
-
                 font-size: 48px;
-
                 letter-spacing: -1.5px;
             }
 
-
             .hero-description {
-
                 font-size: 14px;
-
                 line-height: 1.7;
-
                 max-width: 560px;
             }
 
-
             .hero-note {
-
                 margin-top: 20px;
             }
 
-
             .about {
-
                 padding: 70px 25px;
             }
 
-
             .cta-section {
-
                 padding: 15px 20px 70px;
             }
 
-
             .cta-box {
-
                 padding: 45px 25px;
             }
 
-
             .footer-container {
-
                 flex-direction: column;
-
                 text-align: center;
             }
-
 
             .footer-copy {
-
                 text-align: center;
             }
-
         }
 
-
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
-
         @media (max-width: 480px) {
-
             .navbar-main {
-
                 padding: 14px 15px;
             }
 
-
             .brand span {
-
                 display: none;
             }
 
-
             .nav-right {
-
                 gap: 7px;
             }
 
-
             .nav-login,
             .nav-register {
-
                 padding: 8px 11px;
-
                 font-size: 11px;
             }
 
-
             .hero {
-
                 min-height: 100svh;
-
                 height: auto;
-
                 background-position: 62% center;
             }
 
-
             .hero-container {
-
                 padding: 105px 20px 40px;
             }
 
-
             .hero-content {
-
                 max-width: 100%;
             }
 
-
             .hero-badge {
-
                 font-size: 10px;
-
                 padding: 7px 12px;
-
                 margin-bottom: 17px;
             }
 
-
             .hero h1 {
-
                 font-size: 40px;
-
                 line-height: 1.08;
-
                 letter-spacing: -1px;
             }
 
-
             .hero-description {
-
                 font-size: 13px;
-
                 line-height: 1.65;
-
                 margin-top: 17px;
-
                 margin-bottom: 22px;
             }
 
-
             .hero-buttons {
-
                 flex-direction: column;
-
                 align-items: stretch;
-
                 gap: 10px;
             }
 
-
             .btn-register,
             .btn-login {
-
                 width: 100%;
-
                 padding: 12px 18px;
             }
 
-
             .hero-note {
-
                 align-items: flex-start;
-
                 font-size: 11px;
-
                 line-height: 1.5;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-
 <nav class="navbar-main">
-
     <div class="navbar-inner">
 
-
-        <!-- LOGO -->
-
-        <a
-            href="{{ route('home') }}"
-            class="brand"
-        >
-
-            <img
-                src="{{ asset('images/logo1.jpg') }}"
-                alt="GrowSmart"
-            >
-
-            <span>
-                GrowSmart
-            </span>
-
+        <a href="{{ route('home') }}" class="brand">
+            <img src="{{ asset('images/logo1.jpg') }}" alt="GrowSmart">
+            <span>GrowSmart</span>
         </a>
-
-
-        <!-- NAVIGATION -->
 
         <div class="nav-right">
 
-            <a
-                href="{{ route('login') }}"
-                class="nav-login"
-            >
+            <a href="{{ route('login') }}" class="nav-login">
                 Login
             </a>
 
-
-            <a
-                href="{{ route('register') }}"
-                class="nav-register"
-            >
+            <a href="{{ route('register') }}" class="nav-register">
                 Register
             </a>
 
         </div>
 
     </div>
-
 </nav>
-
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
 
 <section class="hero">
 
@@ -1215,90 +658,125 @@
 
         <div class="hero-content fade-up">
 
-
-            <!-- BADGE -->
-
             <div class="hero-badge">
-
                 <i class="bi bi-stars"></i>
-
                 Welcome to GrowSmart
-
             </div>
 
-
-            <!-- HEADING -->
-
             <h1>
-
                 Grow Smarter.<br>
-
                 <span>Farm Better.</span>
-
             </h1>
 
-
-            <!-- DESCRIPTION -->
-
             <p class="hero-description">
-
                 GrowSmart is your intelligent agriculture
                 platform designed to make farming knowledge
                 simpler, smarter and more accessible.
 
                 Create your account and discover a better
                 way to manage your agricultural journey.
-
             </p>
-
-
-            <!-- BUTTONS -->
 
             <div class="hero-buttons">
 
-
-                <a
-                    href="{{ route('register') }}"
-                    class="btn-register"
-                >
-
-                    Create Your Account
-
+                <a href="{{ route('get.started') }}" class="btn-register">
+                    Get Started
                     <i class="bi bi-arrow-right"></i>
-
                 </a>
 
-
-                <a
-                    href="{{ route('login') }}"
-                    class="btn-login"
-                >
-
+                <a href="{{ route('login') }}" class="btn-login">
                     <i class="bi bi-box-arrow-in-right"></i>
-
                     Login
-
                 </a>
 
             </div>
-
-
-            <!-- TRUST NOTE -->
 
             <div class="hero-note">
-
                 <i class="bi bi-shield-check"></i>
-
                 Join GrowSmart and start your smart agriculture journey.
-
             </div>
-
 
         </div>
 
     </div>
 
 </section>
+
+<section class="about">
+
+    <div class="about-container">
+
+        <div class="about-label">
+            About GrowSmart
+        </div>
+
+        <h2>
+            Smart Farming Starts With Better Knowledge
+        </h2>
+
+        <p>
+            GrowSmart helps farmers access useful agricultural
+            information, crop knowledge, pest management guidance,
+            weather information and smart farming tools in one place.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="cta-section">
+
+    <div class="cta-box">
+
+        <div class="cta-content">
+
+            <h2>
+                Ready to Grow Smarter?
+            </h2>
+
+            <p>
+                Start your journey with GrowSmart and get access
+                to smart agricultural resources designed for modern farming.
+            </p>
+
+            <a href="{{ route('get.started') }}" class="btn-register">
+                Get Started
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-container">
+
+        <div>
+
+            <a href="{{ route('home') }}" class="footer-brand">
+
+                <img src="{{ asset('images/logo1.jpg') }}" alt="GrowSmart">
+
+                <span>GrowSmart</span>
+
+            </a>
+
+            <p class="footer-text">
+                Smart agriculture for a better tomorrow.
+            </p>
+
+        </div>
+
+        <div class="footer-copy">
+            © {{ date('Y') }} GrowSmart. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
 
 </body>
 

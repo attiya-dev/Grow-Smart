@@ -18,9 +18,17 @@ use Carbon\Carbon;
 class AuthController extends Controller
 {
     public function home()
-    {
-        return view('home');
+{
+    return view('home');
+}
+public function getStarted()
+{
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
     }
+
+    return redirect()->route('login');
+}
 
     public function dashboard()
     {

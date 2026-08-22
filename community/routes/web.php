@@ -26,6 +26,7 @@ Route::get('/soil', function () {
 
 Route::get('/', [AuthController::class, 'home'])->name('home');
 
+Route::get('/get-started', [AuthController::class, 'getStarted'])->name('get.started');
 Route::get('/register', [AuthController::class, 'showRegister'])
     ->name('register');
 
