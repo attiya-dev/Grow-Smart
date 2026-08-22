@@ -12,14 +12,42 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-        $table->unsignedBigInteger('user_id');
-    $table->text('question_text')->nullable();
-    $table->string('question_image')->nullable();
-    $table->timestamps();
 
-    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-});
+            $table->id();
+
+            $table->unsignedBigInteger('user_id');
+
+            // Category
+            $table->enum('category', [
+                'crop',
+                'fruit',
+                'vegetable'
+            ]);
+
+            // Question
+            $table->text('question_text')->nullable();
+
+            // Image
+            $table->string('question_image')->nullable();
+
+            // Voice Message
+            $table->json('question_voice')->nullable();
+
+            // Status
+            $table->enum('status', [
+                'pending',
+                'approved',
+                'rejected'
+            ])->default('pending');
+
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
+
+        });
     }
 
     /**
