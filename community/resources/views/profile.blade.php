@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container py-4">
+<div class="container profile-container">
 
     <div class="profile-card">
 
@@ -55,7 +55,7 @@
 
         </div>
 
-        <div class="text-center mt-3">
+        <div class="text-center profile-user-info">
 
             <h4>{{ Auth::user()->name }}</h4>
 
@@ -131,7 +131,7 @@
             <form
                 action="{{ route('profile.delete') }}"
                 method="POST"
-                class="text-center mt-3"
+                class="text-center remove-form"
             >
 
                 @csrf
@@ -159,29 +159,36 @@
 
 <style>
 
+.profile-container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
 .profile-card {
-    max-width: 650px;
-    margin: 20px auto;
+    max-width: 600px;
+    margin: 0 auto;
     background: white;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 10px 35px rgba(23, 59, 50, 0.10);
+    border-radius: 18px;
+    padding: 25px 30px;
+    box-shadow: 0 8px 25px rgba(23, 59, 50, 0.10);
 }
 
 .profile-header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 }
 
 .profile-header h2 {
     color: #173b32;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    font-size: 25px;
 }
 
 .profile-header p {
     color: #718078;
     margin-bottom: 0;
+    font-size: 14px;
 }
 
 .profile-picture-area {
@@ -192,11 +199,11 @@
 
 .profile-big-image,
 .profile-placeholder {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #e6efe9;
+    border: 4px solid #e6efe9;
 }
 
 .profile-placeholder {
@@ -205,22 +212,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 65px;
+    font-size: 55px;
+}
+
+.profile-user-info {
+    margin-top: 10px;
+}
+
+.profile-user-info h4 {
+    margin-bottom: 2px;
+    color: #173b32;
+    font-size: 19px;
+}
+
+.profile-user-info p {
+    margin-bottom: 0;
+    font-size: 13px;
 }
 
 .profile-buttons {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-top: 25px;
+    gap: 10px;
+    margin-top: 17px;
 }
 
 .profile-option {
     border: none;
     background: #e6efe9;
     color: #173b32;
-    padding: 12px 22px;
-    border-radius: 10px;
+    padding: 10px 20px;
+    border-radius: 9px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
@@ -234,9 +256,9 @@
 .selected-file {
     text-align: center;
     color: #718078;
-    font-size: 13px;
-    margin-top: 15px;
-    min-height: 20px;
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 18px;
 }
 
 .save-profile {
@@ -244,9 +266,9 @@
     border: none;
     background: #285c48;
     color: white;
-    padding: 13px;
-    border-radius: 10px;
-    margin-top: 15px;
+    padding: 11px;
+    border-radius: 9px;
+    margin-top: 10px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
@@ -256,11 +278,15 @@
     background: #173b32;
 }
 
+.remove-form {
+    margin-top: 10px;
+}
+
 .remove-profile {
     border: none;
     background: #f8d7da;
     color: #842029;
-    padding: 10px 18px;
+    padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
@@ -271,20 +297,27 @@
 }
 
 .alert {
-    border-radius: 10px;
+    border-radius: 9px;
+    padding: 9px 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
 }
 
 @media (max-width: 576px) {
 
+    .profile-container {
+        padding-top: 5px;
+    }
+
     .profile-card {
-        padding: 25px 18px;
-        margin: 10px auto;
+        padding: 22px 16px;
+        margin: 0 auto;
     }
 
     .profile-big-image,
     .profile-placeholder {
-        width: 130px;
-        height: 130px;
+        width: 115px;
+        height: 115px;
     }
 
     .profile-buttons {

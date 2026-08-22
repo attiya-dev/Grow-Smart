@@ -1149,7 +1149,7 @@
 
                 </a>
 
-                <button
+                {{-- <button
                     type="button"
                     onclick="toggleLanguageMenu()"
                 >
@@ -1165,9 +1165,9 @@
                         style="margin-left:auto; width:auto !important;"
                     ></i>
 
-                </button>
+                </button> --}}
 
-                <div
+                {{-- <div
                     class="language-menu"
                     id="languageMenu"
                 >
@@ -1188,7 +1188,7 @@
 
                     </a>
 
-                </div>
+                </div> --}}
 
                 <a href="{{ route('privacy.policy') }}">
 
