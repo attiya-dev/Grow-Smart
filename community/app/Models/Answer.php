@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $table = 'answers';
     protected $fillable = [
         'question_id',
         'expert_id',
         'answer_text',
         'answer_image',
+        'answer_voice',
+    ];
+
+    protected $casts = [
+        'answer_voice' => 'array',
     ];
 
     public function question()
