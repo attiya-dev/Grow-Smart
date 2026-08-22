@@ -1798,7 +1798,6 @@ Modern technologies help increase fennel yield and improve seed quality.
 
                     'importance_of_crop' => $detail['importance_of_crop'],
 
-                    'modern_technologies' => $detail['modern_technologies'],
                 ]);
             }
          }
