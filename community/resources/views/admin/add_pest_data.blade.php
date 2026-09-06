@@ -146,10 +146,10 @@ body {
 </style>
 
 
-<div class="form-container">
+<div class="form-container" data-no-translate="true">
 
     <h1>
-        🐛 Add Pest Management Data
+        {{ t('🐛 Add Pest Management Data', '🐛 کیڑوں کے انتظام کی معلومات شامل کریں') }}
     </h1>
 
 
@@ -185,7 +185,7 @@ body {
         <div class="form-group">
 
             <label>
-                Select Crop
+                {{ t('Select Crop', 'فصل منتخب کریں') }}
             </label>
 
             <select
@@ -194,7 +194,7 @@ body {
             >
 
                 <option value="">
-                    Select Crop
+                    {{ t('Select Crop', 'فصل منتخب کریں') }}
                 </option>
 
                 @foreach($crops as $crop)
@@ -216,13 +216,13 @@ body {
         <div class="form-group">
 
             <label>
-                Pest / Disease Name
+                {{ t('Pest / Disease Name', 'کیڑے یا بیماری کا نام') }}
             </label>
 
             <input
                 type="text"
                 name="name"
-                placeholder="Example: Aphids"
+                placeholder="{{ t('Example: Aphids', 'مثال: افڈز') }}"
                 value="{{ old('name') }}"
                 required
             >
@@ -233,13 +233,13 @@ body {
         <div class="form-group">
 
             <label>
-                Pest Type
+                {{ t('Pest Type', 'کیڑے کی قسم') }}
             </label>
 
             <input
                 type="text"
                 name="type"
-                placeholder="Example: Insect Pest"
+                placeholder="{{ t('Example: Insect Pest', 'مثال: حشری کیڑا') }}"
                 value="{{ old('type') }}"
                 required
             >
@@ -264,7 +264,7 @@ body {
         <div class="form-group">
 
             <label>
-                Symptoms
+                {{ t('Symptoms', 'علامات') }}
             </label>
 
             <textarea
@@ -278,7 +278,7 @@ body {
         <div class="form-group">
 
             <label>
-                Protection
+                {{ t('Protection', 'بچاؤ') }}
             </label>
 
             <textarea
@@ -292,7 +292,7 @@ body {
         <div class="form-group">
 
             <label>
-                Recommended Control
+                {{ t('Recommended Control', 'تجویز کردہ تدارک') }}
             </label>
 
             <textarea
@@ -309,7 +309,7 @@ body {
                 type="submit"
                 class="btn save"
             >
-                💾 Save Pest Data
+                {{ t('💾 Save Pest Data', '💾 کیڑوں کی معلومات محفوظ کریں') }}
             </button>
 
 
@@ -317,7 +317,7 @@ body {
                 href="{{ route('admin.crops') }}"
                 class="btn back"
             >
-                Back
+                {{ t('Back', 'واپس') }}
             </a>
 
         </div>

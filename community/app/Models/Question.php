@@ -26,6 +26,8 @@ class Question extends Model
     ];
 
 
+    
+
     protected $casts = [
 
         'question_voice' => 'array',
@@ -33,12 +35,15 @@ class Question extends Model
     ];
 
 
-   
+    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+
+    
 
     public function answers()
     {

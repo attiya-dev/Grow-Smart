@@ -8,9 +8,7 @@ use Illuminate\Database\Seeder;
 
 class CropSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
       
@@ -70,9 +68,6 @@ class CropSeeder extends Seeder
             'category' => 'grain'
         ]);
 
-        // =========================
-        // VEGETABLES
-        // =========================
 
         Crop::create([
             'name' => 'Bottle Gourd',

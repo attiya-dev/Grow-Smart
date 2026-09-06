@@ -195,9 +195,9 @@ body {
 }
 
 
-/* ============================= */
-/* DELETE CONFIRMATION MODAL */
-/* ============================= */
+
+
+
 
 .delete-modal {
     display: none;
@@ -318,9 +318,9 @@ body {
 }
 
 
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
+
+
+
 
 @media(max-width: 900px) {
 
@@ -369,16 +369,16 @@ body {
 </style>
 
 
-<div class="container-box">
+<div class="container-box" dir="{{ is_urdu() ? 'rtl' : 'ltr' }}">
 
     <div class="heading">
 
         <h1>
-            🌱 Manage Crops
+            🌱 {{ t('Manage Crops', 'فصلوں کا انتظام') }}
         </h1>
 
         <p>
-            Add and manage all crops in your website.
+            {{ t('Add and manage all crops in your website.', 'اپنی ویب سائٹ پر تمام فصلیں شامل کریں اور ان کا انتظام کریں۔') }}
         </p>
 
     </div>
@@ -401,24 +401,29 @@ body {
             href="{{ route('admin.crop.create') }}"
             class="btn add"
         >
-            ➕ Add Crop
+            ➕ {{ t('Add Crop', 'فصل شامل کریں') }}
         </a>
 
 
-        <a
-            href="{{ route('admin.crop.data.create') }}"
-            class="btn data"
-        >
-            📚 Add Crop Data
+        @if(!is_urdu())
+        <a href="{{ route('admin.crop.data.create') }}" class="btn data">
+            📚 {{ t('Add Crop Data', 'فصل کا ڈیٹا شامل کریں') }}
         </a>
-
-
-        <a
-            href="{{ route('admin.pest.data.create') }}"
-            class="btn pest"
-        >
-            🐛 Add Pest Data
+        @else
+        <a href="{{ route('admin.crop.urdu.data.create') }}" class="btn data">
+            🇵🇰 {{ t('Add / Update Urdu Crop Data', 'اردو فصل کا ڈیٹا شامل یا اپ ڈیٹ کریں') }}
         </a>
+        @endif
+
+        @if(!is_urdu())
+        <a href="{{ route('admin.pest.data.create') }}" class="btn pest">
+            🐛 {{ t('Add Pest Data', 'کیڑوں کا ڈیٹا شامل کریں') }}
+        </a>
+        @else
+        <a href="{{ route('admin.pest.urdu.data.create') }}" class="btn pest">
+            🇵🇰 {{ t('Add / Update Urdu Pest Data', 'اردو کیڑوں کا ڈیٹا شامل یا اپ ڈیٹ کریں') }}
+        </a>
+        @endif
 
     </div>
 
@@ -480,7 +485,7 @@ body {
 
                         <img
                             src="{{ $imageUrl }}"
-                            alt="{{ $crop->name }}"
+                            alt="{{ is_urdu() && $crop->name_ur ? $crop->name_ur : $crop->name }}"
                             loading="lazy"
                             onerror="
                                 this.style.display='none';
@@ -492,7 +497,7 @@ body {
                             class="no-image"
                             style="display:none;"
                         >
-                            🌱 Image Not Found
+                            🌱 {{ t('Image Not Found', 'تصویر دستیاب نہیں ہے') }}
                         </div>
 
                     </div>
@@ -501,7 +506,7 @@ body {
 
                     <div class="no-image">
 
-                        🌱 Image Not Found
+                        🌱 {{ t('Image Not Found', 'تصویر دستیاب نہیں ہے') }}
 
                     </div>
 
@@ -509,17 +514,17 @@ body {
 
 
                 <h3>
-                    {{ $crop->name }}
+                    {{ is_urdu() && $crop->name_ur ? $crop->name_ur : $crop->name }}
                 </h3>
 
 
                 <div class="info">
 
                     <strong>
-                        Category:
+                        {{ t('Category:', 'زمرہ:') }}
                     </strong>
 
-                    {{ ucfirst($crop->category) }}
+                    {{ local_text($crop, 'category') }}
 
                 </div>
 
@@ -527,10 +532,10 @@ body {
                 <div class="info">
 
                     <strong>
-                        Season:
+                        {{ t('Season:', 'موسم:') }}
                     </strong>
 
-                    {{ ucfirst($crop->season) }}
+                    {{ local_text($crop, 'season') }}
 
                 </div>
 
@@ -538,13 +543,10 @@ body {
                 <div class="info">
 
                     <strong>
-                        Type:
+                        {{ t('Type:', 'قسم:') }}
                     </strong>
 
-                    {{ $crop->type
-                        ? ucfirst($crop->type)
-                        : 'Not specified'
-                    }}
+                    {{ $crop->type ? local_text($crop, 'type') : t('Not specified', 'درج نہیں کیا گیا') }}
 
                 </div>
 
@@ -553,7 +555,7 @@ body {
 
                     <span class="badge">
 
-                        ✓ Crop Data Added
+                        ✓ {{ t('Crop Data Added', 'فصل کا ڈیٹا شامل ہے') }}
 
                     </span>
 
@@ -561,10 +563,17 @@ body {
 
                     <span class="badge missing-badge">
 
-                        Crop Data Missing
+                        {{ t('Crop Data Missing', 'فصل کا ڈیٹا موجود نہیں ہے') }}
 
                     </span>
 
+                @endif
+
+
+                @if($crop->urdu_completed)
+                    <span class="badge">✓ {{ t('Urdu Crop Complete', 'اردو فصل کا ڈیٹا مکمل ہے') }}</span>
+                @else
+                    <a href="{{ route('admin.crop.urdu.data.create', ['crop_id' => $crop->id]) }}" class="badge missing-badge" style="text-decoration:none;">🇵🇰 {{ t('Add Urdu Crop Data', 'اردو فصل کا ڈیٹا شامل کریں') }}</a>
                 @endif
 
 
@@ -575,7 +584,7 @@ body {
 
                     <span class="badge">
 
-                        ✓ Pest Data Added
+                        ✓ {{ t('Pest Data Added', 'کیڑوں کا ڈیٹا شامل ہے') }}
 
                     </span>
 
@@ -583,7 +592,7 @@ body {
 
                     <span class="badge missing-badge">
 
-                        No Pest Data
+                        {{ t('No Pest Data', 'کیڑوں کا ڈیٹا موجود نہیں ہے') }}
 
                     </span>
 
@@ -610,7 +619,7 @@ body {
                         onclick="openDeleteModal(this)"
                     >
 
-                        🗑 Delete Crop
+                        🗑 {{ t('Delete Crop', 'فصل حذف کریں') }}
 
                     </button>
 
@@ -624,11 +633,11 @@ body {
             <div class="empty-box">
 
                 <h3>
-                    No crops available.
+                    {{ t('No crops available.', 'اس وقت کوئی فصل موجود نہیں ہے۔') }}
                 </h3>
 
                 <p>
-                    Click "Add Crop" to create your first crop.
+                    {{ t('Click "Add Crop" to create your first crop.', 'اپنی پہلی فصل شامل کرنے کے لیے "فصل شامل کریں" پر کلک کریں۔') }}
                 </p>
 
             </div>
@@ -640,7 +649,7 @@ body {
 </div>
 
 
-<!-- DELETE CONFIRMATION BOX -->
+
 
 <div
     id="deleteModal"
@@ -654,12 +663,12 @@ body {
         </div>
 
         <h2>
-            Delete Crop?
+            {{ t('Delete Crop?', 'فصل حذف کریں؟') }}
         </h2>
 
         <p>
-            Are you sure you want to delete this crop?
-            This action cannot be undone.
+            {{ t('Are you sure you want to delete this crop?', 'کیا آپ واقعی اس فصل کو حذف کرنا چاہتے ہیں؟') }}
+            {{ t('This action cannot be undone.', 'یہ کارروائی واپس نہیں کی جا سکتی۔') }}
         </p>
 
         <div class="modal-buttons">
@@ -669,7 +678,7 @@ body {
                 class="modal-cancel"
                 onclick="closeDeleteModal()"
             >
-                Cancel
+                {{ t('Cancel', 'منسوخ کریں') }}
             </button>
 
             <button
@@ -677,7 +686,7 @@ body {
                 class="modal-delete"
                 onclick="confirmDelete()"
             >
-                Yes, Delete
+                {{ t('Yes, Delete', 'جی ہاں، حذف کریں') }}
             </button>
 
         </div>
@@ -721,7 +730,7 @@ function confirmDelete()
 }
 
 
-/* Close modal when clicking outside the box */
+
 
 document.getElementById('deleteModal').addEventListener(
     'click',
@@ -737,7 +746,7 @@ document.getElementById('deleteModal').addEventListener(
 );
 
 
-/* Close modal with Escape key */
+
 
 document.addEventListener(
     'keydown',

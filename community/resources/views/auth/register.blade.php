@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 
 <head>
 
@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>GrowSmart | Create Account</title>
+    <title>{{ t('GrowSmart | Create Account', 'گرو اسمارٹ | اکاؤنٹ بنائیں') }}</title>
 
     <link
         rel="stylesheet"
@@ -567,6 +567,20 @@
 
     </style>
 
+
+<style id="growsmart-urdu-design">
+html.urdu-mode, html.urdu-mode body { direction: ltr; }
+html.urdu-mode body { text-align: right; }
+html.urdu-mode .container, html.urdu-mode .container-fluid, html.urdu-mode .row, html.urdu-mode .d-flex, html.urdu-mode .navbar, html.urdu-mode .navbar-nav, html.urdu-mode footer, html.urdu-mode header { direction: ltr; }
+html.urdu-mode .row > *, html.urdu-mode .card, html.urdu-mode section, html.urdu-mode article, html.urdu-mode form, html.urdu-mode p, html.urdu-mode h1, html.urdu-mode h2, html.urdu-mode h3, html.urdu-mode h4, html.urdu-mode h5, html.urdu-mode h6, html.urdu-mode label, html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select, html.urdu-mode table, html.urdu-mode td, html.urdu-mode th { direction: rtl; text-align: right; }
+html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select { direction: rtl; text-align: right; }
+html.urdu-mode .text-start { text-align: right !important; }
+html.urdu-mode .text-end { text-align: left !important; }
+html.urdu-mode .brand { justify-content: flex-end; }
+html.urdu-mode .input-group > i:first-child { left: auto; right: 16px; }
+html.urdu-mode .input-group input { padding-left: 45px; padding-right: 45px; }
+html.urdu-mode .eye { right: auto; left: 15px; }
+</style>
 </head>
 
 <body>
@@ -583,7 +597,7 @@
             >
 
             <span>
-                GrowSmart
+                {{ t('GrowSmart', 'گرو اسمارٹ') }}
             </span>
 
         </div>
@@ -591,11 +605,11 @@
         <div class="heading">
 
             <h2>
-                Create Account
+                {{ t('Create Account', 'اکاؤنٹ بنائیں') }}
             </h2>
 
             <p>
-                Join GrowSmart and start your smart agriculture journey.
+                {{ t('Join GrowSmart and start your smart agriculture journey.', 'گرو اسمارٹ میں شامل ہوں اور اپنے ذہین زرعی سفر کا آغاز کریں۔') }}
             </p>
 
         </div>
@@ -606,7 +620,7 @@
 
                 <i class="fa-solid fa-circle-exclamation"></i>
 
-                {{ session('error') }}
+                {{ auth_text(session('error')) }}
 
             </div>
 
@@ -618,7 +632,7 @@
 
                 <i class="fa-solid fa-circle-check"></i>
 
-                {{ session('success') }}
+                {{ auth_text(session('success')) }}
 
             </div>
 
@@ -628,7 +642,7 @@
 
             <div class="error">
 
-                {{ $errors->first('name') }}
+                {{ auth_text($errors->first('name')) }}
 
             </div>
 
@@ -638,7 +652,7 @@
 
             <div class="error">
 
-                {{ $errors->first('email') }}
+                {{ auth_text($errors->first('email')) }}
 
             </div>
 
@@ -658,7 +672,7 @@
                 <input
                     type="text"
                     name="name"
-                    placeholder="Full Name"
+                    placeholder="{{ is_urdu() ? 'پورا نام' : 'Full Name' }}"
                     value="{{ old('name') }}"
                     required
                     autocomplete="name"
@@ -673,7 +687,7 @@
                 <input
                     type="email"
                     name="email"
-                    placeholder="Email Address"
+                    placeholder="{{ is_urdu() ? 'ای میل پتہ' : 'Email Address' }}"
                     value="{{ old('email') }}"
                     required
                     autocomplete="email"
@@ -685,7 +699,7 @@
 
                 <div class="password-error">
 
-                    {{ $errors->first('password') }}
+                    {{ auth_text($errors->first('password')) }}
 
                 </div>
 
@@ -699,7 +713,7 @@
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Password"
+                    placeholder="{{ is_urdu() ? 'پاس ورڈ' : 'Password' }}"
                     required
                     autocomplete="new-password"
                 >
@@ -715,7 +729,7 @@
 
                 <div class="password-error">
 
-                    {{ $errors->first('password_confirmation') }}
+                    {{ auth_text($errors->first('password_confirmation')) }}
 
                 </div>
 
@@ -729,7 +743,7 @@
                     type="password"
                     name="password_confirmation"
                     id="password2"
-                    placeholder="Confirm Password"
+                    placeholder="{{ is_urdu() ? 'پاس ورڈ کی تصدیق کریں' : 'Confirm Password' }}"
                     required
                     autocomplete="new-password"
                 >
@@ -750,7 +764,7 @@
 
                 &nbsp;
 
-                Register
+                {{ t('Register', 'رجسٹر کریں') }}
 
             </button>
 
@@ -758,10 +772,10 @@
 
         <p class="login-text">
 
-            Already have an account?
+            {{ t('Already have an account?', 'کیا آپ کا پہلے سے اکاؤنٹ موجود ہے؟') }}
 
             <a href="{{ route('login') }}">
-                Login
+                {{ t('Login', 'داخل ہوں') }}
             </a>
 
         </p>
@@ -778,29 +792,28 @@
             >
 
             <h3 class="right-title">
-                Grow Smarter. Farm Better.
+                {{ t('Grow Smarter. Farm Better.', 'زیادہ سمجھداری سے اگائیں۔ بہتر کاشت کاری کریں۔') }}
             </h3>
 
             <p class="right-description">
-                Connect with the GrowSmart community and
-                discover smarter agricultural knowledge and solutions.
+                {{ t('Connect with the GrowSmart community and discover smarter agricultural knowledge and solutions.', 'گرو اسمارٹ کی کمیونٹی سے جڑیں اور بہتر زرعی معلومات اور مفید حل دریافت کریں۔') }}
             </p>
 
             <div class="features">
 
                 <div class="feature">
                     <i class="fa-solid fa-leaf"></i>
-                    Smart Farming
+                    {{ t('Smart Farming', 'ذہین کاشت کاری') }}
                 </div>
 
                 <div class="feature">
                     <i class="fa-solid fa-users"></i>
-                    Community
+                    {{ t('Community', 'کمیونٹی') }}
                 </div>
 
                 <div class="feature">
                     <i class="fa-solid fa-seedling"></i>
-                    Better Growth
+                    {{ t('Better Growth', 'بہتر نشوونما') }}
                 </div>
 
             </div>

@@ -9,9 +9,7 @@ use App\Models\CropDetail;
 
 class CropDetail1Seeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         $cropDetails = [
@@ -601,7 +599,7 @@ Cucumber is an important vegetable crop that provides nutrition and hydration. I
             ],
 
             [
-                'crop_name' => 'Eggplant(Brinjal)',
+                'crop_name' => 'EggPlant(Brinjal)',
 
                 'introduction' => 'Eggplant, commonly known as Brinjal, is an important vegetable crop grown in Pakistan and many other countries. It is widely used in daily cooking for curries, baran, bharta, and fried dishes. Brinjal farming provides good income to farmers due to its long harvesting period and high market demand. It grows well in warm climates and can produce multiple harvests over an extended season.',
 

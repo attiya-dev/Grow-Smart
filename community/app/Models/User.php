@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class, 'expert_id');
     }
+
+    public function expertHiddenUsers()
+    {
+        return $this->hasMany(ExpertHiddenUser::class, 'user_id');
+    }
 }

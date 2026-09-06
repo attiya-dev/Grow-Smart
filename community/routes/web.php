@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\LanguageController;
@@ -9,24 +11,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\CropController;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
-Route::get('/soil', function () {
-    $userId = null;
-    $token = null;
-    $timestamp = null;
-    if (Auth::check()) {
-        $userId = Auth::id();
-        $timestamp = time();
-        $token = hash_hmac('sha256', $userId . '|' . $timestamp, env('APP_KEY'));
-    }
-    return view('soil', compact('userId', 'token', 'timestamp'));
-});
-
 Route::get('/', [AuthController::class, 'home'])->name('home');
 
-Route::get('/get-started', [AuthController::class, 'getStarted'])->name('get.started');
 Route::get('/register', [AuthController::class, 'showRegister'])
     ->name('register');
 
@@ -164,6 +150,9 @@ Route::middleware(['auth', 'expert'])->group(function () {
     Route::get('/expert/questions/vegetable', [QuestionController::class, 'vegetableExpertQuestions'])
         ->name('expert.vegetable');
 
+    Route::delete('/expert/users/{userId}/hide', [QuestionController::class, 'hideUserFromExpertList'])
+        ->name('expert.user.hide');
+
     Route::post('/answer', [AnswerController::class, 'store'])
         ->name('answers.store');
 });
@@ -175,6 +164,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/users', [AdminController::class, 'allUsers'])
         ->name('admin.dashboard');
+
+    Route::post('/admin/add-expert', [AdminController::class, 'addExpert'])
+        ->name('admin.addExpert');
 
     Route::post('/admin/make-admin', [AdminController::class, 'makeAdmin'])
         ->name('admin.makeAdmin');
@@ -221,11 +213,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/crops/data', [AdminController::class, 'storeCropData'])
         ->name('admin.crop.data.store');
 
+    Route::get('/admin/crops/urdu-data/create', [AdminController::class, 'createUrduCropData'])
+        ->name('admin.crop.urdu.data.create');
+
+    Route::post('/admin/crops/urdu-data', [AdminController::class, 'storeUrduCropData'])
+        ->name('admin.crop.urdu.data.store');
+
     Route::get('/admin/crops/pest/create', [AdminController::class, 'createPestData'])
         ->name('admin.pest.data.create');
 
     Route::post('/admin/crops/pest', [AdminController::class, 'storePestData'])
         ->name('admin.pest.data.store');
+
+    Route::get('/admin/crops/pest/urdu/create', [AdminController::class, 'createUrduPestData'])
+        ->name('admin.pest.urdu.data.create');
+
+    Route::post('/admin/crops/pest/urdu', [AdminController::class, 'storeUrduPestData'])
+        ->name('admin.pest.urdu.data.store');
 
     Route::delete('/admin/crops/{id}', [AdminController::class, 'deleteCrop'])
         ->name('admin.crop.delete');
@@ -275,16 +279,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/language/{language}', [LanguageController::class, 'change'])
+    ->name('language.change');
+
 Route::view('/privacy-policy', 'privacy-policy')
     ->name('privacy.policy');
 
 Route::view('/about-us', 'about-us')
     ->name('about.us');
-Route::get('/language/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ur'])) {
-        session(['locale' => $locale]);
-        app()->setLocale($locale);
-    }
-    return redirect()->back();
-})->name('language.switch');
-

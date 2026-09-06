@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
@@ -17,23 +15,18 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id');
 
-            // Category
             $table->enum('category', [
                 'crop',
                 'fruit',
                 'vegetable'
             ]);
 
-            // Question
             $table->text('question_text')->nullable();
 
-            // Image
             $table->string('question_image')->nullable();
 
-            // Voice Message
             $table->json('question_voice')->nullable();
 
-            // Status
             $table->enum('status', [
                 'pending',
                 'approved',
@@ -50,9 +43,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('questions');

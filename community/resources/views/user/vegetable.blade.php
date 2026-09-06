@@ -391,10 +391,18 @@ textarea:focus {
 
 <div class="container">
 
-    <div class="heading">
-        <h1>🥬 Vegetable Community</h1>
-        <p>Ask your vegetable questions and get help from agricultural experts.</p>
-    </div>
+     <div class="heading"> 
+    <h1>
+        {{ app()->getLocale() === 'ur' ? ' 🥬 سبزی برادری' : '🥬 Vegetable Community' }}
+    </h1>
+
+    <p>
+        {{ app()->getLocale() === 'ur'
+            ? 'اپنی فصل سے متعلق سوالات پوچھیں اور زرعی ماہرین سے رہنمائی حاصل کریں۔'
+            : 'Ask your vegetable questions and get help from agricultural experts.'
+        }}
+    </p>
+</div>
 
     @if(session('success'))
         <div class="success">
@@ -427,7 +435,7 @@ textarea:focus {
 
             <div class="form-group">
 
-                <label>Upload Vegetable Image</label>
+                <label>{{ t('Upload Vegetable Image', 'سبزی کی تصویر اپ لوڈ کریں') }}</label>
 
                 <input
                     type="file"
@@ -448,7 +456,7 @@ textarea:focus {
 
             <div class="form-group">
 
-                <label>🎤 Voice Question</label>
+                <label>🎤 {{ t('Voice Question', 'صوتی سوال') }}</label>
 
                 <div class="record-box">
 
@@ -456,7 +464,7 @@ textarea:focus {
                         type="button"
                         id="recordBtn"
                         class="record-btn"
-                        title="Start recording"
+                        title="{{ t('Start recording', 'ریکارڈنگ شروع کریں') }}"
                     >
                         🎤
                     </button>
@@ -487,12 +495,12 @@ textarea:focus {
 
             <div class="form-group">
 
-                <label>Ask Your Question</label>
+                <label>{{ t('Ask Your Question', 'اپنا سوال پوچھیں') }}</label>
 
                 <textarea
                     name="question_text"
                     id="question_text"
-                    placeholder="Write your vegetable problem here..."
+                    placeholder="{{ t('Write your vegetable problem here...', 'اپنی سبزی سے متعلق مسئلہ یہاں لکھیں...') }}"
                 ></textarea>
 
             </div>
@@ -501,7 +509,7 @@ textarea:focus {
                 type="submit"
                 class="submit-btn"
             >
-                Submit Question
+                {{ t('Submit Question', 'سوال جمع کریں') }}
             </button>
 
         </form>
@@ -599,7 +607,7 @@ recordBtn.onclick = async function() {
 
             recordBtn.classList.remove("recording");
             recordBtn.innerHTML = "🎤";
-            recordBtn.title = "Start recording";
+            recordBtn.title = "{{ t('Start recording', 'ریکارڈنگ شروع کریں') }}";
 
             timer.innerHTML = "00:00";
         };
@@ -629,7 +637,7 @@ recordBtn.onclick = async function() {
 
     } catch (error) {
 
-        alert("Please allow microphone permission to record your voice.");
+        alert("{{ t('Please allow microphone permission to record your voice.', 'صوتی سوال ریکارڈ کرنے کے لیے براہِ کرم مائیکروفون کی اجازت دیں۔') }}");
 
     }
 };

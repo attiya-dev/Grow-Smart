@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 
 <head>
 
@@ -540,6 +540,77 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.10);
         }
 
+        .nav-item-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 8px 4px;
+            margin: 0 8px;
+            color: #d6e2dc;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: white;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-item-link:hover {
+            color: white;
+            background: transparent;
+            border: none;
+            transform: none;
+        }
+
+        .nav-item-link.active {
+            color: white;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            font-weight: 700;
+        }
+
+        .nav-item-link.active::after {
+            transform: scaleX(1);
+        }
+
+        html.urdu-mode .category-nav .nav-fruit { order: 1; }
+        html.urdu-mode .category-nav .nav-vegetable { order: 2; }
+        html.urdu-mode .category-nav .nav-grains { order: 3; }
+        html.urdu-mode .category-nav .nav-winter { order: 4; }
+        html.urdu-mode .category-nav .nav-summer { order: 5; }
+        html.urdu-mode .category-nav .nav-home { order: 6; }
+
+        html[dir="rtl"] .nav-item-link {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 1100px) {
+            .nav-item-link {
+                margin: 0 5px;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+        }
+
         .main-content {
             max-width: 1450px;
             margin: auto;
@@ -918,6 +989,209 @@
 
     @stack('styles')
 
+
+    <style id="growsmart-bilingual-style">
+        html.urdu-mode,
+        html.urdu-mode body {
+            direction: rtl;
+        }
+
+        html.urdu-mode body {
+            text-align: right;
+        }
+
+        html.urdu-mode .navbar-inner,
+        html.urdu-mode .category-nav,
+        html.urdu-mode .main-content,
+        html.urdu-mode .main-content .row,
+        html.urdu-mode .main-content .d-flex,
+        html.urdu-mode .footer,
+        html.urdu-mode .footer .container-fluid,
+        html.urdu-mode .footer .row {
+            direction: ltr;
+        }
+
+        html.urdu-mode #sidebar {
+            left: auto;
+            right: -285px;
+            transition: right 0.3s ease;
+            direction: rtl;
+        }
+
+        html.urdu-mode #sidebar.show {
+            left: auto;
+            right: 0;
+        }
+
+        html.urdu-mode #sidebar ul li a,
+        html.urdu-mode #sidebar .sidebar-dropdown-btn,
+        html.urdu-mode #sidebar .profile-button,
+        html.urdu-mode #sidebar .language-menu,
+        html.urdu-mode #sidebar .sidebar-profile,
+        html.urdu-mode #sidebar .sidebar-logo {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode #sidebar ul li a,
+        html.urdu-mode #sidebar .sidebar-dropdown-btn {
+            justify-content: flex-start;
+        }
+
+        html.urdu-mode #sidebar ul li a:hover,
+        html.urdu-mode #sidebar .sidebar-dropdown-btn:hover {
+            transform: translateX(-2px);
+        }
+
+        html.urdu-mode #sidebar .close-sidebar {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        html.urdu-mode .sidebar-profile-name,
+        html.urdu-mode .sidebar-profile-email {
+            text-align: right;
+        }
+
+        html.urdu-mode .profile-arrow {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        html.urdu-mode .navbar-main,
+        html.urdu-mode .navbar-inner {
+            direction: rtl;
+        }
+
+        html.urdu-mode .category-nav {
+            direction: ltr;
+            justify-content: flex-start;
+        }
+
+        html.urdu-mode .brand,
+        html.urdu-mode .nav-item-link,
+        html.urdu-mode .category-pill,
+        html.urdu-mode .nav-profile,
+        html.urdu-mode .menu-button {
+            direction: rtl;
+        }
+
+        html.urdu-mode .nav-profile {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+
+
+        html.urdu-mode .crop-slider {
+            direction: ltr;
+        }
+
+        html.urdu-mode .crop-slide,
+        html.urdu-mode .crop-slide-info {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .main-content > *,
+        html.urdu-mode .main-content .row > *,
+        html.urdu-mode .main-content .d-flex > *,
+        html.urdu-mode .main-content .card,
+        html.urdu-mode .main-content .modal-content,
+        html.urdu-mode .main-content form,
+        html.urdu-mode .main-content section,
+        html.urdu-mode .main-content article,
+        html.urdu-mode .main-content p,
+        html.urdu-mode .main-content h1,
+        html.urdu-mode .main-content h2,
+        html.urdu-mode .main-content h3,
+        html.urdu-mode .main-content h4,
+        html.urdu-mode .main-content h5,
+        html.urdu-mode .main-content h6,
+        html.urdu-mode .main-content label,
+        html.urdu-mode .main-content .form-control,
+        html.urdu-mode .main-content .form-select,
+        html.urdu-mode .main-content textarea,
+        html.urdu-mode .main-content td,
+        html.urdu-mode .main-content th,
+        html.urdu-mode .main-content table {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .main-content .row,
+        html.urdu-mode .main-content .d-flex {
+            text-align: initial;
+        }
+
+        html.urdu-mode input,
+        html.urdu-mode textarea,
+        html.urdu-mode select,
+        html.urdu-mode .form-control,
+        html.urdu-mode .form-select {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .text-start {
+            text-align: right !important;
+        }
+
+        html.urdu-mode .text-end {
+            text-align: left !important;
+        }
+
+        html.urdu-mode .form-check {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .form-check .form-check-input {
+            float: right;
+            margin-left: .5em;
+            margin-right: -1.5em;
+        }
+
+        html.urdu-mode .footer {
+            direction: rtl;
+        }
+
+        html.urdu-mode .footer .row {
+            direction: rtl;
+        }
+
+        html.urdu-mode .footer .col-lg-4,
+        html.urdu-mode .footer .col-lg-2,
+        html.urdu-mode .footer .col-lg-3 {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .footer h5,
+        html.urdu-mode .footer p,
+        html.urdu-mode .footer-links,
+        html.urdu-mode .footer-links li,
+        html.urdu-mode .footer a {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .footer-social {
+            direction: ltr;
+        }
+
+        .brand-name-protected,
+        .contact-value-protected {
+            direction: ltr;
+            unicode-bidi: isolate;
+            display: inline-block;
+        }
+
+        html.urdu-mode .footer-bottom {
+            direction: rtl;
+            text-align: center;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -934,7 +1208,7 @@
         <div>
 
             <div class="sidebar-logo-text">
-                GrowSmart
+                {{ is_urdu() ? 'گرو اسمارٹ' : 'GrowSmart' }}
             </div>
 
             <small>
@@ -1007,7 +1281,7 @@
                 <i class="bi bi-bar-chart"></i>
 
                 <span>
-                    Crop Data
+                    {{ t('Crop Data', 'فصلوں کا ڈیٹا') }}
                 </span>
 
             </a>
@@ -1024,7 +1298,7 @@
                 <i class="bi bi-bug"></i>
 
                 <span>
-                    Pest Management
+                    {{ t('Pest Management', 'کیڑوں کا انتظام') }}
                 </span>
 
             </a>
@@ -1041,7 +1315,7 @@
                 <i class="bi bi-people"></i>
 
                 <span>
-                    Community
+                    {{ is_urdu() ? 'کمیونٹی' : 'Community' }}
                 </span>
 
             </a>
@@ -1060,7 +1334,7 @@
                 <i class="bi bi-cpu"></i>
 
                 <span>
-                    AI Soil Analysis
+                    {{ t('AI Soil Analysis', 'مصنوعی ذہانت سے مٹی کا تجزیہ') }}
                 </span>
 
             </a>
@@ -1077,7 +1351,7 @@
                 <i class="bi bi-cloud-sun"></i>
 
                 <span>
-                    Weather Information
+                    {{ t('Weather Information', 'موسم کی معلومات') }}
                 </span>
 
             </a>
@@ -1114,7 +1388,7 @@
                 @endif
 
                 <span>
-                    Profile
+                    {{ Auth::user()->name }}
                 </span>
 
                 <i
@@ -1134,7 +1408,7 @@
                     <i class="bi bi-person-bounding-box"></i>
 
                     <span>
-                        Add Profile Picture
+                        {{ t('Add Profile Picture', 'پروفائل تصویر شامل کریں') }}
                     </span>
 
                 </a>
@@ -1144,12 +1418,12 @@
                     <i class="bi bi-gear"></i>
 
                     <span>
-                        Account Settings
+                        {{ t('Account Settings', 'اکاؤنٹ کی ترتیبات') }}
                     </span>
 
                 </a>
 
-                {{-- <button
+                <button
                     type="button"
                     onclick="toggleLanguageMenu()"
                 >
@@ -1157,7 +1431,7 @@
                     <i class="bi bi-translate"></i>
 
                     <span>
-                        Select Language
+                        {{ t('Select Language', 'زبان منتخب کریں') }}
                     </span>
 
                     <i
@@ -1165,9 +1439,9 @@
                         style="margin-left:auto; width:auto !important;"
                     ></i>
 
-                </button> --}}
+                </button>
 
-                {{-- <div
+                <div
                     class="language-menu"
                     id="languageMenu"
                 >
@@ -1188,14 +1462,14 @@
 
                     </a>
 
-                </div> --}}
+                </div>
 
                 <a href="{{ route('privacy.policy') }}">
 
                     <i class="bi bi-shield-lock"></i>
 
                     <span>
-                        Privacy Policy
+                        {{ t('Privacy Policy', 'رازداری کی پالیسی') }}
                     </span>
 
                 </a>
@@ -1205,7 +1479,7 @@
                     <i class="bi bi-info-circle"></i>
 
                     <span>
-                        About Us
+                        {{ t('About Us', 'ہمارے بارے میں') }}
                     </span>
 
                 </a>
@@ -1218,7 +1492,7 @@
                     <i class="bi bi-box-arrow-right"></i>
 
                     <span>
-                        Logout
+                        {{ t('Logout', 'خروج کریں') }}
                     </span>
 
                 </button>
@@ -1264,7 +1538,7 @@
             >
 
             <span>
-                GrowSmart
+                {{ is_urdu() ? 'گرو اسمارٹ' : 'GrowSmart' }}
             </span>
 
         </a>
@@ -1273,44 +1547,44 @@
 
             <a
                 href="/dashboard"
-                class="category-pill {{ request()->is('dashboard') || request()->is('/') ? 'active' : '' }}"
+                class="nav-item-link nav-home {{ request()->is('dashboard') || request()->is('/') ? 'active' : '' }}"
             >
-                Home
+                {{ t('Home', 'صفحۂ اول') }}
             </a>
 
             <a
                 href="/summer"
-                class="category-pill {{ request()->is('summer') ? 'active' : '' }}"
+                class="nav-item-link nav-summer {{ request()->is('summer') ? 'active' : '' }}"
             >
-                Summer Crops
+                {{ t('Summer Crops', 'موسم گرما کی فصلیں') }}
             </a>
 
             <a
                 href="/winter"
-                class="category-pill {{ request()->is('winter') ? 'active' : '' }}"
+                class="nav-item-link nav-winter {{ request()->is('winter') ? 'active' : '' }}"
             >
-                Winter Crops
+                {{ t('Winter Crops', 'موسم سرما کی فصلیں') }}
             </a>
 
             <a
                 href="/grains"
-                class="category-pill {{ request()->is('grains') ? 'active' : '' }}"
+                class="nav-item-link nav-grains {{ request()->is('grains') ? 'active' : '' }}"
             >
-                Grains
+                {{ t('Grains', 'اناج') }}
             </a>
 
             <a
                 href="/vegetable"
-                class="category-pill {{ request()->is('vegetable') ? 'active' : '' }}"
+                class="nav-item-link nav-vegetable {{ request()->is('vegetable') ? 'active' : '' }}"
             >
-                Vegetables
+                {{ t('Vegetables', 'سبزیاں') }}
             </a>
 
             <a
                 href="/fruit"
-                class="category-pill {{ request()->is('fruit') ? 'active' : '' }}"
+                class="nav-item-link nav-fruit {{ request()->is('fruit') ? 'active' : '' }}"
             >
-                Fruits
+                {{ t('Fruits', 'پھل') }}
             </a>
 
         </div>
@@ -1360,47 +1634,49 @@
 
                 <h5>
                     <i class="bi bi-tree-fill"></i>
-                    &nbsp;GrowSmart
+                    <span class="brand-name-protected" data-no-translate="true">{{ is_urdu() ? 'گرو اسمارٹ' : 'GrowSmart' }}</span>
                 </h5>
 
                 <p>
-                    GrowSmart is an intelligent agriculture platform
-                    helping farmers with crop information, pest
-                    management, soil analysis, weather forecasting
-                    and expert community support.
+                    @if(is_urdu())
+                        <span data-no-translate="true">گرو اسمارٹ</span> ایک ذہین زرعی پلیٹ فارم ہے جو کسانوں کو فصلوں کی معلومات، کیڑوں کے انتظام، مٹی کے تجزیے، موسم کی پیش گوئی اور ماہرین کی کمیونٹی سے مدد فراہم کرتا ہے۔
+                    @else
+                        <span data-no-translate="true">GrowSmart</span> is an intelligent agriculture platform
+                        helping farmers with crop information, pest
+                        management, soil analysis, weather forecasting
+                        and expert community support.
+                    @endif
                 </p>
 
             </div>
 
             <div class="col-lg-2 col-md-6 mb-4">
 
-                <h5>
-                    Quick Links
-                </h5>
+                <h5>{{ is_urdu() ? 'فوری روابط' : 'Quick Links' }}</h5>
 
                 <ul class="footer-links">
 
                     <li>
                         <a href="/">
-                            Home
+                            {{ t('Home', 'صفحۂ اول') }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/grid">
-                            Crop Data
+                            {{ t('Crop Data', 'فصلوں کا ڈیٹا') }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/garden">
-                            Pest Management
+                            {{ t('Pest Management', 'کیڑوں کا انتظام') }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/community">
-                            Community
+                            {{ is_urdu() ? 'کمیونٹی' : 'Community' }}
                         </a>
                     </li>
 
@@ -1410,33 +1686,31 @@
 
             <div class="col-lg-3 col-md-6 mb-4">
 
-                <h5>
-                    Services
-                </h5>
+                <h5>{{ is_urdu() ? 'خدمات' : 'Services' }}</h5>
 
                 <ul class="footer-links">
 
                     <li>
                         <a href="/soil">
-                            AI Soil Analysis
+                            {{ t('AI Soil Analysis', 'مصنوعی ذہانت سے مٹی کا تجزیہ') }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/weather">
-                            Weather Forecast
+                            {{ t('Weather Forecast', 'موسم کی پیش گوئی') }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/community">
-                            Expert Support
+                            {{ is_urdu() ? 'ماہرین کی مدد' : 'Expert Support' }}
                         </a>
                     </li>
 
                     <li>
                         <a href="/grid">
-                            Crop Knowledge
+                            {{ is_urdu() ? 'فصلوں کا علم' : 'Crop Knowledge' }}
                         </a>
                     </li>
 
@@ -1446,23 +1720,21 @@
 
             <div class="col-lg-3 col-md-6 mb-4">
 
-                <h5>
-                    Contact Us
-                </h5>
+                <h5>{{ is_urdu() ? 'ہم سے رابطہ کریں' : 'Contact Us' }}</h5>
 
                 <p>
                     <i class="bi bi-envelope-fill"></i>
-                    &nbsp;support@growsmart.com
+                    &nbsp;<span class="contact-value-protected" data-no-translate="true">support@growsmart.com</span>
                 </p>
 
                 <p>
                     <i class="bi bi-telephone-fill"></i>
-                    &nbsp;+92 XXX XXXXXXX
+                    &nbsp;<span class="contact-value-protected" data-no-translate="true">+92 XXX XXXXXXX</span>
                 </p>
 
                 <p>
                     <i class="bi bi-geo-alt-fill"></i>
-                    &nbsp;Pakistan
+                    &nbsp;{{ is_urdu() ? 'پاکستان' : 'Pakistan' }}
                 </p>
 
                 <div class="footer-social mt-3">
@@ -1491,11 +1763,11 @@
 
         <div class="footer-bottom">
 
-            © {{ date('Y') }} GrowSmart. All Rights Reserved.
+            © {{ date('Y') }} <span data-no-translate="true">{{ is_urdu() ? 'گرو اسمارٹ' : 'GrowSmart' }}</span>. {{ is_urdu() ? 'جملہ حقوق محفوظ ہیں۔' : 'All Rights Reserved.' }}
 
             <br>
 
-            Empowering Farmers Through Smart Agriculture.
+            {{ is_urdu() ? 'ذہین زراعت کے ذریعے کسانوں کو بااختیار بنانا۔' : 'Empowering Farmers Through Smart Agriculture.' }}
 
         </div>
 
@@ -1514,11 +1786,11 @@
         </div>
 
         <h3>
-            Logout
+            {{ t('Logout', 'خروج کریں') }}
         </h3>
 
         <p>
-            Are you sure you want to logout from GrowSmart?
+            {{ t('Are you sure you want to logout from GrowSmart?', 'کیا آپ واقعی گرو اسمارٹ سے خروج کرنا چاہتے ہیں؟') }}
         </p>
 
         <div class="logout-actions">
@@ -1528,7 +1800,7 @@
                 class="logout-cancel"
                 onclick="closeLogoutModal()"
             >
-                No
+                {{ t('No', 'نہیں') }}
             </button>
 
             <form
@@ -1543,7 +1815,7 @@
                     type="submit"
                     class="logout-confirm"
                 >
-                    Yes, Logout
+                    {{ t('Yes, Logout', 'جی ہاں، خروج کریں') }}
                 </button>
 
             </form>
@@ -1555,8 +1827,7 @@
 </div>
 
 <script>
-
-function toggleSidebar()
+    function toggleSidebar()
 {
     const sidebar = document.getElementById('sidebar');
     const backdrop = document.getElementById('sidebar-backdrop');
@@ -1623,15 +1894,14 @@ function toggleProfileMenu()
     menu.style.left = left + 'px';
 }
 
+
 function toggleLanguageMenu()
 {
     const menu = document.getElementById('languageMenu');
 
-    if (!menu) {
-        return;
+    if (menu) {
+        menu.classList.toggle('show');
     }
-
-    menu.classList.toggle('show');
 }
 
 function openLogoutModal()

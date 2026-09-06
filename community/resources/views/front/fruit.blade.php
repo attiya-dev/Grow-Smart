@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Fruits | GrowSmart')
+@section('title', (is_urdu() ? 'پھل' : 'Fruits') . ' | GrowSmart')
 
 @push('styles')
 <style>
@@ -355,28 +355,25 @@
 
 <div class="crop-page">
 
-    {{-- Hero Section --}}
     <div class="crop-hero">
 
         <h1 class="crop-page-title">
-            Fruits
+            {{ t('Fruits', 'پھل') }}
         </h1>
 
         <p class="crop-page-subtitle">
-            Discover a variety of fruits and explore detailed agricultural
-            information, growing guidance, and useful crop details.
+            {{ t('Discover a variety of fruits and explore detailed agricultural information, growing guidance, and useful crop details.', 'مختلف پھلوں کو دیکھیں اور تفصیلی زرعی معلومات، کاشت کی رہنمائی اور فصل کی مفید تفصیلات حاصل کریں۔') }}
         </p>
 
     </div>
 
 
-    {{-- Fruits Section --}}
     <div class="crop-section">
 
         <div class="crop-section-header">
 
             <h2 class="crop-section-title">
-                Available Fruits
+                {{ t('Available Fruits', 'دستیاب پھل') }}
             </h2>
 
             <span class="crop-count">
@@ -399,12 +396,12 @@
 
                         <div class="crop-card">
 
-                            {{-- Crop Image --}}
+                            
                             <div class="crop-image-wrapper">
 
                                 <img
                                     src="{{ asset('images/' . $crop->image) }}"
-                                    alt="{{ $crop->name }}"
+                                    alt="{{ local_text($crop, 'name') }}"
                                     loading="lazy"
                                     onerror="this.src='{{ asset('images/default-crop.jpg') }}'"
                                 >
@@ -412,30 +409,30 @@
                                 <div class="crop-image-overlay"></div>
 
 
-                                {{-- View Details --}}
+                                
                                 <div class="view-badge">
 
                                     <i class="bi bi-arrow-right"></i>
 
-                                    View Details
+                                    {{ t('View Details', 'تفصیلات دیکھیں') }}
 
                                 </div>
 
                             </div>
 
 
-                            {{-- Crop Information --}}
+                            
                             <div class="card-info">
 
                                 <div class="crop-title">
-                                    {{ $crop->name }}
+                                    {{ local_text($crop, 'name') }}
                                 </div>
 
 
                                 @if($crop->type)
 
                                     <div class="crop-type">
-                                        {{ ucfirst($crop->type) }}
+                                        {{ local_text($crop, 'type') }}
                                     </div>
 
                                 @endif
@@ -461,11 +458,11 @@
                         </div>
 
                         <h5>
-                            No Fruits Available
+                            {{ t('No Fruits Available', 'کوئی پھل دستیاب نہیں ہیں') }}
                         </h5>
 
                         <p>
-                            There are currently no fruits available to display.
+                            {{ t('There are currently no fruits available to display.', 'اس وقت دکھانے کے لیے کوئی پھل دستیاب نہیں ہے۔') }}
                         </p>
 
                     </div>

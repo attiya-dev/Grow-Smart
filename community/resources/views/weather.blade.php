@@ -405,7 +405,7 @@
 
 @section('content')
 
-<div class="weather-page">
+<div class="weather-page" data-no-translate>
 
     <div class="weather-header">
         <div class="weather-header-content">
@@ -414,11 +414,10 @@
                 <i class="bi bi-cloud-sun-fill"></i>
             </div>
 
-            <h1>Weather Info</h1>
+            <h1>{{ is_urdu() ? 'موسم کی معلومات' : 'Weather Info' }}</h1>
 
             <p>
-                Check the current weather and forecast for your area.
-                Use this information to plan your farming activities.
+                {{ is_urdu() ? 'اپنے علاقے کے موجودہ موسم اور آئندہ دنوں کی پیش گوئی دیکھیں۔ اس معلومات کی مدد سے اپنی زرعی سرگرمیوں کی بہتر منصوبہ بندی کریں۔' : 'Check the current weather and forecast for your area. Use this information to plan your farming activities.' }}
             </p>
 
         </div>
@@ -432,15 +431,15 @@
                 <i class="bi bi-geo-alt-fill"></i>
             </div>
 
-            <h4>Weather Permission Required</h4>
+            <h4>{{ is_urdu() ? 'موسم دیکھنے کے لیے مقام کی اجازت درکار ہے' : 'Weather Permission Required' }}</h4>
 
             <p>
-                Allow your location to see the current weather in your area.
+                {{ is_urdu() ? 'اپنے علاقے کا موجودہ موسم دیکھنے کے لیے اپنے مقام تک رسائی کی اجازت دیں۔' : 'Allow your location to see the current weather in your area.' }}
             </p>
 
             <button class="location-btn" onclick="getLocation()">
                 <i class="bi bi-geo-alt me-2"></i>
-                Show Weather Using Location
+                {{ is_urdu() ? 'مقام کی مدد سے موسم دیکھیں' : 'Show Weather Using Location' }}
             </button>
 
             <div id="locationError"></div>
@@ -485,7 +484,7 @@
 
                     <div class="mt-3" style="font-size:13px;color:#c8d9d1;">
                         <i class="bi bi-thermometer-half me-1"></i>
-                        Feels Like:
+                        {{ is_urdu() ? 'محسوس ہونے والا درجہ حرارت:' : 'Feels Like:' }}
                         <span id="feelsLike">—</span>°C
                     </div>
 
@@ -498,7 +497,7 @@
                         <div class="weather-stat">
                             <div class="weather-stat-label">
                                 <i class="bi bi-droplet me-1"></i>
-                                Humidity
+                                {{ is_urdu() ? 'نمی' : 'Humidity' }}
                             </div>
 
                             <div class="weather-stat-value" id="humidityVal">
@@ -509,7 +508,7 @@
                         <div class="weather-stat">
                             <div class="weather-stat-label">
                                 <i class="bi bi-wind me-1"></i>
-                                Wind
+                                {{ is_urdu() ? 'ہوا' : 'Wind' }}
                             </div>
 
                             <div class="weather-stat-value" id="windVal">
@@ -520,7 +519,7 @@
                         <div class="weather-stat">
                             <div class="weather-stat-label">
                                 <i class="bi bi-eye me-1"></i>
-                                Visibility
+                                {{ is_urdu() ? 'حدِ نگاہ' : 'Visibility' }}
                             </div>
 
                             <div class="weather-stat-value" id="visibilityVal">
@@ -531,7 +530,7 @@
                         <div class="weather-stat">
                             <div class="weather-stat-label">
                                 <i class="bi bi-calendar3 me-1"></i>
-                                Today
+                                {{ is_urdu() ? 'آج' : 'Today' }}
                             </div>
 
                             <div class="weather-stat-value" id="todayDate">
@@ -554,10 +553,10 @@
             </div>
 
             <div>
-                <h3>Five Day Forecast</h3>
+                <h3>{{ is_urdu() ? 'پانچ دن کی موسم کی پیش گوئی' : 'Five Day Forecast' }}</h3>
 
                 <p>
-                    Weather conditions for the coming days
+                    {{ is_urdu() ? 'آنے والے دنوں کے موسمی حالات' : 'Weather conditions for the coming days' }}
                 </p>
             </div>
 
@@ -569,7 +568,7 @@
 
             <div class="tips-title">
                 <i class="bi bi-lightbulb-fill"></i>
-                Farmer Tips
+                {{ is_urdu() ? 'کسانوں کے لیے مفید مشورے' : 'Farmer Tips' }}
             </div>
 
             <div id="tipsContainer"></div>
@@ -589,6 +588,8 @@
 
 @push('scripts')
 <script>
+const weatherUrdu = @json(is_urdu());
+
 function getLocation() {
 
     const errorBox = document.getElementById('locationError');
@@ -598,14 +599,14 @@ function getLocation() {
     }
 
     if (!navigator.geolocation) {
-        showError('Your browser does not support location services.');
+        showError(weatherUrdu ? 'آپ کا براؤزر مقام کی خدمات کو سپورٹ نہیں کرتا۔' : 'Your browser does not support location services.');
         return;
     }
 
     document.getElementById('loadingSection').innerHTML = `
         <div class="location-box loading-box">
             <div class="spinner-border" role="status"></div>
-            <p class="mt-3 mb-0">Finding your location...</p>
+            <p class="mt-3 mb-0">{{ is_urdu() ? 'آپ کا مقام تلاش کیا جا رہا ہے...' : 'Finding your location...' }}</p>
         </div>
     `;
 
@@ -626,16 +627,15 @@ function getLocation() {
                         <i class="bi bi-geo-alt-fill"></i>
                     </div>
 
-                    <h4>Location Permission Required</h4>
+                    <h4>{{ is_urdu() ? 'مقام کی اجازت درکار ہے' : 'Location Permission Required' }}</h4>
 
                     <p>
-                        Please allow location access from your browser
-                        to see your local weather.
+                        {{ is_urdu() ? 'اپنے مقامی موسم کو دیکھنے کے لیے براہِ کرم اپنے براؤزر میں مقام تک رسائی کی اجازت دیں۔' : 'Please allow location access from your browser to see your local weather.' }}
                     </p>
 
                     <button class="location-btn" onclick="getLocation()">
                         <i class="bi bi-arrow-clockwise me-2"></i>
-                        Try Again
+                        {{ is_urdu() ? 'دوبارہ کوشش کریں' : 'Try Again' }}
                     </button>
 
                     <div id="locationError"></div>
@@ -643,9 +643,7 @@ function getLocation() {
                 </div>
             `;
 
-            showError(
-                'Location access was not allowed. Please allow location access in your browser.'
-            );
+            showError(weatherUrdu ? 'مقام تک رسائی کی اجازت نہیں دی گئی۔ براہِ کرم اپنے براؤزر میں مقام تک رسائی کی اجازت دیں۔' : 'Location access was not allowed. Please allow location access in your browser.');
         }
     );
 }
@@ -675,9 +673,7 @@ function fetchWeather(lat, lon) {
         displayWeather(data);
     })
     .catch(() => {
-        showError(
-            'Weather data could not be loaded. Please check your internet connection and try again.'
-        );
+        showError(weatherUrdu ? 'موسم کی معلومات لوڈ نہیں ہو سکیں۔ براہِ کرم اپنے انٹرنیٹ کنکشن کی جانچ کریں اور دوبارہ کوشش کریں۔' : 'Weather data could not be loaded. Please check your internet connection and try again.');
     });
 }
 

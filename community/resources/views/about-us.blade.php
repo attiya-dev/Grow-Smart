@@ -13,60 +13,57 @@
             </div>
 
             <div>
-                <h1>About GrowSmart</h1>
-                <p>Smart Agriculture Platform</p>
+                <h1>{{ t('About GrowSmart', 'گرو اسمارٹ کے بارے میں') }}</h1>
+                <p>{{ t('Smart Agriculture Platform', 'ذہین زرعی پلیٹ فارم') }}</p>
             </div>
         </div>
 
         <div class="about-intro">
-            <h2>Growing Smarter, Together</h2>
+            <h2>{{ t('Growing Smarter, Together', 'مل کر بہتر اور جدید کاشت کاری کی طرف') }}</h2>
             <p>
-                GrowSmart is a smart agriculture platform that brings
-                crop knowledge, pest management, weather information,
-                AI soil analysis and agricultural community support
-                together in one place.
+                {{ t('GrowSmart is a smart agriculture platform that brings crop knowledge, pest management, weather information, AI soil analysis and agricultural community support together in one place.', 'گرو اسمارٹ ایک ذہین زرعی پلیٹ فارم ہے جو فصلوں کی معلومات، کیڑوں کے انتظام، موسم کی معلومات، اے آئی کی مدد سے مٹی کے تجزیے اور زرعی کمیونٹی کی معاونت کو ایک ہی جگہ فراہم کرتا ہے۔') }}
             </p>
         </div>
 
         <div class="about-section">
-            <h2>What We Provide</h2>
+            <h2>{{ t('What We Provide', 'ہم کیا فراہم کرتے ہیں') }}</h2>
 
             <div class="about-grid">
 
                 <div class="about-box">
                     <i class="bi bi-bar-chart"></i>
-                    <h3>Crop Data</h3>
-                    <p>Crop information, seasons and useful growing guidance.</p>
+                    <h3>{{ t('Crop Data', 'فصلوں کی معلومات') }}</h3>
+                    <p>{{ t('Crop information, seasons and useful growing guidance.', 'فصلوں کی معلومات، موسم اور کاشت کے لیے مفید رہنمائی۔') }}</p>
                 </div>
 
                 <div class="about-box">
                     <i class="bi bi-bug"></i>
-                    <h3>Pest Management</h3>
-                    <p>Helpful information for identifying and managing pests.</p>
+                    <h3>{{ t('Pest Management', 'کیڑوں کا انتظام') }}</h3>
+                    <p>{{ t('Helpful information for identifying and managing pests.', 'کیڑوں کی شناخت اور ان کے مؤثر انتظام کے لیے مفید معلومات۔') }}</p>
                 </div>
 
                 <div class="about-box">
                     <i class="bi bi-cloud-sun"></i>
-                    <h3>Weather</h3>
-                    <p>Weather information to support better farming decisions.</p>
+                    <h3>{{ t('Weather', 'موسم') }}</h3>
+                    <p>{{ t('Weather information to support better farming decisions.', 'بہتر زرعی فیصلوں میں مدد کے لیے موسم کی معلومات۔') }}</p>
                 </div>
 
                 <div class="about-box">
                     <i class="bi bi-cpu"></i>
-                    <h3>AI Soil Analysis</h3>
-                    <p>Smart soil analysis to help improve farming decisions.</p>
+                    <h3>{{ t('AI Soil Analysis', 'اے آئی مٹی کا تجزیہ') }}</h3>
+                    <p>{{ t('Smart soil analysis to help improve farming decisions.', 'بہتر زرعی فیصلوں میں مدد کے لیے ذہین مٹی کا تجزیہ۔') }}</p>
                 </div>
 
                 <div class="about-box">
                     <i class="bi bi-people"></i>
-                    <h3>Community</h3>
-                    <p>Ask questions, share knowledge and get agricultural support.</p>
+                    <h3>{{ t('Community', 'کمیونٹی') }}</h3>
+                    <p>{{ t('Ask questions, share knowledge and get agricultural support.', 'سوالات پوچھیں، معلومات بانٹیں اور زرعی معاونت حاصل کریں۔') }}</p>
                 </div>
 
                 <div class="about-box">
                     <i class="bi bi-flower1"></i>
-                    <h3>Smart Farming</h3>
-                    <p>Modern technology and agricultural knowledge in one platform.</p>
+                    <h3>{{ t('Smart Farming', 'جدید کاشت کاری') }}</h3>
+                    <p>{{ t('Modern technology and agricultural knowledge in one platform.', 'جدید ٹیکنالوجی اور زرعی علم ایک ہی پلیٹ فارم پر۔') }}</p>
                 </div>
 
             </div>
@@ -75,11 +72,9 @@
         <div class="about-goal">
             <i class="bi bi-bullseye"></i>
             <div>
-                <h2>Our Goal</h2>
+                <h2>{{ t('Our Goal', 'ہمارا مقصد') }}</h2>
                 <p>
-                    To make modern agriculture information simple, useful
-                    and accessible, helping farmers make smarter decisions
-                    through technology.
+                    {{ t('To make modern agriculture information simple, useful and accessible, helping farmers make smarter decisions through technology.', 'جدید زرعی معلومات کو آسان، مفید اور ہر ایک کے لیے قابلِ رسائی بنانا تاکہ کسان ٹیکنالوجی کی مدد سے بہتر اور باخبر فیصلے کر سکیں۔') }}
                 </p>
             </div>
         </div>

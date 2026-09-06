@@ -143,10 +143,10 @@ body {
 </style>
 
 
-<div class="form-container">
+<div class="form-container" data-no-translate="true">
 
     <h1>
-        📚 Add Crop Data
+        {{ t('📚 Add Crop Data', '📚 فصل کی معلومات شامل کریں') }}
     </h1>
 
 
@@ -182,7 +182,7 @@ body {
         <div class="form-group">
 
             <label>
-                Select Crop
+                {{ t('Select Crop', 'فصل منتخب کریں') }}
             </label>
 
             <select
@@ -191,7 +191,7 @@ body {
             >
 
                 <option value="">
-                    Select Crop
+                    {{ t('Select Crop', 'فصل منتخب کریں') }}
                 </option>
 
                 @foreach($crops as $crop)
@@ -212,7 +212,7 @@ body {
 
         <div class="form-group">
 
-            <label>Introduction</label>
+            <label>{{ t('Introduction', 'تعارف') }}</label>
 
             <textarea
                 name="introduction"
@@ -224,7 +224,7 @@ body {
 
         <div class="form-group">
 
-            <label>Basic Information</label>
+            <label>{{ t('Basic Information', 'بنیادی معلومات') }}</label>
 
             <textarea
                 name="basic_information"
@@ -236,7 +236,7 @@ body {
 
         <div class="form-group">
 
-            <label>Sowing Season</label>
+            <label>{{ t('Sowing Season', 'کاشت کا موسم') }}</label>
 
             <textarea
                 name="sowing_season"
@@ -248,7 +248,7 @@ body {
 
         <div class="form-group">
 
-            <label>Harvesting Season</label>
+            <label>{{ t('Harvesting Season', 'کٹائی کا موسم') }}</label>
 
             <textarea
                 name="harvesting_season"
@@ -260,7 +260,7 @@ body {
 
         <div class="form-group">
 
-            <label>Climate Requirements</label>
+            <label>{{ t('Climate Requirements', 'موسمی ضروریات') }}</label>
 
             <textarea
                 name="climate_requirements"
@@ -272,7 +272,7 @@ body {
 
         <div class="form-group">
 
-            <label>Soil Requirements</label>
+            <label>{{ t('Soil Requirements', 'مٹی کی ضروریات') }}</label>
 
             <textarea
                 name="soil_requirements"
@@ -284,7 +284,7 @@ body {
 
         <div class="form-group">
 
-            <label>Land Preparation</label>
+            <label>{{ t('Land Preparation', 'زمین کی تیاری') }}</label>
 
             <textarea
                 name="land_preparation"
@@ -296,7 +296,7 @@ body {
 
         <div class="form-group">
 
-            <label>Seed Selection</label>
+            <label>{{ t('Seed Selection', 'بیج کا انتخاب') }}</label>
 
             <textarea
                 name="seed_selection"
@@ -308,7 +308,7 @@ body {
 
         <div class="form-group">
 
-            <label>Seed Rate</label>
+            <label>{{ t('Seed Rate', 'بیج کی مقدار') }}</label>
 
             <textarea
                 name="seed_rate"
@@ -320,7 +320,7 @@ body {
 
         <div class="form-group">
 
-            <label>Irrigation Requirements</label>
+            <label>{{ t('Irrigation Requirements', 'آبپاشی کی ضروریات') }}</label>
 
             <textarea
                 name="irrigation_requirements"
@@ -332,7 +332,7 @@ body {
 
         <div class="form-group">
 
-            <label>Fertilizer Requirements</label>
+            <label>{{ t('Fertilizer Requirements', 'کھاد کی ضروریات') }}</label>
 
             <textarea
                 name="fertilizer_requirements"
@@ -344,7 +344,7 @@ body {
 
         <div class="form-group">
 
-            <label>Growing Stages</label>
+            <label>{{ t('Growing Stages', 'نشوونما کے مراحل') }}</label>
 
             <textarea
                 name="growing_stages"
@@ -356,7 +356,7 @@ body {
 
         <div class="form-group">
 
-            <label>Types of Crop</label>
+            <label>{{ t('Types of Crop', 'فصل کی اقسام') }}</label>
 
             <textarea
                 name="types_of_crop"
@@ -368,7 +368,7 @@ body {
 
         <div class="form-group">
 
-            <label>Crop Varieties</label>
+            <label>{{ t('Crop Varieties', 'فصل کی اقسام') }}</label>
 
             <textarea
                 name="crop_varieties"
@@ -380,7 +380,7 @@ body {
 
         <div class="form-group">
 
-            <label>Nutritional Value</label>
+            <label>{{ t('Nutritional Value', 'غذائی قدر') }}</label>
 
             <textarea
                 name="nutritional_value"
@@ -392,7 +392,7 @@ body {
 
         <div class="form-group">
 
-            <label>Importance of Crop</label>
+            <label>{{ t('Importance of Crop', 'فصل کی اہمیت') }}</label>
 
             <textarea
                 name="importance_of_crop"
@@ -408,7 +408,7 @@ body {
                 type="submit"
                 class="btn save"
             >
-                💾 Save Crop Data
+                {{ t('💾 Save Crop Data', '💾 فصل کی معلومات محفوظ کریں') }}
             </button>
 
 
@@ -416,7 +416,7 @@ body {
                 href="{{ route('admin.crops') }}"
                 class="btn back"
             >
-                Back
+                {{ t('Back', 'واپس') }}
             </a>
 
         </div>

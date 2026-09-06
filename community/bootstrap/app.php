@@ -1,25 +1,32 @@
+
 <?php
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\SetLanguage;
+use App\Http\Middleware\TranslateUrduResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
+    ->withCommands([__DIR__.'/../app/Console/Commands'])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-    'expert' => \App\Http\Middleware\ExpertMiddleware::class,
-    'user' => \App\Http\Middleware\UserMiddleware::class,
+
+        $middleware->web(append: [
+            SetLanguage::class,
+            TranslateUrduResponse::class,
         ]);
-        
-        // Add SetLocale middleware to run on all web requests
-        $middleware->web(append: \App\Http\Middleware\SetLocale::class);
+
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'expert' => \App\Http\Middleware\ExpertMiddleware::class,
+            'user' => \App\Http\Middleware\UserMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })->create();
+    })
+    ->create();

@@ -96,14 +96,14 @@ body {
 </style>
 
 
-<div class="admin-dashboard">
+<div class="admin-dashboard" data-no-translate="true">
 
     <div class="header">
 
-        <h1>Admin Dashboard</h1>
+        <h1>{{ t('Admin Dashboard', 'منتظم کا ڈیش بورڈ') }}</h1>
 
         <p>
-            Manage users, questions and crop information
+            {{ t('Manage users, questions and crop information', 'صارفین، سوالات اور فصلوں کی معلومات کا انتظام کریں') }}
         </p>
 
     </div>
@@ -120,7 +120,6 @@ body {
 
     <div class="menu">
 
-        {{-- USERS --}}
 
         <a href="{{ route('admin.dashboard') }}"
            class="card">
@@ -130,17 +129,14 @@ body {
             </div>
 
             <h2>
-                All Users
+                {{ t('All Users', 'تمام صارفین') }}
             </h2>
 
             <p>
-                View and manage all registered users.
+                {{ t('View and manage all registered users.', 'تمام رجسٹرڈ صارفین کو دیکھیں اور ان کا انتظام کریں۔') }}
             </p>
 
         </a>
-
-
-        {{-- QUESTIONS --}}
 
         <a href="{{ route('admin.questions') }}"
            class="card">
@@ -150,17 +146,14 @@ body {
             </div>
 
             <h2>
-                User Questions
+                {{ t('User Questions', 'صارفین کے سوالات') }}
             </h2>
 
             <p>
-                View, review and manage questions submitted by users.
+                {{ t('View, review and manage questions submitted by users.', 'صارفین کی جانب سے جمع کرائے گئے سوالات دیکھیں، ان کا جائزہ لیں اور ان کا انتظام کریں۔') }}
             </p>
 
         </a>
-
-
-        {{-- CROPS --}}
 
         <a href="{{ route('admin.crops') }}"
            class="card">
@@ -170,11 +163,11 @@ body {
             </div>
 
             <h2>
-                Manage Crops
+                {{ t('Manage Crops', 'فصلوں کا انتظام') }}
             </h2>
 
             <p>
-                Add crops, crop information, pest information and delete crops.
+                {{ t('Add crops, crop information, pest information and delete crops.', 'فصلیں، فصلوں کی معلومات اور کیڑوں کی معلومات شامل کریں اور فصلیں حذف کریں۔') }}
             </p>
 
         </a>

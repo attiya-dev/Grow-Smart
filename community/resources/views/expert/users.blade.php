@@ -89,23 +89,23 @@ body{
 
 </style>
 
-<div class="container">
+<div class="container" data-no-translate="true">
 
 <div class="title">
 
-<h1>Expert Dashboard</h1>
+<h1>{{ is_urdu() ? 'ماہر کا ڈیش بورڈ' : 'Expert Dashboard' }}</h1>
 
-<p>Select a category to answer community questions.</p>
+<p>{{ is_urdu() ? 'کمیونٹی کے سوالات کے جوابات دینے کے لیے ایک زمرہ منتخب کریں۔' : 'Select a category to answer community questions.' }}</p>
 
 </div>
 
 <div class="cards">
 
-    <!-- Crop -->
+    
 
     <div class="card">
 
-        <h2>🌾 Crop Questions</h2>
+        <h2>🌾 {{ is_urdu() ? 'فصلوں سے متعلق سوالات' : 'Crop Questions' }}</h2>
 
         @if($cropCount > 0)
 
@@ -119,7 +119,7 @@ body{
 
             <div class="no-question">
 
-                No Questions Asked
+                {{ is_urdu() ? 'ابھی تک کوئی سوال نہیں پوچھا گیا۔' : 'No Questions Asked' }}
 
             </div>
 
@@ -127,18 +127,18 @@ body{
 
         <a href="{{ route('expert.crop.users') }}" class="btn">
 
-            Open
+            {{ is_urdu() ? 'کھولیں' : 'Open' }}
 
         </a>
 
     </div>
 
 
-    <!-- Fruit -->
+    
 
     <div class="card">
 
-        <h2>🍎 Fruit Questions</h2>
+        <h2>🍎 {{ is_urdu() ? 'پھلوں سے متعلق سوالات' : 'Fruit Questions' }}</h2>
 
         @if($fruitCount > 0)
 
@@ -152,7 +152,7 @@ body{
 
             <div class="no-question">
 
-                No Questions Asked
+                {{ is_urdu() ? 'ابھی تک کوئی سوال نہیں پوچھا گیا۔' : 'No Questions Asked' }}
 
             </div>
 
@@ -160,18 +160,18 @@ body{
 
         <a href="{{ route('expert.fruit.users') }}" class="btn">
 
-            Open
+            {{ is_urdu() ? 'کھولیں' : 'Open' }}
 
         </a>
 
     </div>
 
 
-    <!-- Vegetable -->
+    
 
     <div class="card">
 
-        <h2>🥕 Vegetable Questions</h2>
+        <h2>🥕 {{ is_urdu() ? 'سبزیوں سے متعلق سوالات' : 'Vegetable Questions' }}</h2>
 
         @if($vegetableCount > 0)
 
@@ -185,7 +185,7 @@ body{
 
             <div class="no-question">
 
-                No Questions Asked
+                {{ is_urdu() ? 'ابھی تک کوئی سوال نہیں پوچھا گیا۔' : 'No Questions Asked' }}
 
             </div>
 
@@ -193,7 +193,7 @@ body{
 
         <a href="{{ route('expert.vegetable.users') }}" class="btn">
 
-            Open
+            {{ is_urdu() ? 'کھولیں' : 'Open' }}
 
         </a>
 

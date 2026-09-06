@@ -338,8 +338,8 @@
 <div class="questions-box">
 
     <div class="page-title">
-        <h2>🥬 Vegetable Questions</h2>
-        <p>Answer the user's vegetable questions</p>
+        <h2>🥬 {{ t('Vegetable Questions', 'سبزیوں سے متعلق سوالات') }}</h2>
+        <p>{{ t('Answer the user\'s vegetable questions', 'صارف کے سبزیوں سے متعلق سوالات کے جوابات دیں۔') }}</p>
     </div>
 
     @forelse($questions as $question)
@@ -347,7 +347,7 @@
         <div class="question-card">
 
             <div class="question-title">
-                🥬 Vegetable Question
+                🥬 {{ t('Vegetable Question', 'سبزی سے متعلق سوال') }}
             </div>
 
             @if($question->question_text)
@@ -370,7 +370,7 @@
             @if($question->question_voice)
 
                 <div class="voice-title">
-                    🎤 Voice Question
+                    🎤 {{ t('Voice Question', 'آواز میں سوال') }}
                 </div>
 
                 @foreach($question->question_voice as $voice)
@@ -387,10 +387,36 @@
 
             @endif
 
+            @if($question->answers->count())
+                <div class="existing-answers" style="background:#f8fbf8;border:1px solid #dcebdd;border-radius:12px;padding:15px;margin-bottom:18px;">
+                    <div style="color:#1b5e20;font-weight:bold;margin-bottom:10px;">
+                        ✓ {{ t('Previous Expert Answers', 'ماہر کے سابقہ جوابات') }}
+                    </div>
+                    @foreach($question->answers as $answer)
+                        <div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;">
+                            <strong>👨‍🌾 {{ $answer->expert->name ?? t('Expert', 'ماہر') }}</strong>
+                            @if($answer->answer_text)
+                                <div class="mt-2">{{ $answer->answer_text }}</div>
+                            @endif
+                            @if($answer->answer_image)
+                                <img src="{{ asset('storage/'.$answer->answer_image) }}" class="img-fluid rounded mt-2" style="max-width:220px;">
+                            @endif
+                            @if($answer->answer_voice)
+                                @foreach((is_array($answer->answer_voice) ? $answer->answer_voice : [$answer->answer_voice]) as $voice)
+                                    <audio controls class="w-100 mt-2">
+                                        <source src="{{ asset('storage/'.$voice) }}">
+                                    </audio>
+                                @endforeach
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
             <hr class="line">
 
             <div class="answer-title">
-                👨‍🌾 Your Answer
+                👨‍🌾 {{ t('Your Answer', 'آپ کا جواب') }}
             </div>
 
             <form
@@ -410,13 +436,13 @@
                 <div>
 
                     <label class="answer-label">
-                        Write Answer
+                        {{ t('Write Answer', 'جواب لکھیں') }}
                     </label>
 
                     <textarea
                         name="answer_text"
                         class="answer-text"
-                        placeholder="Write your agricultural advice here..."
+                        placeholder="{{ t('Write your agricultural advice here...', 'اپنا زرعی مشورہ یہاں لکھیں...') }}"
                     ></textarea>
 
                 </div>
@@ -424,7 +450,7 @@
                 <div style="margin-top:18px;">
 
                     <label class="answer-label">
-                        🖼️ Answer Image
+                        🖼️ {{ t('Answer Image', 'جواب کی تصویر') }}
                     </label>
 
                     <input
@@ -440,7 +466,7 @@
                 <div style="margin-top:18px;">
 
                     <label class="answer-label">
-                        🎤 Record Voice Answer
+                        🎤 {{ t('Record Voice Answer', 'آواز میں جواب ریکارڈ کریں') }}
                     </label>
 
                     <div class="voice-record-area">
@@ -448,7 +474,7 @@
                         <button
                             type="button"
                             class="recordBtn"
-                            title="Start recording"
+                            title="{{ t('Start recording', 'ریکارڈنگ شروع کریں') }}"
                         >
                             🎤
                         </button>
@@ -469,7 +495,7 @@
                     type="submit"
                     class="submit-answer-btn"
                 >
-                    👨‍🌾 Submit Answer
+                    👨‍🌾 {{ t('Submit Answer', 'جواب جمع کریں') }}
                 </button>
 
             </form>
@@ -479,7 +505,7 @@
     @empty
 
         <div class="empty-box">
-            This user has no unanswered crop questions.
+            {{ t('This user has no unanswered crop questions.', 'اس صارف کے کوئی غیر جوابی فصلوں سے متعلق سوالات موجود نہیں ہیں۔') }}
         </div>
 
     @endforelse
@@ -488,6 +514,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    const isUrdu = @json(is_urdu());
 
     function formatTime(seconds) {
 
@@ -662,7 +689,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         deleteButton.type = "button";
         deleteButton.className = "voice-delete";
-        deleteButton.innerHTML = "🗑 Delete Recording";
+        deleteButton.innerHTML = `🗑 ${isUrdu ? 'ریکارڈنگ حذف کریں' : 'Delete Recording'}`;
 
         menu.appendChild(deleteButton);
 

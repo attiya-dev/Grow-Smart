@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $cropDetail->crop_name . ' | GrowSmart')
+@section('title', (is_urdu() ? local_text($cropDetail, 'crop_name') : $cropDetail->crop_name) . ' | GrowSmart')
 
 @push('styles')
 <style>
@@ -158,8 +158,8 @@
 .crop-section-content {
     width: 100%;
     color: #56665e;
-    font-size: 13.5px;
-    line-height: 1.8;
+    font-size: 14px;
+    line-height: 2;
     white-space: pre-line;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -177,9 +177,15 @@
 }
 
 .section-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 18px;
+}
+
+
+.section-grid .crop-section {
+    width: 100%;
+    margin-bottom: 0;
 }
 
 .section-grid .crop-section {
@@ -219,7 +225,7 @@
     }
 
     .section-grid {
-        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
 }
@@ -266,6 +272,7 @@
 @endpush
 
 @section('content')
+<div data-no-translate="true">
 
 @php
     $crop = \App\Models\Crop::where('name', $cropDetail->crop_name)->first();
@@ -283,7 +290,7 @@
 
                     <img
                         src="{{ asset('images/' . basename($crop->image)) }}"
-                        alt="{{ $cropDetail->crop_name }}"
+                        alt="{{ local_text($cropDetail, 'crop_name') }}"
                         onerror="this.style.display='none'; this.parentElement.classList.add('no-crop-image'); this.parentElement.innerHTML='<i class=\'bi bi-flower1\'></i>';"
                     >
 
@@ -302,11 +309,11 @@
             <div class="crop-title">
 
                 <h1>
-                    {{ $cropDetail->crop_name }}
+                    {{ local_text($cropDetail, 'crop_name') }}
                 </h1>
 
                 <p>
-                    Complete agricultural information and farming guide
+                    {{ t('Complete agricultural information and farming guide', 'مکمل زرعی معلومات اور کاشت کاری کی رہنمائی') }}
                 </p>
 
             </div>
@@ -327,11 +334,11 @@
             <div>
 
                 <div class="overview-label">
-                    Sowing
+                    {{ t('Sowing', 'کاشت') }}
                 </div>
 
                 <div class="overview-value">
-                    Crop Season
+                    {{ t('Crop Season', 'فصل کا موسم') }}
                 </div>
 
             </div>
@@ -348,11 +355,11 @@
             <div>
 
                 <div class="overview-label">
-                    Climate
+                    {{ t('Climate', 'آب و ہوا') }}
                 </div>
 
                 <div class="overview-value">
-                    Climate Requirements
+                    {{ t('Climate Requirements', 'موسمی ضروریات') }}
                 </div>
 
             </div>
@@ -369,11 +376,11 @@
             <div>
 
                 <div class="overview-label">
-                    Farming
+                    {{ t('Farming', 'کاشت کاری') }}
                 </div>
 
                 <div class="overview-value">
-                    Irrigation & Soil
+                    {{ t('Irrigation & Soil', 'آبپاشی اور مٹی') }}
                 </div>
 
             </div>
@@ -392,15 +399,15 @@
             </div>
 
             <h2>
-                Introduction
+                {{ t('Introduction', 'تعارف') }}
             </h2>
 
         </div>
 
         <div class="info-box">
 
-            <div class="crop-section-content">
-                {{ $cropDetail->introduction }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'introduction') }}
             </div>
 
         </div>
@@ -417,13 +424,13 @@
             </div>
 
             <h2>
-                Basic Information
+                {{ t('Basic Information', 'بنیادی معلومات') }}
             </h2>
 
         </div>
 
-        <div class="crop-section-content">
-            {{ $cropDetail->basic_information }}
+        <div class="crop-section-content" data-no-translate>
+            {{ local_text($cropDetail, 'basic_information') }}
         </div>
 
     </div>
@@ -440,13 +447,13 @@
                 </div>
 
                 <h2>
-                    Sowing Season
+                    {{ t('Sowing Season', 'کاشت کا موسم') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->sowing_season }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'sowing_season') }}
             </div>
 
         </div>
@@ -461,13 +468,13 @@
                 </div>
 
                 <h2>
-                    Harvesting Season
+                    {{ t('Harvesting Season', 'کٹائی کا موسم') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->harvesting_season }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'harvesting_season') }}
             </div>
 
         </div>
@@ -484,15 +491,15 @@
             </div>
 
             <h2>
-                Climate Requirements
+                {{ t('Climate Requirements', 'موسمی ضروریات') }}
             </h2>
 
         </div>
 
         <div class="info-box">
 
-            <div class="crop-section-content">
-                {{ $cropDetail->climate_requirements }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'climate_requirements') }}
             </div>
 
         </div>
@@ -511,13 +518,13 @@
                 </div>
 
                 <h2>
-                    Soil Requirements
+                    {{ t('Soil Requirements', 'مٹی کی ضروریات') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->soil_requirements }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'soil_requirements') }}
             </div>
 
         </div>
@@ -532,13 +539,13 @@
                 </div>
 
                 <h2>
-                    Land Preparation
+                    {{ t('Land Preparation', 'زمین کی تیاری') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->land_preparation }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'land_preparation') }}
             </div>
 
         </div>
@@ -557,13 +564,13 @@
                 </div>
 
                 <h2>
-                    Seed Selection
+                    {{ t('Seed Selection', 'بیج کا انتخاب') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->seed_selection }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'seed_selection') }}
             </div>
 
         </div>
@@ -578,13 +585,13 @@
                 </div>
 
                 <h2>
-                    Seed Rate
+                    {{ t('Seed Rate', 'بیج کی مقدار') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->seed_rate }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'seed_rate') }}
             </div>
 
         </div>
@@ -603,13 +610,13 @@
                 </div>
 
                 <h2>
-                    Irrigation Requirements
+                    {{ t('Irrigation Requirements', 'آبپاشی کی ضروریات') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->irrigation_requirements }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'irrigation_requirements') }}
             </div>
 
         </div>
@@ -624,13 +631,13 @@
                 </div>
 
                 <h2>
-                    Fertilizer Requirements
+                    {{ t('Fertilizer Requirements', 'کھاد کی ضروریات') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->fertilizer_requirements }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'fertilizer_requirements') }}
             </div>
 
         </div>
@@ -647,13 +654,13 @@
             </div>
 
             <h2>
-                Growing Stages
+                {{ t('Growing Stages', 'نشوونما کے مراحل') }}
             </h2>
 
         </div>
 
-        <div class="crop-section-content">
-            {{ $cropDetail->growing_stages }}
+        <div class="crop-section-content" data-no-translate>
+            {{ local_text($cropDetail, 'growing_stages') }}
         </div>
 
     </div>
@@ -670,13 +677,13 @@
                 </div>
 
                 <h2>
-                    Types of Crop
+                    {{ t('Types of Crop', 'فصل کی اقسام') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->types_of_crop }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'types_of_crop') }}
             </div>
 
         </div>
@@ -691,13 +698,13 @@
                 </div>
 
                 <h2>
-                    Crop Varieties
+                    {{ t('Crop Varieties', 'فصل کی اقسام') }}
                 </h2>
 
             </div>
 
-            <div class="crop-section-content">
-                {{ $cropDetail->crop_varieties }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'crop_varieties') }}
             </div>
 
         </div>
@@ -714,15 +721,15 @@
             </div>
 
             <h2>
-                Nutritional Value
+                {{ t('Nutritional Value', 'غذائی قدر') }}
             </h2>
 
         </div>
 
         <div class="info-box">
 
-            <div class="crop-section-content">
-                {{ $cropDetail->nutritional_value }}
+            <div class="crop-section-content" data-no-translate>
+                {{ local_text($cropDetail, 'nutritional_value') }}
             </div>
 
         </div>
@@ -739,17 +746,18 @@
             </div>
 
             <h2>
-                Importance of the Crop
+                {{ t('Importance of the Crop', 'فصل کی اہمیت') }}
             </h2>
 
         </div>
 
-        <div class="crop-section-content">
-            {{ $cropDetail->importance_of_crop }}
+        <div class="crop-section-content" data-no-translate>
+            {{ local_text($cropDetail, 'importance_of_crop') }}
         </div>
 
     </div>
 
 </div>
 
+</div>
 @endsection

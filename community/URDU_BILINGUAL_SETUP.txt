@@ -1,0 +1,32 @@
+GrowSmart Bilingual Urdu Version
+
+This version stores English and Urdu crop/pest content separately.
+
+Initial 64 crop records and all 580 pest-management records are stored in dedicated static Urdu seeders:
+- database/seeders/UrduCropSeeder.php
+- database/seeders/UrduPestSeeder.php
+
+No automatic Urdu translation is used for crop names, crop data, or pest-management data.
+
+Run after extracting the project:
+
+composer dump-autoload
+php artisan migrate
+php artisan db:seed --class=UrduContentSeeder
+php artisan optimize:clear
+php artisan serve
+
+Urdu content is shown only when its complete Urdu record is marked complete.
+An English-only crop added by the Admin Dashboard remains visible only on the English side until the admin saves its complete Urdu crop record.
+An English-only pest/disease remains hidden from the Urdu pest page until its complete Urdu record is saved.
+
+For static text use:
+{{ t('Dashboard', 'ڈیش بورڈ') }}
+
+For database content use:
+{{ local_text($crop, 'name') }}
+{{ local_text($detail, 'introduction') }}
+{{ local_text($pest, 'symptoms') }}
+
+The Admin Dashboard provides separate forms for English crop/pest data and complete Urdu crop/pest data.
+The Urdu status migration does not delete or reset existing Urdu content.

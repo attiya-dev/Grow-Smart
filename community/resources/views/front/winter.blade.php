@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Winter Crops | GrowSmart')
+@section('title', (is_urdu() ? 'موسم سرما کی فصلیں' : 'Winter Crops') . ' | GrowSmart')
 
 @section('content')
 
@@ -385,16 +385,15 @@
 
             <div class="crop-badge">
                 <i class="bi bi-snow"></i>
-                Winter Crop Collection
+                {{ t('Winter Crop Collection', 'موسم سرما کی فصلوں کا مجموعہ') }}
             </div>
 
             <h1 class="crop-page-title">
-                Winter Crops
+                {{ t('Winter Crops', 'موسم سرما کی فصلیں') }}
             </h1>
 
             <p class="crop-page-subtitle">
-                Explore crops that thrive during the winter season and discover
-                useful agricultural information and growing guidance for each crop.
+                {{ t('Explore crops that thrive during the winter season and discover useful agricultural information and growing guidance for each crop.', 'موسم سرما میں اچھی نشوونما پانے والی فصلوں کو دیکھیں اور ہر فصل کے بارے میں مفید زرعی معلومات اور کاشت کی رہنمائی حاصل کریں۔') }}
             </p>
 
         </div>
@@ -407,11 +406,11 @@
 
             <div>
                 <h2 class="crop-section-title">
-                    Winter Crop Collection
+                    {{ t('Winter Crop Collection', 'موسم سرما کی فصلوں کا مجموعہ') }}
                 </h2>
 
                 <p class="crop-section-text">
-                    Select a crop to view its complete agricultural details.
+                    {{ t('Select a crop to view its complete agricultural details.', 'مکمل زرعی تفصیلات دیکھنے کے لیے ایک فصل منتخب کریں۔') }}
                 </p>
             </div>
 
@@ -434,14 +433,14 @@
 
                                 <img
                                     src="{{ asset('images/' . $crop->image) }}"
-                                    alt="{{ $crop->name }}"
+                                    alt="{{ local_text($crop, 'name') }}"
                                     loading="lazy"
                                 >
 
                                 <div class="crop-image-overlay"></div>
 
                                 <span class="crop-view-badge">
-                                    View Details
+                                    {{ t('View Details', 'تفصیلات دیکھیں') }}
                                 </span>
 
                             </div>
@@ -449,13 +448,13 @@
                             <div class="card-info">
 
                                 <div class="crop-title">
-                                    {{ $crop->name }}
+                                    {{ local_text($crop, 'name') }}
                                 </div>
 
                                 @if($crop->type)
 
                                     <div class="crop-type">
-                                        {{ ucfirst($crop->type) }}
+                                        {{ local_text($crop, 'type') }}
                                     </div>
 
                                 @endif
@@ -479,11 +478,11 @@
                         </div>
 
                         <h5>
-                            No winter crops available
+                            {{ t('No winter crops available', 'موسم سرما کی کوئی فصل دستیاب نہیں ہے') }}
                         </h5>
 
                         <p>
-                            There are currently no winter crops available to display.
+                            {{ t('There are currently no winter crops available to display.', 'اس وقت دکھانے کے لیے موسم سرما کی کوئی فصل دستیاب نہیں ہے۔') }}
                         </p>
 
                     </div>

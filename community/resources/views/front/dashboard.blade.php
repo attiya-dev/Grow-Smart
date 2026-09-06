@@ -2,7 +2,6 @@
 
 @section('title', 'GrowSmart | Dashboard')
 
-
 @section('content')
 
     <section class="hero">
@@ -12,99 +11,51 @@
             <div class="hero-left">
 
                 <div class="hero-badge">
-
                     <i class="bi bi-stars"></i>
-
                     Smart Agriculture Platform
-
                 </div>
 
-
                 <h1>
-
                     Grow Smarter.<br>
-
-                    <span>Farm Better.</span>
-
+                    <span>{{ t('Farm Better.', 'بہتر کاشت کاری کریں۔') }}</span>
                 </h1>
 
-
                 <p class="hero-description">
-
                     GrowSmart brings essential farming knowledge,
                     crop information, weather insights, pest
                     management and intelligent soil analysis
                     together in one simple platform.
-
                 </p>
-
 
                 <div class="hero-actions">
 
-                    <a
-                        href="/grid"
-                        class="hero-primary-btn"
-                    >
-
+                    <a href="/grid" class="hero-primary-btn">
                         Explore Crop Data
-
                         <i class="bi bi-arrow-right"></i>
-
                     </a>
 
-
-                    <a
-                        href="/weather"
-                        class="hero-secondary-btn"
-                    >
-
+                    <a href="/weather" class="hero-secondary-btn">
                         <i class="bi bi-cloud-sun"></i>
-
                         Check Weather
-
                     </a>
 
                 </div>
 
-
                 <div class="hero-stats">
 
                     <div class="hero-stat">
-
-                        <strong>
-                            50+
-                        </strong>
-
-                        <span>
-                            Crop Resources
-                        </span>
-
+                        <strong>50+</strong>
+                        <span>Crop Resources</span>
                     </div>
 
-
                     <div class="hero-stat">
-
-                        <strong>
-                            Smart
-                        </strong>
-
-                        <span>
-                            Expert Advice
-                        </span>
-
+                        <strong>Smart</strong>
+                        <span>Expert Advice</span>
                     </div>
 
-
                     <div class="hero-stat">
-
-                        <strong>
-                            AI
-                        </strong>
-
-                        <span>
-                            Soil Insights
-                        </span>
-
+                        <strong>AI</strong>
+                        <span>Soil Insights</span>
                     </div>
 
                 </div>
@@ -115,10 +66,12 @@
 
     </section>
 
+
+    {{-- Popular Crops --}}
+
     <div class="section-heading">
 
         <div>
-
             <h2>
                 Popular Crops
             </h2>
@@ -126,19 +79,11 @@
             <p>
                 Explore commonly grown crops and learn more about them.
             </p>
-
         </div>
 
-
-        <a
-            href="/grid"
-            class="see-all"
-        >
-
+        <a href="/grid" class="see-all">
             See All
-
             <i class="bi bi-arrow-right"></i>
-
         </a>
 
     </div>
@@ -149,20 +94,21 @@
         <div
             class="crop-slider"
             id="cropSlider"
+            style="direction:ltr;"
         >
 
             @forelse($sliderCrops as $crop)
 
                 <a
                     href="{{ route('crop.show', $crop->id) }}"
-                    class="crop-slide"
+                    class="crop-slide {{ is_urdu() ? 'urdu-slide' : 'english-slide' }}"
                 >
 
                     <div class="crop-slide-image">
 
                         <img
                             src="{{ asset('images/'.$crop->image) }}"
-                            alt="{{ $crop->name }}"
+                            alt="{{ local_text($crop, 'name') }}"
                             loading="lazy"
                         >
 
@@ -176,7 +122,7 @@
                     <div class="crop-slide-info">
 
                         <h5>
-                            {{ $crop->name }}
+                            {{ local_text($crop, 'name') }}
                         </h5>
 
                         <span>
@@ -204,6 +150,8 @@
     </div>
 
 
+    {{-- GrowSmart Services --}}
+
     <div class="section-heading">
 
         <div>
@@ -223,6 +171,7 @@
 
     <div class="row g-4 mb-5">
 
+        {{-- Weather --}}
 
         <div class="col-lg-4 col-md-6">
 
@@ -251,11 +200,9 @@
                         </h5>
 
                         <p>
-
                             Stay updated with weather conditions
                             and forecasts to make better farming
                             decisions.
-
                         </p>
 
                     </div>
@@ -266,6 +213,8 @@
 
         </div>
 
+
+        {{-- Community --}}
 
         <div class="col-lg-4 col-md-6">
 
@@ -294,10 +243,8 @@
                         </h5>
 
                         <p>
-
                             Ask questions, share farming problems
                             and get help from agriculture experts.
-
                         </p>
 
                     </div>
@@ -307,6 +254,9 @@
             </a>
 
         </div>
+
+
+        {{-- Soil Analysis --}}
 
         <div class="col-lg-4 col-md-6">
 
@@ -335,11 +285,9 @@
                         </h5>
 
                         <p>
-
                             Upload a soil image and get useful
                             information and suggestions about
                             your soil.
-
                         </p>
 
                     </div>
@@ -351,6 +299,9 @@
         </div>
 
     </div>
+
+
+    {{-- Pest Management --}}
 
     <div class="section-heading">
 
@@ -365,7 +316,6 @@
             </p>
 
         </div>
-
 
         <a
             href="/garden"
@@ -398,15 +348,14 @@
 
                             <img
                                 src="{{ asset('images/'.$crop->image) }}"
-                                alt="{{ $crop->name }}"
+                                alt="{{ local_text($crop, 'name') }}"
                                 loading="lazy"
                             >
-
 
                             <div class="crop-info">
 
                                 <h5>
-                                    {{ $crop->name }}
+                                    {{ local_text($crop, 'name') }}
                                 </h5>
 
                             </div>
@@ -422,9 +371,7 @@
                 <div class="col-12">
 
                     <p class="text-muted mb-0 text-center">
-
                         No pest management information available.
-
                     </p>
 
                 </div>
@@ -441,6 +388,10 @@
 @push('styles')
 
 <style>
+
+    /* =========================================
+       HERO
+    ========================================= */
 
     .hero {
 
@@ -475,7 +426,9 @@
         display: flex;
 
         align-items: center;
+
     }
+
 
     .hero-content {
 
@@ -486,11 +439,16 @@
         width: 100%;
 
         padding: 50px 52px;
+
     }
 
+
     .hero-left {
+
         max-width: 650px;
+
     }
+
 
     .hero-badge {
 
@@ -515,11 +473,16 @@
         font-size: 11px;
 
         margin-bottom: 15px;
+
     }
 
+
     .hero-badge i {
+
         color: #d6b16e;
+
     }
+
 
     .hero h1 {
 
@@ -534,11 +497,16 @@
         letter-spacing: -1.2px;
 
         font-weight: 750;
+
     }
 
+
     .hero h1 span {
+
         color: #d8e7dd;
+
     }
+
 
     .hero-description {
 
@@ -551,7 +519,9 @@
         line-height: 1.65;
 
         margin-bottom: 22px;
+
     }
+
 
     .hero-actions {
 
@@ -562,7 +532,9 @@
         gap: 10px;
 
         flex-wrap: wrap;
+
     }
+
 
     .hero-primary-btn {
 
@@ -585,7 +557,9 @@
         font-weight: bold;
 
         transition: 0.25s;
+
     }
+
 
     .hero-primary-btn:hover {
 
@@ -596,7 +570,9 @@
         transform: translateY(-2px);
 
         box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+
     }
+
 
     .hero-secondary-btn {
 
@@ -623,7 +599,9 @@
         backdrop-filter: blur(7px);
 
         transition: 0.25s;
+
     }
+
 
     .hero-secondary-btn:hover {
 
@@ -632,6 +610,7 @@
         color: white;
 
         transform: translateY(-2px);
+
     }
 
 
@@ -644,7 +623,9 @@
         margin-top: 26px;
 
         flex-wrap: wrap;
+
     }
+
 
     .hero-stat {
 
@@ -661,7 +642,9 @@
         backdrop-filter: blur(8px);
 
         transition: 0.25s;
+
     }
+
 
     .hero-stat strong {
 
@@ -672,7 +655,9 @@
         font-size: 17px;
 
         font-weight: bold;
+
     }
+
 
     .hero-stat span {
 
@@ -683,7 +668,13 @@
         font-size: 9px;
 
         margin-top: 2px;
+
     }
+
+
+    /* =========================================
+       SECTION HEADINGS
+    ========================================= */
 
     .section-heading {
 
@@ -696,7 +687,9 @@
         gap: 20px;
 
         margin-bottom: 14px;
+
     }
+
 
     .section-heading h2 {
 
@@ -707,7 +700,9 @@
         font-size: 23px;
 
         font-weight: bold;
+
     }
+
 
     .section-heading p {
 
@@ -716,7 +711,9 @@
         color: var(--gray);
 
         font-size: 12px;
+
     }
+
 
     .see-all {
 
@@ -727,7 +724,13 @@
         font-weight: bold;
 
         white-space: nowrap;
+
     }
+
+
+    /* =========================================
+       CROP SLIDER
+    ========================================= */
 
     .slider-box {
 
@@ -742,7 +745,9 @@
         margin-bottom: 35px;
 
         box-shadow: var(--card-shadow);
+
     }
+
 
     .crop-slider {
 
@@ -757,7 +762,9 @@
         scroll-behavior: smooth;
 
         scrollbar-width: thin;
+
     }
+
 
     .crop-slide {
 
@@ -778,14 +785,20 @@
         transition: 0.3s;
 
         flex-shrink: 0;
+
+        text-decoration: none;
+
     }
+
 
     .crop-slide:hover {
 
         transform: translateY(-5px);
 
         box-shadow: var(--hover-shadow);
+
     }
+
 
     .crop-slide-image {
 
@@ -794,7 +807,9 @@
         position: relative;
 
         overflow: hidden;
+
     }
+
 
     .crop-slide-image img {
 
@@ -803,7 +818,11 @@
         height: 100%;
 
         object-fit: cover;
+
+        display: block;
+
     }
+
 
     .common-badge {
 
@@ -824,12 +843,23 @@
         font-size: 9px;
 
         font-weight: bold;
+
     }
+
+
+    /* =========================================
+       IMPORTANT:
+       ENGLISH CROP NAME CENTER ALIGNMENT
+    ========================================= */
 
     .crop-slide-info {
 
         padding: 12px;
+
+        text-align: center;
+
     }
+
 
     .crop-slide-info h5 {
 
@@ -840,7 +870,13 @@
         font-size: 14px;
 
         font-weight: bold;
+
+        text-align: center;
+
+        width: 100%;
+
     }
+
 
     .crop-slide-info span {
 
@@ -851,8 +887,75 @@
         color: var(--gray);
 
         font-size: 10px;
+
+        text-align: center;
+
+        width: 100%;
+
     }
 
+
+    /* English version */
+
+    .english-slide {
+
+        direction: ltr;
+
+        text-align: center;
+
+    }
+
+
+    .english-slide .crop-slide-info {
+
+        direction: ltr;
+
+        text-align: center;
+
+    }
+
+
+    .english-slide .crop-slide-info h5,
+
+    .english-slide .crop-slide-info span {
+
+        text-align: center;
+
+    }
+
+
+    /* Urdu version */
+
+    .urdu-slide {
+
+        direction: rtl;
+
+        text-align: center;
+
+    }
+
+
+    .urdu-slide .crop-slide-info {
+
+        direction: rtl;
+
+        text-align: center;
+
+    }
+
+
+    .urdu-slide .crop-slide-info h5,
+
+    .urdu-slide .crop-slide-info span {
+
+        text-align: center;
+
+    }
+
+
+    /* =========================================
+       SERVICES
+    ========================================= */
 
     .service-card {
 
@@ -869,21 +972,27 @@
         box-shadow: var(--card-shadow);
 
         transition: 0.3s;
+
     }
+
 
     .service-card:hover {
 
         transform: translateY(-6px);
 
         box-shadow: var(--hover-shadow);
+
     }
+
 
     .service-image {
 
         height: 220px;
 
         overflow: hidden;
+
     }
+
 
     .service-image img {
 
@@ -892,12 +1001,16 @@
         height: 100%;
 
         object-fit: cover;
+
     }
+
 
     .service-body {
 
         padding: 18px 20px 21px;
+
     }
+
 
     .service-body h5 {
 
@@ -908,7 +1021,9 @@
         font-weight: bold;
 
         margin-bottom: 7px;
+
     }
+
 
     .service-body p {
 
@@ -919,7 +1034,13 @@
         line-height: 1.65;
 
         margin: 0;
+
     }
+
+
+    /* =========================================
+       PEST MANAGEMENT
+    ========================================= */
 
     .data-wrapper {
 
@@ -934,7 +1055,9 @@
         margin-bottom: 45px;
 
         box-shadow: var(--card-shadow);
+
     }
+
 
     .crop-card {
 
@@ -949,14 +1072,18 @@
         overflow: hidden;
 
         transition: 0.3s;
+
     }
+
 
     .crop-card:hover {
 
         transform: translateY(-6px);
 
         box-shadow: var(--hover-shadow);
+
     }
+
 
     .crop-card img {
 
@@ -967,14 +1094,18 @@
         object-fit: cover;
 
         display: block;
+
     }
+
 
     .crop-info {
 
         padding: 14px;
 
         text-align: center;
+
     }
+
 
     .crop-info h5 {
 
@@ -985,7 +1116,15 @@
         font-weight: bold;
 
         margin: 0;
+
+        text-align: center;
+
     }
+
+
+    /* =========================================
+       TABLET
+    ========================================= */
 
     @media (max-width: 768px) {
 
@@ -996,22 +1135,30 @@
             border-radius: 20px;
 
             align-items: flex-end;
+
         }
+
 
         .hero-content {
 
             padding: 32px 30px;
+
         }
+
 
         .hero h1 {
 
             font-size: 39px;
+
         }
+
 
         .hero-description {
 
             font-size: 13px;
+
         }
+
 
         .hero-stats {
 
@@ -1020,22 +1167,45 @@
             grid-template-columns: repeat(3, 1fr);
 
             gap: 8px;
+
         }
+
 
         .hero-stat {
 
             min-width: 0;
 
             text-align: center;
+
         }
+
 
         .service-image {
 
             height: 200px;
+
+        }
+
+
+        .crop-slide-info h5 {
+
+            text-align: center;
+
+        }
+
+
+        .crop-slide-info span {
+
+            text-align: center;
+
         }
 
     }
 
+
+    /* =========================================
+       MOBILE
+    ========================================= */
 
     @media (max-width: 576px) {
 
@@ -1044,24 +1214,32 @@
             min-height: 499px;
 
             border-radius: 18px;
+
         }
+
 
         .hero-content {
 
             padding: 25px 20px 24px;
+
         }
+
 
         .hero h1 {
 
             font-size: 34px;
+
         }
+
 
         .hero-actions {
 
             flex-direction: column;
 
             width: 100%;
+
         }
+
 
         .hero-primary-btn,
         .hero-secondary-btn {
@@ -1069,12 +1247,16 @@
             width: 100%;
 
             justify-content: center;
+
         }
+
 
         .hero-stats {
 
             gap: 6px;
+
         }
+
 
         .slider-box,
         .data-wrapper {
@@ -1082,41 +1264,83 @@
             padding: 12px;
 
             border-radius: 15px;
+
         }
+
 
         .crop-slide {
 
             min-width: 205px;
+
+            max-width: 205px;
+
         }
+
+
+        .crop-slide-info {
+
+            text-align: center;
+
+        }
+
+
+        .crop-slide-info h5,
+        .crop-slide-info span {
+
+            text-align: center;
+
+        }
+
 
         .service-image {
 
             height: 190px;
+
         }
+
 
         .crop-card img {
 
             height: 145px;
+
         }
 
     }
 
+
+    /* =========================================
+       SMALL MOBILE
+    ========================================= */
 
     @media (max-width: 400px) {
 
         .hero {
 
             min-height: 509px;
+
         }
+
 
         .hero-content {
 
             padding: 23px 17px;
+
         }
+
 
         .hero h1 {
 
             font-size: 31px;
+
+        }
+
+
+        .crop-slide {
+
+            min-width: 195px;
+
+            max-width: 195px;
+
         }
 
     }
@@ -1125,150 +1349,231 @@
 
 @endpush
 
+
 @push('scripts')
 
 <script>
 
-    const slider =
-        document.getElementById('cropSlider');
+document.addEventListener('DOMContentLoaded', function () {
 
-    let sliderTimer = null;
+    const slider = document.getElementById('cropSlider');
+
+    if (!slider) return;
 
 
-    function startSlider() {
+    /*
+     * Keep the slider itself LTR.
+     * This prevents the automatic carousel
+     * from moving incorrectly in Urdu mode.
+     */
 
-        if (!slider) {
+    slider.style.direction = 'ltr';
+
+
+    let timer = null;
+
+    let moving = false;
+
+
+    const getStep = () => {
+
+        const card = slider.querySelector('.crop-slide');
+
+        if (!card) return 240;
+
+
+        const gap =
+            parseFloat(
+                getComputedStyle(slider).gap
+            ) || 15;
+
+
+        return card.getBoundingClientRect().width + gap;
+
+    };
+
+
+    const prepare = () => {
+
+        if (
+            slider.dataset.ready === '1' ||
+            slider.children.length < 2
+        ) {
             return;
         }
 
-        if (slider.children.length <= 1) {
+
+        const original =
+            Array.from(slider.children);
+
+
+        original.forEach(card => {
+
+            slider.appendChild(
+                card.cloneNode(true)
+            );
+
+        });
+
+
+        slider.dataset.ready = '1';
+
+    };
+
+
+    const move = () => {
+
+        if (
+            moving ||
+            slider.children.length < 2
+        ) {
             return;
         }
 
-        stopSlider();
 
-        sliderTimer = setInterval(
-            function() {
+        const step = getStep();
 
-                const firstCard =
-                    slider.children[0];
-
-                if (!firstCard) {
-                    return;
-                }
-
-                const cardWidth =
-                    firstCard.offsetWidth + 15;
+        const max =
+            slider.scrollWidth -
+            slider.clientWidth;
 
 
-                slider.scrollBy({
+        if (max <= 2) {
 
-                    left: cardWidth,
+            slider.scrollLeft = 0;
 
-                    behavior: 'smooth'
+            return;
+
+        }
+
+
+        moving = true;
+
+
+        const next =
+            slider.scrollLeft + step;
+
+
+        if (next >= max - 2) {
+
+            slider.scrollTo({
+
+                left: next,
+
+                behavior: 'smooth'
+
+            });
+
+
+            window.setTimeout(() => {
+
+                slider.scrollTo({
+
+                    left: 0,
+
+                    behavior: 'auto'
 
                 });
 
 
-                setTimeout(
-                    function() {
+                moving = false;
 
-                        if (
-                            slider.scrollLeft +
-                            slider.clientWidth >=
-                            slider.scrollWidth - 10
-                        ) {
+            }, 700);
 
-                            slider.scrollTo({
+        } else {
 
-                                left: 0,
+            slider.scrollTo({
 
-                                behavior: 'smooth'
+                left: next,
 
-                            });
+                behavior: 'smooth'
 
-                        }
-
-                    },
-                    800
-                );
-
-            },
-            3500
-        );
-
-    }
+            });
 
 
-    function stopSlider() {
+            window.setTimeout(() => {
 
-        if (sliderTimer) {
+                moving = false;
 
-            clearInterval(sliderTimer);
-
-            sliderTimer = null;
+            }, 700);
 
         }
 
-    }
+    };
 
 
-    if (slider) {
+    const start = () => {
 
-        startSlider();
-
-
-        slider.addEventListener(
-            'mouseenter',
-            stopSlider
-        );
+        if (
+            slider.children.length < 2
+        ) {
+            return;
+        }
 
 
-        slider.addEventListener(
-            'mouseleave',
-            startSlider
-        );
+        if (timer) {
 
-
-        slider.addEventListener(
-            'touchstart',
-            stopSlider,
-            { passive: true }
-        );
-
-
-        slider.addEventListener(
-            'touchend',
-            function() {
-
-                setTimeout(
-                    startSlider,
-                    1500
-                );
-
-            },
-            { passive: true }
-        );
-
-    }
-
-
-    document.addEventListener(
-        'visibilitychange',
-        function() {
-
-            if (document.hidden) {
-
-                stopSlider();
-
-            } else {
-
-                startSlider();
-
-            }
+            window.clearInterval(timer);
 
         }
+
+
+        timer =
+            window.setInterval(
+                move,
+                3000
+            );
+
+    };
+
+
+    const stop = () => {
+
+        if (timer) {
+
+            window.clearInterval(timer);
+
+            timer = null;
+
+        }
+
+
+        moving = false;
+
+    };
+
+
+    prepare();
+
+    start();
+
+
+    slider.addEventListener(
+        'mouseenter',
+        stop
     );
+
+
+    slider.addEventListener(
+        'mouseleave',
+        start
+    );
+
+
+    slider.addEventListener(
+        'touchstart',
+        stop,
+        { passive: true }
+    );
+
+
+    slider.addEventListener(
+        'touchend',
+        start,
+        { passive: true }
+    );
+
+});
 
 </script>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $crop->name . ' Pest Management | GrowSmart')
+@section('title', (is_urdu() ? local_text($crop, 'name') . ' کے کیڑوں کا انتظام' : $crop->name . ' Pest Management') . ' | GrowSmart')
 
 @push('styles')
 <style>
@@ -392,6 +392,7 @@
 @endpush
 
 @section('content')
+<div data-no-translate="true">
 
 <div class="pest-detail-page">
 
@@ -401,7 +402,7 @@
 
             <img
                 src="{{ asset('images/' . $crop->image) }}"
-                alt="{{ $crop->name }}"
+                alt="{{ local_text($crop, 'name') }}"
                 class="crop-image"
             >
 
@@ -412,18 +413,16 @@
                 </div>
 
                 <h1>
-                    {{ $crop->name }} Pest Management
+                    {{ local_text($crop, 'name') }} {{ t('Pest Management', 'کیڑوں کا انتظام') }}
                 </h1>
 
                 <p>
-                    Learn about common pests affecting {{ $crop->name }},
-                    their symptoms, prevention methods and recommended
-                    control measures.
+                    {{ is_urdu() ? local_text($crop, 'name') . ' کو متاثر کرنے والے عام کیڑوں، ان کی علامات، بچاؤ کے طریقوں اور تجویز کردہ تدارک کے اقدامات کے بارے میں معلومات حاصل کریں۔' : 'Learn about common pests affecting ' . local_text($crop, 'name') . ', their symptoms, prevention methods and recommended control measures.' }}
                 </p>
 
                 <div class="pest-count">
                     <i class="bi bi-bug"></i>
-                    {{ $crop->pestManagements->count() }} Pest Information
+                    {{ $crop->pestManagements->count() }} {{ t('Pest Information', 'کیڑوں کی معلومات') }}
                 </div>
 
             </div>
@@ -440,12 +439,11 @@
 
         <div>
             <h2>
-                Pest Information
+                {{ t('Pest Information', 'کیڑوں کی معلومات') }}
             </h2>
 
             <p>
-                Identification, prevention and recommended control methods
-                for {{ $crop->name }}.
+                {{ is_urdu() ? local_text($crop, 'name') . ' کے کیڑوں کی شناخت، بچاؤ اور تجویز کردہ تدارک کے طریقوں کے بارے میں معلومات۔' : 'Identification, prevention and recommended control methods for ' . local_text($crop, 'name') . '.' }}
             </p>
         </div>
 
@@ -464,7 +462,7 @@
                     </div>
 
                     <span>
-                        {{ $pest->name }}
+                        {{ local_text($pest, 'name') }}
                     </span>
 
                 </div>
@@ -472,7 +470,7 @@
                 @if($pest->type)
 
                     <div class="pest-type">
-                        {{ $pest->type }}
+                        {{ local_text($pest, 'type') }}
                     </div>
 
                 @endif
@@ -489,11 +487,11 @@
 
                             <div class="info-title">
                                 <i class="bi bi-arrow-repeat"></i>
-                                How It Occurs
+                                {{ t('How It Occurs', 'یہ کیسے پیدا ہوتا ہے') }}
                             </div>
 
-                            <p class="info-text">
-                                {{ $pest->how_it_occurs }}
+                            <p class="info-text" data-no-translate>
+                                {{ local_text($pest, 'how_it_occurs') }}
                             </p>
 
                         </div>
@@ -506,11 +504,11 @@
 
                             <div class="info-title">
                                 <i class="bi bi-exclamation-triangle"></i>
-                                Symptoms
+                                {{ t('Symptoms', 'علامات') }}
                             </div>
 
-                            <p class="info-text">
-                                {{ $pest->symptoms }}
+                            <p class="info-text" data-no-translate>
+                                {{ local_text($pest, 'symptoms') }}
                             </p>
 
                         </div>
@@ -523,11 +521,11 @@
 
                             <div class="info-title">
                                 <i class="bi bi-shield-check"></i>
-                                Protection
+                                {{ t('Protection', 'بچاؤ') }}
                             </div>
 
-                            <p class="info-text">
-                                {{ $pest->protection }}
+                            <p class="info-text" data-no-translate>
+                                {{ local_text($pest, 'protection') }}
                             </p>
 
                         </div>
@@ -540,11 +538,11 @@
 
                             <div class="info-title">
                                 <i class="bi bi-check-circle-fill"></i>
-                                Recommended Control
+                                {{ t('Recommended Control', 'تجویز کردہ تدارک') }}
                             </div>
 
-                            <p class="info-text">
-                                {{ $pest->recommended_control }}
+                            <p class="info-text" data-no-translate>
+                                {{ local_text($pest, 'recommended_control') }}
                             </p>
 
                         </div>
@@ -566,12 +564,11 @@
             </div>
 
             <h4>
-                No Pest Information Available
+                {{ t('No Pest Information Available', 'کیڑوں کی کوئی معلومات دستیاب نہیں ہے') }}
             </h4>
 
             <p>
-                There is currently no pest management information
-                available for {{ $crop->name }}.
+                {{ is_urdu() ? 'اس وقت ' . local_text($crop, 'name') . ' کے لیے کیڑوں کے انتظام کی کوئی معلومات دستیاب نہیں۔' : 'There is currently no pest management information available for ' . local_text($crop, 'name') . '.' }}
             </p>
 
         </div>
@@ -580,4 +577,5 @@
 
 </div>
 
+</div>
 @endsection

@@ -20,20 +20,17 @@ return new class extends Migration
 
             $table->string('answer_image')->nullable();
 
-            // Multiple voice recordings stored as JSON
             $table->json('answer_voice')->nullable();
 
             $table->timestamps();
 
 
-            // Question relationship
             $table->foreign('question_id')
                 ->references('id')
                 ->on('questions')
                 ->onDelete('cascade');
 
 
-            // Expert relationship
             $table->foreign('expert_id')
                 ->references('id')
                 ->on('users')

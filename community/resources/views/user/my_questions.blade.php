@@ -38,10 +38,6 @@
     display: inline-block;
 }
 
-/* =========================
-   CUSTOM DELETE MODAL
-========================= */
-
 .delete-modal {
     display: none;
     position: fixed;
@@ -124,9 +120,63 @@
     background: #bb2d3b;
 }
 
-/* =========================
-   MOBILE
-========================= */
+.question-more-wrap {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    direction: inherit;
+}
+
+.question-more-btn {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: #f1f3f1;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-more-btn:hover {
+    background: #e2e7e2;
+}
+
+.question-more-menu {
+    display: none;
+    position: absolute;
+    bottom: 48px;
+    inset-inline-end: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .18);
+    overflow: hidden;
+    z-index: 100;
+    direction: inherit;
+}
+
+.question-more-menu.show {
+    display: block;
+}
+
+.question-delete-option {
+    width: 100%;
+    border: 0;
+    background: #fff;
+    color: #dc3545;
+    text-align: start;
+    padding: 12px 14px;
+    cursor: pointer;
+    direction: inherit;
+}
+
+.question-delete-option:hover {
+    background: #fff1f1;
+}
 
 @media (max-width: 768px) {
 
@@ -147,429 +197,394 @@
 
 </style>
 
+<div class="my-questions-container" dir="{{ is_urdu() ? 'rtl' : 'ltr' }}">
 
-<!-- =========================
-     MAIN CONTAINER
-========================= -->
+<h2 class="mb-4 text-success">
+    📋 {{ t('My Questions', 'میرے سوالات') }}
+</h2>
 
-<div class="my-questions-container">
+@if(session('success'))
 
-    <h2 class="mb-4 text-success">
-        📋 My Questions
-    </h2>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
 
+@endif
 
-    <!-- SUCCESS MESSAGE -->
+@forelse($questions as $question)
 
-    @if(session('success'))
+    <div class="card shadow mb-4 my-question-card">
 
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="card-body">
 
-    @endif
+            <h5>
+                {{ t('Category:', 'زمرہ:') }}
+                {{ is_urdu() ? local_text($question, 'category') : ucfirst($question->category) }}
+            </h5>
 
+            @if($question->status == 'approved')
 
-    <!-- =========================
-         QUESTIONS
-    ========================= -->
+                <div class="alert alert-success mt-3">
 
-    @forelse($questions as $question)
+                    ✅
+                    <strong>{{ t('Status:', 'حیثیت:') }}</strong>
+                    {{ t('Approved', 'منظور شدہ') }}
 
-        <div class="card shadow mb-4 my-question-card">
+                </div>
 
-            <div class="card-body">
+            @elseif($question->status == 'rejected')
 
+                <div class="alert alert-danger mt-3">
 
-                <!-- CATEGORY -->
+                    ❌
+                    <strong>{{ t('Status:', 'حیثیت:') }}</strong>
+                    {{ t('Rejected', 'مسترد شدہ') }}
 
-                <h5>
-                    Category: {{ ucfirst($question->category) }}
-                </h5>
+                    <br>
 
+                    {{ t(
+                        'Your question was not approved by the admin.',
+                        'آپ کا سوال منتظم نے منظور نہیں کیا۔'
+                    ) }}
 
-                <!-- =========================
-                     QUESTION STATUS
-                ========================= -->
+                </div>
 
-                @if($question->status == 'approved')
+            @else
 
-                    <div class="alert alert-success mt-3">
+                <div class="alert alert-warning mt-3">
 
-                        ✅ <strong>Status:</strong> Approved
+                    ⏳
+                    <strong>{{ t('Status:', 'حیثیت:') }}</strong>
+                    {{ t(
+                        'Waiting for approval',
+                        'منظوری کا انتظار ہے'
+                    ) }}
 
-                    </div>
+                </div>
 
-                @elseif($question->status == 'rejected')
+            @endif
 
-                    <div class="alert alert-danger mt-3">
+            @if($question->question_text)
 
-                        ❌ <strong>Status:</strong> Rejected
+                <div class="mt-3">
 
-                        <br>
+                    <strong>
+                        {{ t('Question:', 'سوال:') }}
+                    </strong>
 
-                        Your question was not approved by the admin.
+                    <p class="mt-2">
+                        {{ $question->question_text }}
+                    </p>
 
-                    </div>
+                </div>
 
-                @else
+            @endif
 
-                    <div class="alert alert-warning mt-3">
+            @if($question->question_image)
 
-                        ⏳ <strong>Status:</strong>
-                        Waiting for approval
+                <div class="mb-3">
 
-                    </div>
+                    <strong>
+                        📷 {{ t(
+                            'Uploaded Image',
+                            'اپ لوڈ کی گئی تصویر'
+                        ) }}
+                    </strong>
 
-                @endif
+                    <br>
 
+                    <img
+                        src="{{ asset('storage/'.$question->question_image) }}"
+                        class="img-fluid rounded mt-2"
+                        style="max-width:250px;"
+                        alt="{{ t('Question Image', 'سوال کی تصویر') }}"
+                    >
 
-                <!-- =========================
-                     QUESTION TEXT
-                ========================= -->
+                </div>
 
-                @if($question->question_text)
+            @endif
 
-                    <div class="mt-3">
+            @if($question->question_voice)
 
-                        <strong>
-                            Question:
-                        </strong>
+                <div class="mb-3">
 
-                        <p class="mt-2">
+                    <strong>
+                        🎤 {{ t(
+                            'Voice Questions',
+                            'صوتی سوالات'
+                        ) }}
+                    </strong>
 
-                            {{ $question->question_text }}
+                    @php
 
-                        </p>
+                        $voices = $question->question_voice;
 
-                    </div>
+                        if (is_string($voices)) {
 
-                @endif
+                            $decodedVoices = json_decode(
+                                $voices,
+                                true
+                            );
 
+                            if (
+                                json_last_error() === JSON_ERROR_NONE &&
+                                is_array($decodedVoices)
+                            ) {
 
-                <!-- =========================
-                     QUESTION IMAGE
-                ========================= -->
+                                $voices = $decodedVoices;
 
-                @if($question->question_image)
-
-                    <div class="mb-3">
-
-                        <strong>
-                            📷 Uploaded Image
-                        </strong>
-
-                        <br>
-
-                        <img
-                            src="{{ asset('storage/'.$question->question_image) }}"
-                            class="img-fluid rounded mt-2"
-                            style="max-width:250px;"
-                            alt="Question Image"
-                        >
-
-                    </div>
-
-                @endif
-
-
-                <!-- =========================
-                     MULTIPLE VOICE QUESTIONS
-                ========================= -->
-
-                @if($question->question_voice)
-
-                    <div class="mb-3">
-
-                        <strong>
-                            🎤 Voice Questions
-                        </strong>
-
-
-                        @php
-
-                            $voices = $question->question_voice;
-
-                            /*
-                             * If database value is JSON,
-                             * convert it into an array.
-                             */
-
-                            if (is_string($voices)) {
-
-                                $decodedVoices = json_decode(
-                                    $voices,
-                                    true
-                                );
-
-                                if (
-                                    json_last_error() === JSON_ERROR_NONE &&
-                                    is_array($decodedVoices)
-                                ) {
-
-                                    $voices = $decodedVoices;
-
-                                } else {
-
-                                    $voices = [$voices];
-
-                                }
-
-                            }
-
-
-                            /*
-                             * Make sure voices is always an array.
-                             */
-
-                            if (!is_array($voices)) {
+                            } else {
 
                                 $voices = [$voices];
 
                             }
 
-                        @endphp
+                        }
 
+                        if (!is_array($voices)) {
+                            $voices = [$voices];
+                        }
 
-                        @foreach($voices as $index => $voice)
+                    @endphp
 
-                            @if($voice)
+                    @foreach($voices as $index => $voice)
 
-                                <div class="voice-box">
+                        @if($voice)
 
-                                    <div class="mb-2">
+                            <div class="voice-box">
 
-                                        🎤 Voice Question
-                                        {{ $index + 1 }}
+                                <div class="mb-2">
 
-                                    </div>
-
-
-                                    <audio
-                                        controls
-                                        class="w-100"
-                                        controlsList="nodownload"
-                                    >
-
-                                        <source
-                                            src="{{ asset('storage/'.$voice) }}"
-                                        >
-
-                                        Your browser does not support
-                                        audio playback.
-
-                                    </audio>
+                                    🎤
+                                    {{ t(
+                                        'Voice Question',
+                                        'صوتی سوال'
+                                    ) }}
+                                    {{ $index + 1 }}
 
                                 </div>
 
-                            @endif
+                                <audio
+                                    controls
+                                    class="w-100"
+                                    controlsList="nodownload"
+                                >
 
-                        @endforeach
-
-                    </div>
-
-                @endif
-
-
-                <!-- =========================
-                     EXPERT ANSWERS
-                ========================= -->
-
-                @if($question->answers->count())
-
-                    <hr>
-
-                    <h5 class="text-success mb-3">
-
-                        👨‍🌾 Expert Answers
-
-                    </h5>
-
-
-                    @foreach($question->answers as $answer)
-
-                        <div class="answer-box">
-
-
-                            <!-- EXPERT NAME -->
-
-                            <strong>
-
-                                👨‍🌾
-
-                                {{ $answer->expert->name }}
-
-                            </strong>
-
-
-                            <!-- =========================
-                                 ANSWER TEXT
-                            ========================= -->
-
-                            @if($answer->answer_text)
-
-                                <p class="mt-2 mb-3">
-
-                                    {{ $answer->answer_text }}
-
-                                </p>
-
-                            @endif
-
-
-                            <!-- =========================
-                                 EXPERT IMAGE
-                            ========================= -->
-
-                            @if($answer->answer_image)
-
-                                <div class="mt-2">
-
-                                    <strong>
-                                        📷 Expert Image
-                                    </strong>
-
-                                    <br>
-
-                                    <img
-                                        src="{{ asset('storage/'.$answer->answer_image) }}"
-                                        class="img-fluid rounded mt-2"
-                                        style="max-width:220px;"
-                                        alt="Expert Answer Image"
+                                    <source
+                                        src="{{ asset('storage/'.$voice) }}"
                                     >
 
-                                </div>
+                                    {{ t(
+                                        'Your browser does not support audio playback.',
+                                        'آپ کا براؤزر آڈیو چلانے کی سہولت فراہم نہیں کرتا۔'
+                                    ) }}
 
-                            @endif
+                                </audio>
 
+                            </div>
 
-                            <!-- =========================
-                                 MULTIPLE EXPERT VOICE REPLIES
-                            ========================= -->
+                        @endif
 
-                            @if($answer->answer_voice)
+                    @endforeach
 
-                                <div class="mt-3">
+                </div>
 
-                                    <strong>
-                                        🎙 Expert Voice Replies
-                                    </strong>
+            @endif
 
+            @if($question->answers->count())
 
-                                    @php
+                <hr>
 
-                                        $answerVoices =
-                                            $answer->answer_voice;
+                <h5 class="text-success mb-3">
 
+                    👨‍🌾
+                    {{ t(
+                        'Expert Answers',
+                        'ماہرین کے جوابات'
+                    ) }}
 
-                                        /*
-                                         * Convert JSON into array.
-                                         */
+                </h5>
 
-                                        if (is_string($answerVoices)) {
+                @foreach($question->answers as $answer)
 
-                                            $decodedAnswerVoices =
-                                                json_decode(
-                                                    $answerVoices,
-                                                    true
-                                                );
+                    <div class="answer-box">
 
+                        <strong>
 
-                                            if (
-                                                json_last_error() === JSON_ERROR_NONE &&
-                                                is_array($decodedAnswerVoices)
-                                            ) {
+                            👨‍🌾
+                            {{ $answer->expert->name }}
 
-                                                $answerVoices =
-                                                    $decodedAnswerVoices;
+                        </strong>
 
-                                            } else {
+                        @if($answer->answer_text)
 
-                                                $answerVoices =
-                                                    [$answerVoices];
+                            <p class="mt-2 mb-3">
+                                {{ $answer->answer_text }}
+                            </p>
 
-                                            }
+                        @endif
 
-                                        }
+                        @if($answer->answer_image)
 
+                            <div class="mt-2">
 
-                                        /*
-                                         * Make sure it is always
-                                         * an array.
-                                         */
+                                <strong>
 
-                                        if (!is_array($answerVoices)) {
+                                    📷
+                                    {{ t(
+                                        'Expert Image',
+                                        'ماہر کی تصویر'
+                                    ) }}
+
+                                </strong>
+
+                                <br>
+
+                                <img
+                                    src="{{ asset('storage/'.$answer->answer_image) }}"
+                                    class="img-fluid rounded mt-2"
+                                    style="max-width:220px;"
+                                    alt="{{ t(
+                                        'Expert Answer Image',
+                                        'ماہر کے جواب کی تصویر'
+                                    ) }}"
+                                >
+
+                            </div>
+
+                        @endif
+
+                        @if($answer->answer_voice)
+
+                            <div class="mt-3">
+
+                                <strong>
+
+                                    🎙
+                                    {{ t(
+                                        'Expert Voice Replies',
+                                        'ماہر کے صوتی جوابات'
+                                    ) }}
+
+                                </strong>
+
+                                @php
+
+                                    $answerVoices =
+                                        $answer->answer_voice;
+
+                                    if (is_string($answerVoices)) {
+
+                                        $decodedAnswerVoices =
+                                            json_decode(
+                                                $answerVoices,
+                                                true
+                                            );
+
+                                        if (
+                                            json_last_error() === JSON_ERROR_NONE &&
+                                            is_array($decodedAnswerVoices)
+                                        ) {
+
+                                            $answerVoices =
+                                                $decodedAnswerVoices;
+
+                                        } else {
 
                                             $answerVoices =
                                                 [$answerVoices];
 
                                         }
 
-                                    @endphp
+                                    }
 
+                                    if (!is_array($answerVoices)) {
 
-                                    @foreach(
-                                        $answerVoices
-                                        as $voiceIndex => $answerVoice
-                                    )
+                                        $answerVoices =
+                                            [$answerVoices];
 
-                                        @if($answerVoice)
+                                    }
 
-                                            <div class="voice-box">
+                                @endphp
 
-                                                <div class="mb-2">
+                                @foreach(
+                                    $answerVoices
+                                    as $voiceIndex => $answerVoice
+                                )
 
-                                                    🎙 Voice Reply
-                                                    {{ $voiceIndex + 1 }}
+                                    @if($answerVoice)
 
-                                                </div>
+                                        <div class="voice-box">
 
+                                            <div class="mb-2">
 
-                                                <audio
-                                                    controls
-                                                    class="w-100"
-                                                    controlsList="nodownload"
-                                                >
-
-                                                    <source
-                                                        src="{{ asset('storage/'.$answerVoice) }}"
-                                                    >
-
-                                                    Your browser does not
-                                                    support audio playback.
-
-                                                </audio>
+                                                🎙
+                                                {{ t(
+                                                    'Voice Reply',
+                                                    'صوتی جواب'
+                                                ) }}
+                                                {{ $voiceIndex + 1 }}
 
                                             </div>
 
-                                        @endif
+                                            <audio
+                                                controls
+                                                class="w-100"
+                                                controlsList="nodownload"
+                                            >
 
-                                    @endforeach
+                                                <source
+                                                    src="{{ asset('storage/'.$answerVoice) }}"
+                                                >
 
-                                </div>
+                                                {{ t(
+                                                    'Your browser does not support audio playback.',
+                                                    'آپ کا براؤزر آڈیو چلانے کی سہولت فراہم نہیں کرتا۔'
+                                                ) }}
 
-                            @endif
+                                            </audio>
 
-                        </div>
+                                        </div>
 
-                    @endforeach
+                                    @endif
 
-                @endif
+                                @endforeach
 
+                            </div>
 
-                <!-- =========================
-                     DELETE BUTTON
-                ========================= -->
+                        @endif
 
-                @if(
-                    $question->answers->count() ||
-                    $question->status == 'rejected'
-                )
+                    </div>
 
-                    <div class="text-end mt-3">
+                @endforeach
+
+            @endif
+
+            @if(
+                $question->answers->count() ||
+                $question->status == 'rejected'
+            )
+
+                <div class="question-more-wrap mt-3">
+
+                    <button
+                        type="button"
+                        class="question-more-btn"
+                        aria-label="{{ t(
+                            'More options',
+                            'مزید اختیارات'
+                        ) }}"
+                    >
+                        ⋮
+                    </button>
+
+                    <div class="question-more-menu">
 
                         <form
-                            action="{{ route('question.delete', $question->id) }}"
+                            action="{{ route(
+                                'question.delete',
+                                $question->id
+                            ) }}"
                             method="POST"
                             class="delete-question-form"
                         >
@@ -578,13 +593,16 @@
 
                             @method('DELETE')
 
-
                             <button
                                 type="submit"
-                                class="btn btn-danger"
+                                class="question-delete-option"
                             >
 
-                                🗑 Delete Question
+                                🗑
+                                {{ t(
+                                    'Delete Question',
+                                    'سوال حذف کریں'
+                                ) }}
 
                             </button>
 
@@ -592,103 +610,97 @@
 
                     </div>
 
-                @endif
+                </div>
 
-            </div>
-
-        </div>
-
-
-    @empty
-
-
-        <!-- NO QUESTIONS -->
-
-        <div class="alert alert-warning">
-
-            You have not asked any questions yet.
+            @endif
 
         </div>
 
+    </div>
 
-    @endforelse
+@empty
+
+    <div class="alert alert-warning">
+
+        {{ t(
+            'You have not asked any questions yet.',
+            'آپ نے ابھی تک کوئی سوال نہیں پوچھا۔'
+        ) }}
+
+    </div>
+
+@endforelse
 
 </div>
-
-
-<!-- =========================
-     CUSTOM DELETE MODAL
-========================= -->
 
 <div
     class="delete-modal"
     id="deleteModal"
 >
 
-    <div class="delete-modal-box">
+```
+<div class="delete-modal-box">
 
+    <div class="delete-modal-header">
 
-        <!-- MODAL HEADER -->
+        <h5>
+            GrowSmart
+        </h5>
 
-        <div class="delete-modal-header">
+    </div>
 
-            <h5>
-                GrowSmart
-            </h5>
+    <div class="delete-modal-body">
 
-        </div>
+        <h5>
+            {{ t(
+                'Delete Question?',
+                'کیا آپ یہ سوال حذف کرنا چاہتے ہیں؟'
+            ) }}
+        </h5>
 
+        <p>
+            {{ t(
+                'Are you sure you want to delete this question?',
+                'کیا آپ واقعی یہ سوال حذف کرنا چاہتے ہیں؟'
+            ) }}
+        </p>
 
-        <!-- MODAL BODY -->
+    </div>
 
-        <div class="delete-modal-body">
+    <div class="delete-modal-footer">
 
-            <h5>
-                Delete Question?
-            </h5>
+        <button
+            type="button"
+            class="cancel-delete"
+            id="cancelDelete"
+        >
 
-            <p>
-                Are you sure you want to delete this question?
-            </p>
+            {{ t(
+                'Cancel',
+                'منسوخ کریں'
+            ) }}
 
-        </div>
+        </button>
 
+        <button
+            type="button"
+            class="confirm-delete"
+            id="confirmDelete"
+        >
 
-        <!-- MODAL FOOTER -->
+            🗑
+            {{ t(
+                'Delete',
+                'حذف کریں'
+            ) }}
 
-        <div class="delete-modal-footer">
-
-            <button
-                type="button"
-                class="cancel-delete"
-                id="cancelDelete"
-            >
-
-                Cancel
-
-            </button>
-
-
-            <button
-                type="button"
-                class="confirm-delete"
-                id="confirmDelete"
-            >
-
-                🗑 Delete
-
-            </button>
-
-        </div>
+        </button>
 
     </div>
 
 </div>
 
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+</div>
 
 <script>
 
@@ -696,30 +708,20 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
         let deleteForm = null;
-
 
         const modal =
             document.getElementById("deleteModal");
 
-
         const cancelButton =
             document.getElementById("cancelDelete");
-
 
         const confirmButton =
             document.getElementById("confirmDelete");
 
-
-        /*
-         * Open custom confirmation box
-         */
-
         document
             .querySelectorAll(".delete-question-form")
             .forEach(function (form) {
-
 
                 form.addEventListener(
                     "submit",
@@ -727,9 +729,7 @@ document.addEventListener(
 
                         event.preventDefault();
 
-
                         deleteForm = form;
-
 
                         modal.style.display = "flex";
 
@@ -737,11 +737,6 @@ document.addEventListener(
                 );
 
             });
-
-
-        /*
-         * Cancel delete
-         */
 
         cancelButton.addEventListener(
             "click",
@@ -754,23 +749,11 @@ document.addEventListener(
             }
         );
 
-
-        /*
-         * Confirm delete
-         */
-
         confirmButton.addEventListener(
             "click",
             function () {
 
-
                 if (deleteForm) {
-
-                    /*
-                     * Submit the original form
-                     * without triggering the
-                     * confirmation event again.
-                     */
 
                     HTMLFormElement.prototype.submit.call(
                         deleteForm
@@ -781,16 +764,9 @@ document.addEventListener(
             }
         );
 
-
-        /*
-         * Close modal when clicking
-         * outside the modal box.
-         */
-
         modal.addEventListener(
             "click",
             function (event) {
-
 
                 if (event.target === modal) {
 
@@ -803,15 +779,9 @@ document.addEventListener(
             }
         );
 
-
-        /*
-         * Close modal with Escape key.
-         */
-
         document.addEventListener(
             "keydown",
             function (event) {
-
 
                 if (
                     event.key === "Escape" &&
@@ -823,6 +793,55 @@ document.addEventListener(
                     deleteForm = null;
 
                 }
+
+            }
+        );
+
+        document
+            .querySelectorAll(".question-more-btn")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.stopPropagation();
+
+                        const menu =
+                            button.nextElementSibling;
+
+                        document
+                            .querySelectorAll(".question-more-menu")
+                            .forEach(function (other) {
+
+                                if (other !== menu) {
+
+                                    other.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            });
+
+                        menu.classList.toggle("show");
+
+                    }
+                );
+
+            });
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                document
+                    .querySelectorAll(".question-more-menu")
+                    .forEach(function (menu) {
+
+                        menu.classList.remove("show");
+
+                    });
 
             }
         );

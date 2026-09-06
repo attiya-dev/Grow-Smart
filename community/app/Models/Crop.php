@@ -8,12 +8,18 @@ class Crop extends Model
 {
     protected $table = 'crops';
 
+    protected $casts = [
+        'urdu_completed' => 'boolean',
+    ];
+
     protected $fillable = [
         'image',
         'name',
+        'name_ur',
         'season',
         'type',
         'category',
+        'urdu_completed',
     ];
 
     public function cropDetail()

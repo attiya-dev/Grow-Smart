@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Account Settings | GrowSmart')
+@section('title', t('Account Settings | GrowSmart', 'اکاؤنٹ کی ترتیبات | گرو اسمارٹ'))
 
 @section('content')
 
@@ -8,9 +8,6 @@
 
     <div class="settings-wrapper">
 
-        {{-- =========================================================
-             PAGE TITLE
-        ========================================================== --}}
 
         <div class="settings-title">
 
@@ -19,19 +16,16 @@
             </div>
 
             <div>
-                <h2>Account Settings</h2>
+                <h2>{{ t('Account Settings', 'اکاؤنٹ کی ترتیبات') }}</h2>
 
                 <p>
-                    Manage your email, password and account security.
+                    {{ t('Manage your email, password and account security.', 'اپنے ای میل، پاس ورڈ اور اکاؤنٹ کی حفاظت کا انتظام کریں۔') }}
                 </p>
             </div>
 
         </div>
 
 
-        {{-- =========================================================
-             SUCCESS MESSAGES
-        ========================================================== --}}
 
         @if(session('email_success'))
 
@@ -78,9 +72,7 @@
         @endif
 
 
-        {{-- =========================================================
-             ERROR MESSAGES
-        ========================================================== --}}
+
 
         @if(session('error'))
 
@@ -120,9 +112,6 @@
         @endif
 
 
-        {{-- =========================================================
-             CHANGE EMAIL CARD
-        ========================================================== --}}
 
         <div class="settings-card">
 
@@ -137,11 +126,11 @@
                 <div>
 
                     <h4>
-                        Change Email
+                        {{ t('Change Email', 'ای میل تبدیل کریں') }}
                     </h4>
 
                     <p>
-                        Update your email and verify the new address.
+                        {{ t('Update your email and verify the new address.', 'اپنا ای میل پتہ تبدیل کریں اور نئے پتے کی تصدیق کریں۔') }}
                     </p>
 
                 </div>
@@ -149,10 +138,6 @@
             </div>
 
 
-            {{-- =====================================================
-                 STEP 1:
-                 ENTER NEW EMAIL
-            ====================================================== --}}
 
             @if(!session('email_verification_pending'))
 
@@ -165,12 +150,11 @@
                     @csrf
 
 
-                    {{-- CURRENT EMAIL --}}
-
+                    
                     <div class="form-group">
 
                         <label>
-                            Current Email
+                            {{ t('Current Email', 'موجودہ ای میل') }}
                         </label>
 
                         <div class="input-wrap">
@@ -188,12 +172,12 @@
                     </div>
 
 
-                    {{-- NEW EMAIL --}}
+                    
 
                     <div class="form-group">
 
                         <label>
-                            New Email
+                            {{ t('New Email', 'نئی ای میل') }}
                         </label>
 
                         <div class="input-wrap">
@@ -204,7 +188,7 @@
                                 type="email"
                                 name="email"
                                 value="{{ old('email') }}"
-                                placeholder="Enter new email address"
+                                placeholder="{{ t('Enter new email address', 'نیا ای میل پتہ درج کریں') }}"
                                 autocomplete="email"
                                 required
                             >
@@ -214,12 +198,12 @@
                     </div>
 
 
-                    {{-- CURRENT PASSWORD --}}
+                
 
                     <div class="form-group">
 
                         <label>
-                            Current Password
+                            {{ t('Current Password', 'موجودہ پاس ورڈ') }}
                         </label>
 
                         <div class="input-wrap">
@@ -230,7 +214,7 @@
                                 type="password"
                                 name="current_password"
                                 id="emailPassword"
-                                placeholder="Enter current password"
+                                placeholder="{{ t('Enter current password', 'موجودہ پاس ورڈ درج کریں') }}"
                                 autocomplete="current-password"
                                 required
                             >
@@ -239,7 +223,7 @@
                                 type="button"
                                 class="password-toggle"
                                 onclick="togglePassword('emailPassword', this)"
-                                aria-label="Show password"
+                                aria-label="{{ t('Show password', 'پاس ورڈ دکھائیں') }}"
                             >
 
                                 <i class="bi bi-eye"></i>
@@ -251,7 +235,7 @@
                     </div>
 
 
-                    {{-- VERIFICATION NOTE --}}
+                    
 
                     <div class="verification-note">
 
@@ -259,15 +243,14 @@
 
                         <span>
 
-                            A 6-digit verification code will be sent
-                            to your new email address.
+                            {{ t('A 6-digit verification code will be sent to your new email address.', '6 ہندسوں پر مشتمل تصدیقی کوڈ آپ کے نئے ای میل پتے پر بھیجا جائے گا۔') }}
 
                         </span>
 
                     </div>
 
 
-                    {{-- SUBMIT --}}
+                
 
                     <button
                         type="submit"
@@ -278,7 +261,7 @@
                         <i class="bi bi-send"></i>
 
                         <span>
-                            Send Verification Code
+                            {{ t('Send Verification Code', 'تصدیقی کوڈ بھیجیں') }}
                         </span>
 
                     </button>
@@ -286,10 +269,7 @@
                 </form>
 
 
-            {{-- =====================================================
-                 STEP 2:
-                 ENTER OTP
-            ====================================================== --}}
+        
 
             @else
 
@@ -303,18 +283,18 @@
 
 
                     <h4 class="otp-title">
-                        Verify New Email
+                        {{ t('Verify New Email', 'نئی ای میل کی تصدیق کریں') }}
                     </h4>
 
 
                     <p class="otp-description">
 
-                        We sent a 6-digit verification code to:
+                        {{ t('We sent a 6-digit verification code to:', 'ہم نے 6 ہندسوں پر مشتمل تصدیقی کوڈ اس پتے پر بھیجا ہے:') }}
 
                     </p>
 
 
-                    {{-- NEW EMAIL DISPLAY --}}
+
 
                     <div class="pending-email">
 
@@ -329,15 +309,11 @@
 
                     <p class="otp-description second">
 
-                        Enter the code below to confirm your new
-                        email address.
+                        {{ t('Enter the code below to confirm your new email address.', 'اپنے نئے ای میل پتے کی تصدیق کے لیے نیچے دیا گیا کوڈ درج کریں۔') }}
 
                     </p>
 
 
-                    {{-- =================================================
-                         OTP FORM
-                    ================================================== --}}
 
                     <form
                         action="{{ route('account.email.verify') }}"
@@ -355,7 +331,7 @@
                                 name="otp"
                                 id="emailOtp"
                                 class="otp-input"
-                                placeholder="Enter 6-digit code"
+                                placeholder="{{ t('Enter 6-digit code', '6 ہندسوں پر مشتمل کوڈ درج کریں') }}"
                                 maxlength="6"
                                 minlength="6"
                                 inputmode="numeric"
@@ -370,7 +346,7 @@
                         </div>
 
 
-                        {{-- VERIFY BUTTON --}}
+
 
                         <button
                             type="submit"
@@ -381,7 +357,7 @@
                             <i class="bi bi-shield-check"></i>
 
                             <span>
-                                Verify Email
+                                {{ t('Verify Email', 'ای میل کی تصدیق کریں') }}
                             </span>
 
                         </button>
@@ -389,7 +365,6 @@
                     </form>
 
 
-                    {{-- CANCEL VERIFICATION --}}
 
                     <form
                         action="{{ route('account.email.cancel') }}"
@@ -406,7 +381,7 @@
 
                             <i class="bi bi-arrow-left"></i>
 
-                            Cancel
+                            {{ t('Cancel', 'منسوخ کریں') }}
 
                         </button>
 
@@ -419,9 +394,6 @@
         </div>
 
 
-        {{-- =========================================================
-             CHANGE PASSWORD CARD
-        ========================================================== --}}
 
         <div class="settings-card">
 
@@ -436,11 +408,11 @@
                 <div>
 
                     <h4>
-                        Change Password
+                        {{ t('Change Password', 'پاس ورڈ تبدیل کریں') }}
                     </h4>
 
                     <p>
-                        Create a strong password to protect your account.
+                        {{ t('Create a strong password to protect your account.', 'اپنے اکاؤنٹ کی حفاظت کے لیے مضبوط پاس ورڈ بنائیں۔') }}
                     </p>
 
                 </div>
@@ -456,12 +428,11 @@
                 @csrf
 
 
-                {{-- CURRENT PASSWORD --}}
 
                 <div class="form-group">
 
                     <label>
-                        Current Password
+                        {{ t('Current Password', 'موجودہ پاس ورڈ') }}
                     </label>
 
                     <div class="input-wrap">
@@ -472,7 +443,7 @@
                             type="password"
                             name="current_password"
                             id="currentPassword"
-                            placeholder="Enter current password"
+                            placeholder="{{ t('Enter current password', 'موجودہ پاس ورڈ درج کریں') }}"
                             autocomplete="current-password"
                             required
                         >
@@ -481,7 +452,7 @@
                             type="button"
                             class="password-toggle"
                             onclick="togglePassword('currentPassword', this)"
-                            aria-label="Show password"
+                            aria-label="{{ t('Show password', 'پاس ورڈ دکھائیں') }}"
                         >
 
                             <i class="bi bi-eye"></i>
@@ -493,12 +464,11 @@
                 </div>
 
 
-                {{-- NEW PASSWORD --}}
 
                 <div class="form-group">
 
                     <label>
-                        New Password
+                        {{ t('New Password', 'نیا پاس ورڈ') }}
                     </label>
 
                     <div class="input-wrap">
@@ -509,7 +479,7 @@
                             type="password"
                             name="password"
                             id="newPassword"
-                            placeholder="Enter new password"
+                            placeholder="{{ t('Enter new password', 'نیا پاس ورڈ درج کریں') }}"
                             autocomplete="new-password"
                             required
                         >
@@ -518,7 +488,7 @@
                             type="button"
                             class="password-toggle"
                             onclick="togglePassword('newPassword', this)"
-                            aria-label="Show password"
+                            aria-label="{{ t('Show password', 'پاس ورڈ دکھائیں') }}"
                         >
 
                             <i class="bi bi-eye"></i>
@@ -530,12 +500,11 @@
                 </div>
 
 
-                {{-- CONFIRM PASSWORD --}}
 
                 <div class="form-group">
 
                     <label>
-                        Confirm New Password
+                        {{ t('Confirm New Password', 'نئے پاس ورڈ کی تصدیق کریں') }}
                     </label>
 
                     <div class="input-wrap">
@@ -546,7 +515,7 @@
                             type="password"
                             name="password_confirmation"
                             id="confirmPassword"
-                            placeholder="Confirm new password"
+                            placeholder="{{ t('Confirm new password', 'نیا پاس ورڈ دوبارہ درج کریں') }}"
                             autocomplete="new-password"
                             required
                         >
@@ -555,7 +524,7 @@
                             type="button"
                             class="password-toggle"
                             onclick="togglePassword('confirmPassword', this)"
-                            aria-label="Show password"
+                            aria-label="{{ t('Show password', 'پاس ورڈ دکھائیں') }}"
                         >
 
                             <i class="bi bi-eye"></i>
@@ -567,7 +536,6 @@
                 </div>
 
 
-                {{-- CHANGE PASSWORD BUTTON --}}
 
                 <button
                     type="submit"
@@ -576,7 +544,7 @@
 
                     <i class="bi bi-shield-check"></i>
 
-                    Change Password
+                    {{ t('Change Password', 'پاس ورڈ تبدیل کریں') }}
 
                 </button>
 
@@ -584,10 +552,6 @@
 
         </div>
 
-
-        {{-- =========================================================
-             SECURITY INFORMATION
-        ========================================================== --}}
 
         <div class="security-card">
 
@@ -600,15 +564,12 @@
             <div>
 
                 <h5>
-                    Email Verification
+                    {{ t('Email Verification', 'ای میل کی تصدیق') }}
                 </h5>
 
                 <p>
 
-                    When you change your email address, GrowSmart
-                    will send a verification code to the new email.
-                    Your email will only be changed after the correct
-                    6-digit code is entered.
+                    {{ t('When you change your email address, GrowSmart will send a verification code to the new email. Your email will only be changed after the correct 6-digit code is entered.', 'جب آپ اپنا ای میل پتہ تبدیل کریں گے تو گرو اسمارٹ نئے ای میل پتے پر تصدیقی کوڈ بھیجے گا۔ درست 6 ہندسوں کا کوڈ درج کرنے کے بعد ہی آپ کا ای میل پتہ تبدیل کیا جائے گا۔') }}
 
                 </p>
 
@@ -622,10 +583,6 @@
 
 @endsection
 
-
-{{-- =============================================================
-     STYLES
-============================================================= --}}
 
 @push('styles')
 
@@ -643,9 +600,7 @@
 }
 
 
-/* =============================================================
-   TITLE
-============================================================= */
+
 
 .settings-title{
     display:flex;
@@ -681,9 +636,7 @@
 }
 
 
-/* =============================================================
-   ALERTS
-============================================================= */
+
 
 .settings-alert{
     display:flex;
@@ -713,9 +666,7 @@
 }
 
 
-/* =============================================================
-   CARDS
-============================================================= */
+
 
 .settings-card{
     background:#fff;
@@ -727,9 +678,7 @@
 }
 
 
-/* =============================================================
-   CARD HEADING
-============================================================= */
+
 
 .card-heading{
     display:flex;
@@ -767,9 +716,7 @@
 }
 
 
-/* =============================================================
-   FORM
-============================================================= */
+
 
 .form-group{
     margin-bottom:12px;
@@ -784,9 +731,7 @@
 }
 
 
-/* =============================================================
-   INPUT
-============================================================= */
+
 
 .input-wrap{
     position:relative;
@@ -841,9 +786,7 @@
 }
 
 
-/* =============================================================
-   PASSWORD TOGGLE
-============================================================= */
+
 
 .password-toggle{
     position:absolute;
@@ -873,9 +816,7 @@
 }
 
 
-/* =============================================================
-   VERIFICATION NOTE
-============================================================= */
+
 
 .verification-note{
     display:flex;
@@ -898,9 +839,7 @@
 }
 
 
-/* =============================================================
-   BUTTON
-============================================================= */
+
 
 .settings-button{
     display:inline-flex;
@@ -931,9 +870,7 @@
 }
 
 
-/* =============================================================
-   OTP VERIFICATION BOX
-============================================================= */
+
 
 .otp-verification-box{
     text-align:center;
@@ -992,9 +929,7 @@
 }
 
 
-/* =============================================================
-   PENDING EMAIL
-============================================================= */
+
 
 .pending-email{
     display:inline-flex;
@@ -1029,9 +964,7 @@
 }
 
 
-/* =============================================================
-   OTP INPUT
-============================================================= */
+
 
 .otp-input-wrapper{
     width:100%;
@@ -1086,9 +1019,7 @@
 }
 
 
-/* =============================================================
-   OTP BUTTON
-============================================================= */
+
 
 .otp-button{
     width:100%;
@@ -1096,9 +1027,7 @@
 }
 
 
-/* =============================================================
-   CANCEL
-============================================================= */
+
 
 .cancel-form{
     margin-top:9px;
@@ -1125,9 +1054,7 @@
 }
 
 
-/* =============================================================
-   SECURITY CARD
-============================================================= */
+
 
 .security-card{
     display:flex;
@@ -1167,9 +1094,7 @@
 }
 
 
-/* =============================================================
-   MOBILE
-============================================================= */
+
 
 @media(max-width:600px){
 
@@ -1230,19 +1155,12 @@
 @endpush
 
 
-{{-- =============================================================
-     JAVASCRIPT
-============================================================= --}}
 
 @push('scripts')
 
 <script>
 
-/*
-|--------------------------------------------------------------------------
-| Password Show / Hide
-|--------------------------------------------------------------------------
-*/
+
 
 function togglePassword(id, button){
 
@@ -1284,11 +1202,7 @@ function togglePassword(id, button){
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Change Email Form
-|--------------------------------------------------------------------------
-*/
+
 
 const changeEmailForm =
     document.getElementById('changeEmailForm');
@@ -1317,11 +1231,7 @@ if(changeEmailForm && sendEmailCodeBtn){
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| OTP Input
-|--------------------------------------------------------------------------
-*/
+
 
 const emailOtp =
     document.getElementById('emailOtp');
@@ -1329,11 +1239,7 @@ const emailOtp =
 
 if(emailOtp){
 
-    /*
-    |--------------------------------------------------------------------------
-    | Only allow numbers
-    |--------------------------------------------------------------------------
-    */
+    
 
     emailOtp.addEventListener(
         'input',
@@ -1360,11 +1266,7 @@ if(emailOtp){
     );
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Handle Paste
-    |--------------------------------------------------------------------------
-    */
+    
 
     emailOtp.addEventListener(
         'paste',
@@ -1400,11 +1302,7 @@ if(emailOtp){
     );
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Prevent spaces
-    |--------------------------------------------------------------------------
-    */
+    
 
     emailOtp.addEventListener(
         'keydown',
@@ -1422,11 +1320,7 @@ if(emailOtp){
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| OTP Form
-|--------------------------------------------------------------------------
-*/
+
 
 const emailOtpForm =
     document.getElementById('emailOtpForm');
@@ -1445,9 +1339,7 @@ if(emailOtpForm && emailOtp){
                 emailOtp.value.trim();
 
 
-            /*
-            | OTP must be exactly 6 digits
-            */
+            
 
             if(!/^[0-9]{6}$/.test(otp)){
 
@@ -1464,9 +1356,7 @@ if(emailOtpForm && emailOtp){
             }
 
 
-            /*
-            | Prevent multiple submissions
-            */
+            
 
             if(verifyEmailBtn){
 
@@ -1493,11 +1383,7 @@ if(emailOtpForm && emailOtp){
 
 <style>
 
-/*
-|--------------------------------------------------------------------------
-| OTP Loading Animation
-|--------------------------------------------------------------------------
-*/
+
 
 .spin-icon{
     animation:spin 1s linear infinite;

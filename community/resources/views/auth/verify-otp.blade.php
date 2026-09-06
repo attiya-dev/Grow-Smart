@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowSmart | Email Verification</title>
+    <title>{{ t('GrowSmart | Email Verification', 'گرو اسمارٹ | ای میل کی تصدیق') }}</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -585,6 +585,17 @@
             }
         }
     </style>
+
+<style id="growsmart-urdu-design">
+html.urdu-mode, html.urdu-mode body { direction: ltr; }
+html.urdu-mode body { text-align: right; }
+html.urdu-mode .container, html.urdu-mode .container-fluid, html.urdu-mode .row, html.urdu-mode .d-flex, html.urdu-mode .navbar, html.urdu-mode .navbar-nav, html.urdu-mode footer, html.urdu-mode header { direction: ltr; }
+html.urdu-mode .row > *, html.urdu-mode .card, html.urdu-mode section, html.urdu-mode article, html.urdu-mode form, html.urdu-mode p, html.urdu-mode h1, html.urdu-mode h2, html.urdu-mode h3, html.urdu-mode h4, html.urdu-mode h5, html.urdu-mode h6, html.urdu-mode label, html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select, html.urdu-mode table, html.urdu-mode td, html.urdu-mode th { direction: rtl; text-align: right; }
+html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select { direction: rtl; text-align: right; }
+html.urdu-mode .text-start { text-align: right !important; }
+html.urdu-mode .text-end { text-align: left !important; }
+html.urdu-mode .brand { justify-content: flex-end; }
+</style>
 </head>
 
 <body>
@@ -603,7 +614,7 @@
 
             <div class="brand-text">
                 <span class="brand-name">GrowSmart</span>
-                <span class="brand-tagline">Smart Agriculture</span>
+                <span class="brand-tagline">{{ t('Smart Agriculture', 'ذہین زراعت') }}</span>
             </div>
         </div>
 
@@ -611,23 +622,23 @@
             <i class="fa-solid fa-envelope-circle-check"></i>
         </div>
 
-        <h2>Verify Your Email</h2>
+        <h2>{{ t('Verify Your Email', 'اپنے ای میل پتے کی تصدیق کریں') }}</h2>
 
         <p class="subtitle">
-            One more step to complete your GrowSmart account.
+            {{ t('One more step to complete your GrowSmart account.', 'اپنے گرو اسمارٹ اکاؤنٹ کی تکمیل کے لیے یہ آخری مرحلہ ہے۔') }}
         </p>
 
         @if(session('success'))
             <div class="message success">
                 <i class="fa-solid fa-circle-check"></i>
-                {{ session('success') }}
+                {{ auth_text(session('success')) }}
             </div>
         @endif
 
         @if(session('error'))
             <div class="message error">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                {{ session('error') }}
+                {{ auth_text(session('error')) }}
             </div>
         @endif
 
@@ -636,15 +647,13 @@
                 <i class="fa-solid fa-circle-exclamation"></i>
 
                 @foreach($errors->all() as $error)
-                    <div>{{ $error }}</div>
+                    <div>{{ auth_text($error) }}</div>
                 @endforeach
             </div>
         @endif
 
         <p class="info-text">
-            Enter the
-            <strong>6-digit verification code</strong>
-            that was sent to your email address.
+            {{ t('Enter the 6-digit verification code that was sent to your email address.', 'اپنے ای میل پتے پر بھیجا گیا 6 ہندسوں کا تصدیقی کوڈ درج کریں۔') }}
         </p>
 
         <form
@@ -657,7 +666,7 @@
                 type="text"
                 name="otp"
                 class="otp-input"
-                placeholder="Enter OTP"
+                placeholder="{{ is_urdu() ? 'او ٹی پی درج کریں' : 'Enter OTP' }}"
                 maxlength="6"
                 minlength="6"
                 inputmode="numeric"
@@ -670,7 +679,7 @@
                 type="submit"
                 class="verify-btn"
             >
-                Verify Email
+                {{ t('Verify Email', 'ای میل کی تصدیق کریں') }}
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </form>
@@ -680,7 +689,7 @@
             class="back-link"
         >
             <i class="fa-solid fa-arrow-left"></i>
-            Back to Register
+            {{ t('Back to Register', 'رجسٹریشن پر واپس جائیں') }}
         </a>
 
     </div>
@@ -699,21 +708,18 @@
                 </div>
 
                 <div class="right-logo-name">
-                    GrowSmart
+                    {{ t('GrowSmart', 'گرو اسمارٹ') }}
                 </div>
 
             </div>
 
             <h3>
-                Welcome to<br>
-                GrowSmart
+                {{ t('Welcome to', 'خوش آمدید') }}<br>
+                {{ t('GrowSmart', 'گرو اسمارٹ') }}
             </h3>
 
             <p>
-                Verify your email and start exploring
-                smarter agricultural knowledge,
-                farming solutions and our growing
-                community.
+                {{ t('Verify your email address and start benefiting from better agricultural information, farming solutions and our growing community.', 'اپنے ای میل پتے کی تصدیق کریں اور بہتر زرعی معلومات، کاشت کاری کے حل اور ہماری بڑھتی ہوئی کمیونٹی سے فائدہ اٹھانا شروع کریں۔') }}
             </p>
 
         </div>

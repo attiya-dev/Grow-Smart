@@ -9,16 +9,11 @@ use Illuminate\Database\Seeder;
 
 class CropDetail2Seeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         $cropDetails = [
 
-            // =========================================================
-            // MANGO
-            // =========================================================
             [
                 'crop_name' => 'Mango',
 
@@ -164,9 +159,6 @@ Mango is a major fruit crop that supports farmers’ income and contributes sign
 ',
             ],
 
-            // =========================================================
-            // LYCHEE
-            // =========================================================
             [
                 'crop_name' => 'Lychee',
 
@@ -313,9 +305,6 @@ Lychee is an important seasonal fruit crop that provides income to farmers and s
 ',
             ],
 
-            // =========================================================
-            // GROUNDNUT
-            // =========================================================
             [
                 'crop_name' => 'Groundnut',
 
@@ -464,9 +453,6 @@ Groundnut is an important oilseed crop that provides edible oil, food, and anima
 ',
             ],
 
-            // =========================================================
-            // WATERMELON
-            // =========================================================
             [
                 'crop_name' => 'Watermelon',
 
@@ -615,9 +601,6 @@ Watermelon is an important summer fruit crop that provides good income to farmer
 ',
             ],
 
-            // =========================================================
-            // MELON
-            // =========================================================
             [
                 'crop_name' => 'Melon',
 
@@ -766,9 +749,6 @@ Melon is an important summer fruit crop that provides good income to farmers due
 ',
             ],
 
-            // =========================================================
-            // GUAVA
-            // =========================================================
             [
                 'crop_name' => 'Guava',
 
@@ -915,9 +895,6 @@ Guava is an important fruit crop that provides affordable nutrition to people an
 ',
             ],
 
-            // =========================================================
-            // PAPAYA
-            // =========================================================
             [
                 'crop_name' => 'Papaya',
 
@@ -1067,9 +1044,6 @@ Papaya is an important fast-growing fruit crop that provides quick income to far
 ',
             ],
 
-            // =========================================================
-            // PEACH
-            // =========================================================
             [
                 'crop_name' => 'Peach',
 
@@ -1219,9 +1193,6 @@ Peaches are an important commercial fruit crop in temperate regions, providing g
 ',
             ],
 
-            // =========================================================
-            // WHEAT
-            // =========================================================
             [
                 'crop_name' => 'Wheat',
 
@@ -1374,9 +1345,6 @@ Wheat is the most important staple food crop in Pakistan. It ensures food securi
 ',
             ],
 
-            // =========================================================
-            // MUSTARD
-            // =========================================================
             [
                 'crop_name' => 'Mustard',
 
@@ -1528,9 +1496,6 @@ Mustard is an important oilseed crop that contributes significantly to edible oi
 ',
             ],
 
-            // =========================================================
-            // BARLEY
-            // =========================================================
             [
                 'crop_name' => 'Barley',
 

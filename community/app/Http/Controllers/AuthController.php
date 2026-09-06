@@ -18,35 +18,58 @@ use Carbon\Carbon;
 class AuthController extends Controller
 {
     public function home()
-{
-    return view('home');
-}
-public function getStarted()
-{
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
 
-    return redirect()->route('login');
-}
+            if (!$user->is_active) {
+                Auth::logout();
+                return view('home');
+            }
+
+            if ($user->is_admin) {
+                return redirect()->route('admin.info');
+            }
+
+            if ($user->is_expert) {
+                return redirect()->route('expert.users');
+            }
+
+            return redirect()->route('dashboard');
+        }
+
+        return view('home');
+    }
 
     public function dashboard()
     {
         $month = now()->month;
 
+        $cropQuery = Crop::query();
+        if (is_urdu()) {
+            $cropQuery->where('urdu_completed', true)
+                ->whereNotNull('name_ur')
+                ->where('name_ur', '!=', '');
+        }
+
         if ($month >= 4 && $month <= 9) {
-            $sliderCrops = Crop::where('season', 'summer')
+            $sliderCrops = (clone $cropQuery)->where('season', 'summer')
                 ->take(10)
                 ->get();
         } else {
-            $sliderCrops = Crop::where('season', 'winter')
+            $sliderCrops = (clone $cropQuery)->where('season', 'winter')
                 ->take(10)
                 ->get();
         }
 
-        $cropDataCrops = Crop::take(8)->get();
+        $cropDataCrops = (clone $cropQuery)->take(8)->get();
 
-        $pestCrops = Crop::has('pestManagements')
+        $pestCrops = (clone $cropQuery)
+            ->whereHas('pestManagements', function ($query) {
+                if (is_urdu()) {
+                    $query->where('urdu_completed', true);
+                }
+            })
             ->take(8)
             ->get();
 
@@ -59,6 +82,10 @@ public function getStarted()
 
     public function showRegister()
     {
+        if (Auth::check()) {
+            return $this->redirectToPanel(Auth::user());
+        }
+
         return view('auth.register');
     }
 
@@ -201,6 +228,10 @@ public function getStarted()
 
     public function showLogin()
     {
+        if (Auth::check()) {
+            return $this->redirectToPanel(Auth::user());
+        }
+
         return view('auth.login');
     }
 
@@ -248,6 +279,19 @@ public function getStarted()
             'error',
             'Invalid Email or Password.'
         );
+    }
+
+    private function redirectToPanel(User $user)
+    {
+        if ($user->is_admin) {
+            return redirect()->route('admin.info');
+        }
+
+        if ($user->is_expert) {
+            return redirect()->route('expert.users');
+        }
+
+        return redirect()->route('dashboard');
     }
 
     public function redirectToGoogle()

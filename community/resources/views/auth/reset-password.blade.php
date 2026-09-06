@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 
 <head>
 
@@ -7,9 +7,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GrowSmart - Create New Password</title>
+    <title>{{ t('GrowSmart - Create New Password', 'گرو اسمارٹ - نیا پاس ورڈ بنائیں') }}</title>
 
-    <!-- Font Awesome -->
+    
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -17,7 +17,7 @@
 
     <style>
 
-        /* Basic settings */
+        
 
         * {
             margin: 0;
@@ -27,7 +27,7 @@
         }
 
 
-        /* Page */
+        
 
         body {
             background:
@@ -53,7 +53,7 @@
         }
 
 
-        /* Main box */
+        
 
         .reset-container {
             width: 100%;
@@ -78,7 +78,7 @@
         }
 
 
-        /* Heading */
+        
 
         .reset-box h2 {
             text-align: center;
@@ -91,7 +91,7 @@
         }
 
 
-        /* Labels */
+        
 
         .form-label {
             display: block;
@@ -106,7 +106,7 @@
         }
 
 
-        /* Input */
+        
 
         .form-control {
             width: 100%;
@@ -128,7 +128,7 @@
         }
 
 
-        /* Password box */
+        
 
         .password-input {
             position: relative;
@@ -142,7 +142,7 @@
         }
 
 
-        /* Eye */
+        
 
         .eye-toggle {
             position: absolute;
@@ -173,7 +173,7 @@
         }
 
 
-        /* Remove browser password eye */
+        
 
         input[type="password"]::-ms-reveal,
         input[type="password"]::-ms-clear {
@@ -191,7 +191,7 @@
         }
 
 
-        /* Password information */
+        
 
         .password-info {
             margin-top: 15px;
@@ -204,7 +204,7 @@
         }
 
 
-        /* Error */
+        
 
         .error-message {
             background: #f8d7da;
@@ -221,7 +221,7 @@
         }
 
 
-        /* Reset button */
+        
 
         .reset-btn {
             width: 100%;
@@ -249,7 +249,7 @@
         }
 
 
-        /* Mobile */
+        
 
         @media (max-width: 600px) {
 
@@ -327,7 +327,7 @@
         }
 
 
-        /* Small phones */
+        
 
         @media (max-width: 350px) {
 
@@ -359,6 +359,18 @@
 
     </style>
 
+
+<style id="growsmart-urdu-design">
+html.urdu-mode, html.urdu-mode body { direction: ltr; }
+html.urdu-mode body { text-align: right; }
+html.urdu-mode .container, html.urdu-mode .container-fluid, html.urdu-mode .row, html.urdu-mode .d-flex, html.urdu-mode .navbar, html.urdu-mode .navbar-nav, html.urdu-mode footer, html.urdu-mode header { direction: ltr; }
+html.urdu-mode .row > *, html.urdu-mode .card, html.urdu-mode section, html.urdu-mode article, html.urdu-mode form, html.urdu-mode p, html.urdu-mode h1, html.urdu-mode h2, html.urdu-mode h3, html.urdu-mode h4, html.urdu-mode h5, html.urdu-mode h6, html.urdu-mode label, html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select, html.urdu-mode table, html.urdu-mode td, html.urdu-mode th { direction: rtl; text-align: right; }
+html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select { direction: rtl; text-align: right; }
+html.urdu-mode .text-start { text-align: right !important; }
+html.urdu-mode .text-end { text-align: left !important; }
+html.urdu-mode .eye-toggle { right: auto; left: 15px; }
+html.urdu-mode .password-input .form-control { padding-left: 50px; padding-right: 12px; }
+</style>
 </head>
 
 
@@ -372,17 +384,17 @@
 
 
         <h2>
-            🔐 Create New Password
+            🔐 {{ t('Create New Password', 'نیا پاس ورڈ بنائیں') }}
         </h2>
 
 
-        <!-- Show errors -->
+        
 
         @if($errors->any())
 
             <div class="error-message">
 
-                {{ $errors->first() }}
+                {{ auth_text($errors->first()) }}
 
             </div>
 
@@ -397,7 +409,7 @@
             @csrf
 
 
-            <!-- Reset token -->
+            
 
             <input
                 type="hidden"
@@ -406,10 +418,10 @@
             >
 
 
-            <!-- Email -->
+            
 
             <label class="form-label">
-                Email Address
+                {{ t('Email Address', 'ای میل پتہ') }}
             </label>
 
 
@@ -422,10 +434,10 @@
             >
 
 
-            <!-- New password -->
+            
 
             <label class="form-label">
-                New Password
+                {{ t('New Password', 'نیا پاس ورڈ') }}
             </label>
 
 
@@ -436,7 +448,7 @@
                     name="password"
                     id="newPassword"
                     class="form-control"
-                    placeholder="Enter new password"
+                    placeholder="{{ is_urdu() ? 'نیا پاس ورڈ درج کریں' : 'Enter new password' }}"
                     required
                     autocomplete="new-password"
                 >
@@ -445,7 +457,7 @@
                 <span
                     class="eye-toggle"
                     id="toggleNewPassword"
-                    title="Show password"
+                    title="{{ is_urdu() ? 'پاس ورڈ دکھائیں' : 'Show password' }}"
                 >
 
                     <i class="fa-solid fa-eye"></i>
@@ -455,10 +467,10 @@
             </div>
 
 
-            <!-- Confirm password -->
+            
 
             <label class="form-label">
-                Confirm New Password
+                {{ t('Confirm New Password', 'نئے پاس ورڈ کی تصدیق کریں') }}
             </label>
 
 
@@ -469,7 +481,7 @@
                     name="password_confirmation"
                     id="confirmPassword"
                     class="form-control"
-                    placeholder="Confirm new password"
+                    placeholder="{{ is_urdu() ? 'نیا پاس ورڈ دوبارہ درج کریں' : 'Confirm new password' }}"
                     required
                     autocomplete="new-password"
                 >
@@ -488,24 +500,23 @@
             </div>
 
 
-            <!-- Password rule -->
+            
 
             <div class="password-info">
 
-                Password must be at least 8 characters
-                and contain at least one special character.
+                {{ t('Password must be at least 8 characters long and contain at least one special character.', 'پاس ورڈ کم از کم 8 حروف پر مشتمل ہونا چاہیے اور اس میں کم از کم ایک خصوصی علامت شامل ہونی چاہیے۔') }}
 
             </div>
 
 
-            <!-- Button -->
+            
 
             <button
                 type="submit"
                 class="reset-btn"
             >
 
-                🔑 Reset Password
+                🔑 {{ t('Reset Password', 'پاس ورڈ دوبارہ ترتیب دیں') }}
 
             </button>
 
@@ -520,7 +531,6 @@
 
 <script>
 
-    // Show and hide new password
 
     let newPassword = document.getElementById("newPassword");
 
@@ -552,7 +562,6 @@
     });
 
 
-    // Show and hide confirm password
 
     let confirmPassword = document.getElementById("confirmPassword");
 

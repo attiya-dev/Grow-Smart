@@ -9,9 +9,7 @@ use Illuminate\Database\Seeder;
 
 class CropDetailSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         $cropDetails = [

@@ -659,7 +659,7 @@
                         <a
                             href="{{ route('crop.show', $crop->id) }}"
                             class="crop-card-link"
-                            aria-label="View {{ $crop->name }} details"
+                            aria-label="View {{ local_text($crop, 'name') }} details"
                         >
 
                             <div class="crop-card">
@@ -676,7 +676,7 @@
 
                                     <img
                                         src="{{ asset('images/' . $crop->image) }}"
-                                        alt="{{ $crop->name }}"
+                                        alt="{{ local_text($crop, 'name') }}"
                                     >
 
                                 </div>
@@ -685,7 +685,7 @@
                                 <div class="card-info">
 
                                     <div class="crop-title">
-                                        {{ $crop->name }}
+                                        {{ local_text($crop, 'name') }}
                                     </div>
 
 
@@ -773,7 +773,7 @@
                         <a
                             href="{{ route('crop.show', $crop->id) }}"
                             class="crop-card-link"
-                            aria-label="View {{ $crop->name }} details"
+                            aria-label="View {{ local_text($crop, 'name') }} details"
                         >
 
                             <div class="crop-card">
@@ -790,7 +790,7 @@
 
                                     <img
                                         src="{{ asset('images/' . $crop->image) }}"
-                                        alt="{{ $crop->name }}"
+                                        alt="{{ local_text($crop, 'name') }}"
                                     >
 
                                 </div>
@@ -799,7 +799,7 @@
                                 <div class="card-info">
 
                                     <div class="crop-title">
-                                        {{ $crop->name }}
+                                        {{ local_text($crop, 'name') }}
                                     </div>
 
                                     @if($crop->type)

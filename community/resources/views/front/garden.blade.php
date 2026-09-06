@@ -449,7 +449,7 @@
 
 @section('content')
 
-<div class="pest-page">
+<div class="pest-page" data-no-translate>
 
     <div class="pest-hero">
         <div class="pest-hero-content">
@@ -459,12 +459,11 @@
             </div>
 
             <h1>
-                Pest Management
+                {{ is_urdu() ? 'کیڑوں کا انتظام' : 'Pest Management' }}
             </h1>
 
             <p>
-                Explore pest management information for seasonal crops,
-                including common crop pests and agricultural protection guidance.
+                {{ is_urdu() ? 'موسمی فصلوں میں پائے جانے والے عام کیڑوں اور ان سے بچاؤ کے زرعی طریقوں کے بارے میں معلومات حاصل کریں۔' : 'Explore pest management information for seasonal crops, including common crop pests and agricultural protection guidance.' }}
             </p>
 
         </div>
@@ -482,11 +481,11 @@
 
                 <div>
                     <h2 class="section-title">
-                        Summer Crops
+                        {{ is_urdu() ? 'موسم گرما کی فصلیں' : 'Summer Crops' }}
                     </h2>
 
                     <p class="section-description">
-                        Pest management information for warm-season crops.
+                        {{ is_urdu() ? 'موسم گرما کی فصلوں میں کیڑوں کے انتظام کے بارے میں معلومات۔' : 'Pest management information for warm-season crops.' }}
                     </p>
                 </div>
 
@@ -494,7 +493,7 @@
 
             <div class="crop-count">
                 <i class="bi bi-flower1"></i>
-                {{ $summerCrops->count() }} Crops
+                {{ $summerCrops->count() }} {{ is_urdu() ? 'فصلیں' : 'Crops' }}
             </div>
 
         </div>
@@ -515,13 +514,13 @@
 
                                     @if($crop->type)
                                         <div class="crop-type-badge">
-                                            {{ ucfirst($crop->type) }}
+                                            {{ local_text($crop, 'type') }}
                                         </div>
                                     @endif
 
                                     <img
                                         src="{{ asset('images/' . $crop->image) }}"
-                                        alt="{{ $crop->name }}"
+                                        alt="{{ local_text($crop, 'name') }}"
                                     >
 
                                     <div class="card-arrow">
@@ -533,12 +532,12 @@
                                 <div class="card-info">
 
                                     <div class="crop-title">
-                                        {{ $crop->name }}
+                                        {{ local_text($crop, 'name') }}
                                     </div>
 
                                     @if($crop->type)
                                         <div class="crop-type">
-                                            {{ ucfirst($crop->type) }}
+                                            {{ local_text($crop, 'type') }}
                                         </div>
                                     @endif
 
@@ -561,11 +560,11 @@
                             </div>
 
                             <h5>
-                                No Summer Crops Found
+                                {{ is_urdu() ? 'موسم گرما کی کوئی فصل نہیں ملی' : 'No Summer Crops Found' }}
                             </h5>
 
                             <p>
-                                There are currently no summer crops available.
+                                {{ is_urdu() ? 'اس وقت موسم گرما کی کوئی فصل دستیاب نہیں ہے۔' : 'There are currently no summer crops available.' }}
                             </p>
 
                         </div>
@@ -592,11 +591,11 @@
 
                 <div>
                     <h2 class="section-title">
-                        Winter Crops
+                        {{ is_urdu() ? 'موسم سرما کی فصلیں' : 'Winter Crops' }}
                     </h2>
 
                     <p class="section-description">
-                        Pest management information for cool-season crops.
+                        {{ is_urdu() ? 'موسم سرما کی فصلوں میں کیڑوں کے انتظام کے بارے میں معلومات۔' : 'Pest management information for cool-season crops.' }}
                     </p>
                 </div>
 
@@ -604,7 +603,7 @@
 
             <div class="crop-count">
                 <i class="bi bi-flower1"></i>
-                {{ $winterCrops->count() }} Crops
+                {{ $winterCrops->count() }} {{ is_urdu() ? 'فصلیں' : 'Crops' }}
             </div>
 
         </div>
@@ -625,13 +624,13 @@
 
                                     @if($crop->type)
                                         <div class="crop-type-badge">
-                                            {{ ucfirst($crop->type) }}
+                                            {{ local_text($crop, 'type') }}
                                         </div>
                                     @endif
 
                                     <img
                                         src="{{ asset('images/' . $crop->image) }}"
-                                        alt="{{ $crop->name }}"
+                                        alt="{{ local_text($crop, 'name') }}"
                                     >
 
                                     <div class="card-arrow">
@@ -643,7 +642,7 @@
                                 <div class="card-info">
 
                                     <div class="crop-title">
-                                        {{ $crop->name }}
+                                        {{ local_text($crop, 'name') }}
                                     </div>
                                 </div>
 
@@ -664,11 +663,11 @@
                             </div>
 
                             <h5>
-                                No Winter Crops Found
+                                {{ is_urdu() ? 'موسم سرما کی کوئی فصل نہیں ملی' : 'No Winter Crops Found' }}
                             </h5>
 
                             <p>
-                                There are currently no winter crops available.
+                                {{ is_urdu() ? 'اس وقت موسم سرما کی کوئی فصل دستیاب نہیں ہے۔' : 'There are currently no winter crops available.' }}
                             </p>
 
                         </div>

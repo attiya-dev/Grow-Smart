@@ -1,0 +1,16 @@
+GrowSmart Urdu Manual Data Setup
+
+Automatic translation for crop names, crop data, and pest management data is disabled.
+
+The project contains complete static Urdu seeders for all 64 crops and all 580 pest-management records.
+
+Use the Admin Dashboard for new records:
+1. Add the English crop from Crop Management.
+2. Add the complete Urdu crop name and all Urdu crop-data headings from Add / Update Urdu Crop Data.
+3. Add English pest/disease data from Add Pest Data.
+4. Add the complete Urdu pest/disease data from Add / Update Urdu Pest Data.
+
+Urdu crop records are displayed only when the crop has a completed Urdu record.
+Urdu pest records are displayed only when the pest/disease has a completed Urdu record.
+
+The command `php artisan urdu:translate-offline` is intentionally disabled for crop and pest data and does not machine-translate them.

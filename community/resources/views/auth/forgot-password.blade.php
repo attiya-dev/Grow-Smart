@@ -1,5 +1,6 @@
+```blade
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 
 <head>
 
@@ -10,34 +11,23 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>GrowSmart | Forgot Password</title>
+    <title>
+        {{ t('GrowSmart | Forgot Password', 'گرو اسمارٹ | پاس ورڈ بھول گئے؟') }}
+    </title>
 
-
-    <!-- =========================================================
-         FONT AWESOME
-    ========================================================= -->
-
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-
-    <!-- =========================================================
-         GOOGLE FONT
-    ========================================================= -->
-
+    <!-- Google Font -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-
     <style>
-
-        /* =========================================================
-           BASIC SETTINGS
-        ========================================================= */
 
         * {
             margin: 0;
@@ -46,17 +36,11 @@
             font-family: 'Poppins', sans-serif;
         }
 
-
         html,
         body {
             width: 100%;
             min-height: 100%;
         }
-
-
-        /* =========================================================
-           BODY
-        ========================================================= */
 
         body {
 
@@ -75,21 +59,13 @@
             position: relative;
 
             background:
-
                 linear-gradient(
                     rgba(9, 43, 34, 0.68),
                     rgba(9, 43, 34, 0.68)
                 ),
-
                 url("{{ asset('images/agriculture.jpg') }}")
-
                 center center / cover no-repeat;
         }
-
-
-        /* =========================================================
-           BACKGROUND DECORATION
-        ========================================================= */
 
         body::before {
 
@@ -112,7 +88,6 @@
             pointer-events: none;
         }
 
-
         body::after {
 
             content: "";
@@ -134,10 +109,7 @@
             pointer-events: none;
         }
 
-
-        /* =========================================================
-           MAIN CONTAINER
-        ========================================================= */
+        /* Main Card */
 
         .container {
 
@@ -156,20 +128,11 @@
             z-index: 2;
 
             box-shadow:
-
-                0 25px 70px
-                rgba(0,0,0,0.30),
-
-                0 5px 20px
-                rgba(0,0,0,0.12);
+                0 25px 70px rgba(0,0,0,0.30),
+                0 5px 20px rgba(0,0,0,0.12);
 
             animation: cardAppear 0.7s ease;
         }
-
-
-        /* =========================================================
-           CARD ANIMATION
-        ========================================================= */
 
         @keyframes cardAppear {
 
@@ -192,10 +155,7 @@
             }
         }
 
-
-        /* =========================================================
-           MAIN CONTENT
-        ========================================================= */
+        /* Forgot Password Box */
 
         .forgot-box {
 
@@ -204,10 +164,7 @@
             padding: 45px;
         }
 
-
-        /* =========================================================
-           GROWSMART BRAND
-        ========================================================= */
+        /* Brand */
 
         .brand {
 
@@ -219,11 +176,6 @@
 
             margin-bottom: 30px;
         }
-
-
-        /* =========================================================
-           GROWSMART LOGO
-        ========================================================= */
 
         .brand-logo {
 
@@ -242,15 +194,12 @@
             background: #e7f2eb;
 
             box-shadow:
-
-                0 6px 18px
-                rgba(46,139,87,0.15);
+                0 6px 18px rgba(46,139,87,0.15);
 
             overflow: hidden;
 
             flex-shrink: 0;
         }
-
 
         .brand-logo img {
 
@@ -265,11 +214,6 @@
             display: block;
         }
 
-
-        /* =========================================================
-           BRAND TEXT
-        ========================================================= */
-
         .brand-text {
 
             display: flex;
@@ -278,7 +222,6 @@
 
             justify-content: center;
         }
-
 
         .brand-name {
 
@@ -290,7 +233,6 @@
 
             line-height: 1.2;
         }
-
 
         .brand-tagline {
 
@@ -307,10 +249,7 @@
             margin-top: 3px;
         }
 
-
-        /* =========================================================
-           LOCK ICON
-        ========================================================= */
+        /* Lock Icon */
 
         .lock-icon {
 
@@ -329,7 +268,6 @@
             border-radius: 50%;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #e8f4ec,
@@ -341,15 +279,10 @@
             font-size: 28px;
 
             box-shadow:
-
-                0 8px 25px
-                rgba(46,139,87,0.12);
+                0 8px 25px rgba(46,139,87,0.12);
         }
 
-
-        /* =========================================================
-           HEADING
-        ========================================================= */
+        /* Heading */
 
         .forgot-box h2 {
 
@@ -364,10 +297,7 @@
             text-align: center;
         }
 
-
-        /* =========================================================
-           SUBTITLE
-        ========================================================= */
+        /* Subtitle */
 
         .subtitle {
 
@@ -382,10 +312,7 @@
             text-align: center;
         }
 
-
-        /* =========================================================
-           SUCCESS MESSAGE
-        ========================================================= */
+        /* Messages */
 
         .message.success {
 
@@ -406,11 +333,6 @@
             line-height: 1.5;
         }
 
-
-        /* =========================================================
-           ERROR MESSAGE
-        ========================================================= */
-
         .message.error {
 
             background: #fff0f0;
@@ -430,10 +352,7 @@
             line-height: 1.5;
         }
 
-
-        /* =========================================================
-           FORM LABEL
-        ========================================================= */
+        /* Form Label */
 
         .form-label {
 
@@ -448,10 +367,7 @@
             margin-bottom: 8px;
         }
 
-
-        /* =========================================================
-           INPUT WRAPPER
-        ========================================================= */
+        /* Input */
 
         .input-wrapper {
 
@@ -461,11 +377,6 @@
 
             margin-bottom: 18px;
         }
-
-
-        /* =========================================================
-           INPUT ICON
-        ========================================================= */
 
         .input-icon {
 
@@ -484,11 +395,6 @@
             pointer-events: none;
         }
 
-
-        /* =========================================================
-           EMAIL INPUT
-        ========================================================= */
-
         .form-control {
 
             width: 100%;
@@ -496,7 +402,6 @@
             height: 52px;
 
             padding:
-
                 0
                 15px
                 0
@@ -517,14 +422,12 @@
             transition: 0.25s;
         }
 
-
         .form-control::placeholder {
 
             color: #a3ada8;
 
             font-size: 12px;
         }
-
 
         .form-control:focus {
 
@@ -533,15 +436,10 @@
             border-color: #2e8b57;
 
             box-shadow:
-
-                0 0 0 4px
-                rgba(46,139,87,0.10);
+                0 0 0 4px rgba(46,139,87,0.10);
         }
 
-
-        /* =========================================================
-           RESET BUTTON
-        ========================================================= */
+        /* Reset Button */
 
         .reset-btn {
 
@@ -554,7 +452,6 @@
             border-radius: 10px;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #2e8b57,
@@ -578,20 +475,16 @@
             gap: 9px;
 
             box-shadow:
-
-                0 8px 20px
-                rgba(46,139,87,0.22);
+                0 8px 20px rgba(46,139,87,0.22);
 
             transition: 0.25s;
         }
-
 
         .reset-btn:hover {
 
             transform: translateY(-2px);
 
             background:
-
                 linear-gradient(
                     135deg,
                     #246f46,
@@ -599,15 +492,10 @@
                 );
 
             box-shadow:
-
-                0 12px 25px
-                rgba(46,139,87,0.30);
+                0 12px 25px rgba(46,139,87,0.30);
         }
 
-
-        /* =========================================================
-           BACK TO LOGIN
-        ========================================================= */
+        /* Back To Login */
 
         .back-login {
 
@@ -628,7 +516,6 @@
             transition: 0.2s;
         }
 
-
         .back-login:hover {
 
             color: #183a35;
@@ -636,10 +523,71 @@
             text-decoration: underline;
         }
 
+        /* Urdu Design */
 
-        /* =========================================================
-           MOBILE
-        ========================================================= */
+        html.urdu-mode,
+        html.urdu-mode body {
+            direction: ltr;
+        }
+
+        html.urdu-mode body {
+            text-align: right;
+        }
+
+        html.urdu-mode .container,
+        html.urdu-mode .container-fluid,
+        html.urdu-mode .row,
+        html.urdu-mode .d-flex,
+        html.urdu-mode .navbar,
+        html.urdu-mode .navbar-nav,
+        html.urdu-mode footer,
+        html.urdu-mode header {
+            direction: ltr;
+        }
+
+        html.urdu-mode .row > *,
+        html.urdu-mode .card,
+        html.urdu-mode section,
+        html.urdu-mode article,
+        html.urdu-mode form,
+        html.urdu-mode p,
+        html.urdu-mode h1,
+        html.urdu-mode h2,
+        html.urdu-mode h3,
+        html.urdu-mode h4,
+        html.urdu-mode h5,
+        html.urdu-mode h6,
+        html.urdu-mode label,
+        html.urdu-mode input,
+        html.urdu-mode textarea,
+        html.urdu-mode select,
+        html.urdu-mode table,
+        html.urdu-mode td,
+        html.urdu-mode th {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode input,
+        html.urdu-mode textarea,
+        html.urdu-mode select {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html.urdu-mode .text-start {
+            text-align: right !important;
+        }
+
+        html.urdu-mode .text-end {
+            text-align: left !important;
+        }
+
+        html.urdu-mode .brand {
+            justify-content: flex-end;
+        }
+
+        /* Mobile */
 
         @media (max-width: 600px) {
 
@@ -652,7 +600,6 @@
                 overflow-y: auto;
             }
 
-
             .container {
 
                 width: 100%;
@@ -662,18 +609,15 @@
                 border-radius: 20px;
             }
 
-
             .forgot-box {
 
                 padding: 35px 25px;
             }
 
-
             .brand {
 
                 margin-bottom: 25px;
             }
-
 
             .brand-logo {
 
@@ -682,18 +626,15 @@
                 height: 46px;
             }
 
-
             .brand-name {
 
                 font-size: 19px;
             }
 
-
             .brand-tagline {
 
                 font-size: 8px;
             }
-
 
             .lock-icon {
 
@@ -706,12 +647,10 @@
                 margin-bottom: 17px;
             }
 
-
             .forgot-box h2 {
 
                 font-size: 27px;
             }
-
 
             .subtitle {
 
@@ -720,24 +659,18 @@
                 margin-bottom: 22px;
             }
 
-
             .form-control {
 
                 height: 51px;
             }
 
-
             .reset-btn {
 
                 height: 49px;
             }
-
         }
 
-
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
+        /* Small Mobile */
 
         @media (max-width: 400px) {
 
@@ -746,18 +679,15 @@
                 padding: 10px;
             }
 
-
             .container {
 
                 border-radius: 17px;
             }
 
-
             .forgot-box {
 
                 padding: 28px 19px;
             }
-
 
             .brand-logo {
 
@@ -766,12 +696,10 @@
                 height: 40px;
             }
 
-
             .brand-name {
 
                 font-size: 17px;
             }
-
 
             .brand-tagline {
 
@@ -779,7 +707,6 @@
 
                 letter-spacing: 0.5px;
             }
-
 
             .lock-icon {
 
@@ -790,18 +717,15 @@
                 font-size: 23px;
             }
 
-
             .forgot-box h2 {
 
                 font-size: 24px;
             }
 
-
             .subtitle {
 
                 font-size: 12px;
             }
-
 
             .form-control {
 
@@ -810,7 +734,6 @@
                 font-size: 12px;
             }
 
-
             .reset-btn {
 
                 height: 47px;
@@ -818,212 +741,165 @@
                 font-size: 13px;
             }
 
-
             .back-login {
 
                 font-size: 11px;
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
 
+    <div class="container">
 
-<!-- =========================================================
-     SINGLE WHITE BOX
-========================================================= -->
+        <div class="forgot-box">
 
-<div class="container">
+            <!-- Brand -->
 
+            <div class="brand">
 
-    <div class="forgot-box">
+                <div class="brand-logo">
 
+                    <img
+                        src="{{ asset('images/logo1.jpg') }}"
+                        alt="GrowSmart Logo"
+                    >
 
-        <!-- =====================================================
-             GROWSMART BRAND
-        ====================================================== -->
+                </div>
 
-        <div class="brand">
+                <div class="brand-text">
 
+                    <span class="brand-name">
+                        {{ t('GrowSmart', 'گرو اسمارٹ') }}
+                    </span>
 
-            <div class="brand-logo">
+                    <span class="brand-tagline">
+                        {{ t('Smart Agriculture', 'ذہین زراعت') }}
+                    </span>
 
-                <img
-                    src="{{ asset('images/logo1.jpg') }}"
-                    alt="GrowSmart Logo"
-                >
-
-            </div>
-
-
-            <div class="brand-text">
-
-                <span class="brand-name">
-                    GrowSmart
-                </span>
-
-
-                <span class="brand-tagline">
-                    Smart Agriculture
-                </span>
+                </div>
 
             </div>
 
-        </div>
+            <!-- Lock Icon -->
 
+            <div class="lock-icon">
 
-        <!-- =====================================================
-             LOCK ICON
-        ====================================================== -->
-
-        <div class="lock-icon">
-
-            <i class="fa-solid fa-lock"></i>
-
-        </div>
-
-
-        <!-- =====================================================
-             HEADING
-        ====================================================== -->
-
-        <h2>
-
-            Forgot Password?
-
-        </h2>
-
-
-        <p class="subtitle">
-
-            Don't worry. We'll help you reset your password
-            and get back to your GrowSmart account.
-
-        </p>
-
-
-        <!-- =====================================================
-             SUCCESS MESSAGE
-        ====================================================== -->
-
-        @if(session('success'))
-
-            <div class="message success">
-
-                <i class="fa-solid fa-circle-check"></i>
-
-                {{ session('success') }}
+                <i class="fa-solid fa-lock"></i>
 
             </div>
 
-        @endif
+            <!-- Heading -->
 
+            <h2>
+                {{ t('Forgot Password?', 'پاس ورڈ بھول گئے؟') }}
+            </h2>
 
-        <!-- =====================================================
-             ERROR MESSAGE
-        ====================================================== -->
+            <!-- Subtitle -->
 
-        @if($errors->any())
+            <p class="subtitle">
 
-            <div class="message error">
+                {{ t("Don't worry. We'll help you reset your password and get back to your GrowSmart account.", 'فکر نہ کریں۔ ہم آپ کا پاس ورڈ دوبارہ ترتیب دینے اور آپ کو اپنے گرو اسمارٹ اکاؤنٹ میں واپس آنے میں مدد کریں گے۔') }}
 
-                <i class="fa-solid fa-circle-exclamation"></i>
+            </p>
 
-                {{ $errors->first() }}
+            <!-- Success Message -->
 
-            </div>
+            @if(session('success'))
 
-        @endif
+                <div class="message success">
 
+                    <i class="fa-solid fa-circle-check"></i>
 
-        <!-- =====================================================
-             FORGOT PASSWORD FORM
-        ====================================================== -->
+                    {{ auth_text(session('success')) }}
 
-        <form
-            method="POST"
-            action="{{ route('password.email') }}"
-        >
+                </div>
 
-            @csrf
+            @endif
 
+            <!-- Error Message -->
 
-            <!-- EMAIL LABEL -->
+            @if($errors->any())
 
-            <label
-                class="form-label"
-                for="email"
+                <div class="message error">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    {{ auth_text($errors->first()) }}
+
+                </div>
+
+            @endif
+
+            <!-- Forgot Password Form -->
+
+            <form
+                method="POST"
+                action="{{ route('password.email') }}"
             >
 
-                Email Address
+                @csrf
 
-            </label>
-
-
-            <!-- EMAIL INPUT -->
-
-            <div class="input-wrapper">
-
-                <i class="fa-solid fa-envelope input-icon"></i>
-
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    value="{{ old('email') }}"
-                    placeholder="Enter your registered email"
-                    autocomplete="email"
-                    required
+                <label
+                    class="form-label"
+                    for="email"
                 >
 
-            </div>
+                    {{ t('Email Address', 'ای میل پتہ') }}
 
+                </label>
 
-            <!-- SEND RESET LINK -->
+                <div class="input-wrapper">
 
-            <button
-                type="submit"
-                class="reset-btn"
+                    <i class="fa-solid fa-envelope input-icon"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        value="{{ old('email') }}"
+                        placeholder="{{ is_urdu() ? 'اپنا رجسٹرڈ ای میل پتہ درج کریں' : 'Enter your registered email' }}"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="reset-btn"
+                >
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    {{ t('Send Reset Link', 'پاس ورڈ دوبارہ ترتیب دینے کا لنک بھیجیں') }}
+
+                </button>
+
+            </form>
+
+            <!-- Back To Login -->
+
+            <a
+                href="{{ route('login') }}"
+                class="back-login"
             >
 
-                <i class="fa-solid fa-paper-plane"></i>
+                <i class="fa-solid fa-arrow-left"></i>
 
-                Send Reset Link
+                {{ t('Back to Login', 'لاگ اِن پر واپس جائیں') }}
 
-            </button>
+            </a>
 
-        </form>
-
-
-        <!-- =====================================================
-             BACK TO LOGIN
-        ====================================================== -->
-
-        <a
-            href="{{ route('login') }}"
-            class="back-login"
-        >
-
-            <i class="fa-solid fa-arrow-left"></i>
-
-            Back to Login
-
-        </a>
-
+        </div>
 
     </div>
-
-
-</div>
-
 
 </body>
 
 </html>
+

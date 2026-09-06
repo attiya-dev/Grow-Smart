@@ -6,24 +6,14 @@ use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
-    /**
-     * Switch the application locale
-     */
-    public function switch($locale)
+    public function change(Request $request, string $language)
     {
-        // Validate the locale is supported
-        $supportedLocales = ['en', 'ur'];
-        
-        if (!in_array($locale, $supportedLocales)) {
-            return redirect()->back();
+        if (!in_array($language, ['en', 'ur'])) {
+            $language = 'en';
         }
 
-        // Store the locale in session
-        session()->put('locale', $locale);
-        
-        // Or store in cookie for persistence (lasts 365 days)
-        // cookie()->queue('locale', $locale, 365 * 24 * 60);
+        session(['language' => $language]);
 
-        return redirect()->back();
+        return back();
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Summer Crops | GrowSmart')
+@section('title', (is_urdu() ? 'موسم گرما کی فصلیں' : 'Summer Crops') . ' | GrowSmart')
 
 @push('styles')
 <style>
@@ -381,16 +381,15 @@
 
             <div class="crop-page-label">
                 <i class="bi bi-sun-fill"></i>
-                Summer Season
+                {{ t('Summer Season', 'موسم گرما') }}
             </div>
 
             <h1 class="crop-page-title">
-                Summer Crops
+                {{ t('Summer Crops', 'موسم گرما کی فصلیں') }}
             </h1>
 
             <p class="crop-page-subtitle">
-                Discover crops suitable for the summer season and explore
-                detailed information about their cultivation and management.
+                {{ t('Discover crops suitable for the summer season and explore detailed information about their cultivation and management.', 'موسم گرما کے لیے موزوں فصلوں کو دیکھیں اور ان کی کاشت اور انتظام کے بارے میں تفصیلی معلومات حاصل کریں۔') }}
             </p>
 
         </div>
@@ -420,7 +419,7 @@
 
                                 <img
                                     src="{{ asset('images/' . $crop->image) }}"
-                                    alt="{{ $crop->name }}"
+                                    alt="{{ local_text($crop, 'name') }}"
                                     loading="lazy"
                                 >
 
@@ -428,7 +427,7 @@
 
                                 <div class="crop-badge">
                                     <i class="bi bi-sun me-1"></i>
-                                    Summer
+                                    {{ t('Summer', 'موسم گرما') }}
                                 </div>
 
                                 <div class="crop-card-arrow">
@@ -440,13 +439,13 @@
                             <div class="card-info">
 
                                 <div class="crop-title">
-                                    {{ $crop->name }}
+                                    {{ local_text($crop, 'name') }}
                                 </div>
 
                                 @if($crop->type)
 
                                     <div class="crop-type">
-                                        {{ ucfirst($crop->type) }}
+                                        {{ local_text($crop, 'type') }}
                                     </div>
 
                                 @endif
@@ -470,12 +469,11 @@
                         </div>
 
                         <h5>
-                            No Summer Crops Available
+                            No {{ t('Summer Crops', 'موسم گرما کی فصلیں') }} Available
                         </h5>
 
                         <p>
-                            There are currently no summer crops available.
-                            Please check back later.
+                            {{ t('There are currently no summer crops available. Please check back later.', 'اس وقت موسم گرما کی کوئی فصل دستیاب نہیں ہے۔ براہِ کرم بعد میں دوبارہ دیکھیں۔') }}
                         </p>
 
                     </div>

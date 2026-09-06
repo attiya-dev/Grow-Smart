@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'My Profile | GrowSmart')
+@section('title', t('My Profile | GrowSmart', 'میرا پروفائل | گرو اسمارٹ'))
 
 @section('content')
 
-<div class="container profile-container">
+<div class="container py-4">
 
     <div class="profile-card">
 
         <div class="profile-header">
-            <h2>My Profile</h2>
-            <p>Manage your GrowSmart profile picture.</p>
+            <h2>{{ t('My Profile', 'میرا پروفائل') }}</h2>
+            <p>{{ t('Manage your GrowSmart profile picture.', 'اپنی گرو اسمارٹ پروفائل تصویر کا انتظام کریں۔') }}</p>
         </div>
 
         @if(session('success'))
@@ -35,7 +35,7 @@
                     src="{{ asset(Auth::user()->profile_photo) }}"
                     class="profile-big-image"
                     id="profilePreview"
-                    alt="Profile Picture"
+                    :alt="t('Profile Picture', 'پروفائل تصویر')"
                 >
 
             @else
@@ -48,14 +48,14 @@
                     src=""
                     class="profile-big-image d-none"
                     id="profilePreview"
-                    alt="Profile Picture"
+                    :alt="t('Profile Picture', 'پروفائل تصویر')"
                 >
 
             @endif
 
         </div>
 
-        <div class="text-center profile-user-info">
+        <div class="text-center mt-3">
 
             <h4>{{ Auth::user()->name }}</h4>
 
@@ -98,7 +98,7 @@
                     onclick="document.getElementById('galleryInput').click()"
                 >
                     <i class="bi bi-images"></i>
-                    Gallery
+                    {{ t('Gallery', 'گیلری') }}
                 </button>
 
                 <button
@@ -107,13 +107,13 @@
                     onclick="document.getElementById('cameraInput').click()"
                 >
                     <i class="bi bi-camera"></i>
-                    Camera
+                    {{ t('Camera', 'کیمرہ') }}
                 </button>
 
             </div>
 
             <div id="selectedFileName" class="selected-file">
-                No new image selected
+                {{ t('No new image selected', 'کوئی نئی تصویر منتخب نہیں کی گئی') }}
             </div>
 
             <button
@@ -121,7 +121,7 @@
                 class="save-profile"
             >
                 <i class="bi bi-check-circle"></i>
-                Save Profile Picture
+                {{ t('Save Profile Picture', 'پروفائل تصویر محفوظ کریں') }}
             </button>
 
         </form>
@@ -131,7 +131,7 @@
             <form
                 action="{{ route('profile.delete') }}"
                 method="POST"
-                class="text-center remove-form"
+                class="text-center mt-3"
             >
 
                 @csrf
@@ -142,7 +142,7 @@
                     class="remove-profile"
                 >
                     <i class="bi bi-trash"></i>
-                    Remove Profile Picture
+                    {{ t('Remove Profile Picture', 'پروفائل تصویر ہٹا دیں') }}
                 </button>
 
             </form>
@@ -159,36 +159,29 @@
 
 <style>
 
-.profile-container {
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-
 .profile-card {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 650px;
+    margin: 20px auto;
     background: white;
-    border-radius: 18px;
-    padding: 25px 30px;
-    box-shadow: 0 8px 25px rgba(23, 59, 50, 0.10);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 35px rgba(23, 59, 50, 0.10);
 }
 
 .profile-header {
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 25px;
 }
 
 .profile-header h2 {
     color: #173b32;
     font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 25px;
+    margin-bottom: 8px;
 }
 
 .profile-header p {
     color: #718078;
     margin-bottom: 0;
-    font-size: 14px;
 }
 
 .profile-picture-area {
@@ -199,11 +192,11 @@
 
 .profile-big-image,
 .profile-placeholder {
-    width: 125px;
-    height: 125px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #e6efe9;
+    border: 5px solid #e6efe9;
 }
 
 .profile-placeholder {
@@ -212,37 +205,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 55px;
-}
-
-.profile-user-info {
-    margin-top: 10px;
-}
-
-.profile-user-info h4 {
-    margin-bottom: 2px;
-    color: #173b32;
-    font-size: 19px;
-}
-
-.profile-user-info p {
-    margin-bottom: 0;
-    font-size: 13px;
+    font-size: 65px;
 }
 
 .profile-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 17px;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .profile-option {
     border: none;
     background: #e6efe9;
     color: #173b32;
-    padding: 10px 20px;
-    border-radius: 9px;
+    padding: 12px 22px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
@@ -256,9 +234,9 @@
 .selected-file {
     text-align: center;
     color: #718078;
-    font-size: 12px;
-    margin-top: 10px;
-    min-height: 18px;
+    font-size: 13px;
+    margin-top: 15px;
+    min-height: 20px;
 }
 
 .save-profile {
@@ -266,9 +244,9 @@
     border: none;
     background: #285c48;
     color: white;
-    padding: 11px;
-    border-radius: 9px;
-    margin-top: 10px;
+    padding: 13px;
+    border-radius: 10px;
+    margin-top: 15px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
@@ -278,15 +256,11 @@
     background: #173b32;
 }
 
-.remove-form {
-    margin-top: 10px;
-}
-
 .remove-profile {
     border: none;
     background: #f8d7da;
     color: #842029;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
@@ -297,27 +271,20 @@
 }
 
 .alert {
-    border-radius: 9px;
-    padding: 9px 12px;
-    margin-bottom: 12px;
-    font-size: 13px;
+    border-radius: 10px;
 }
 
 @media (max-width: 576px) {
 
-    .profile-container {
-        padding-top: 5px;
-    }
-
     .profile-card {
-        padding: 22px 16px;
-        margin: 0 auto;
+        padding: 25px 18px;
+        margin: 10px auto;
     }
 
     .profile-big-image,
     .profile-placeholder {
-        width: 115px;
-        height: 115px;
+        width: 130px;
+        height: 130px;
     }
 
     .profile-buttons {

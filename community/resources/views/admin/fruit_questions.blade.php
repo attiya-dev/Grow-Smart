@@ -110,13 +110,13 @@ audio {
 <div class="container">
 
     <div class="heading">
-        <h1>🍎 Fruit Questions</h1>
+        <h1>{{ t('🍎 Fruit Questions', '🍎 پھلوں سے متعلق سوالات') }}</h1>
     </div>
 
     @if($questions->count() == 0)
 
         <div class="empty">
-            No Pending Fruit Questions
+            {{ t('No Pending Fruit Questions', 'پھلوں سے متعلق کوئی زیرِ التوا سوال نہیں ہے۔') }}
         </div>
 
     @else
@@ -151,7 +151,7 @@ audio {
                     <div class="voice">
 
                         <div class="voice-title">
-                            🎤 Voice Questions
+                            {{ t('🎤 Voice Question', '🎤 آواز میں سوال') }}
                         </div>
 
                         @foreach($question->question_voice as $voice)
@@ -185,7 +185,7 @@ audio {
                     >
 
                     <button type="submit" class="btn approve">
-                        Approve
+                        {{ t('Approve', 'منظور کریں') }}
                     </button>
 
                 </form>
@@ -205,7 +205,7 @@ audio {
                     >
 
                     <button type="submit" class="btn reject">
-                        Reject
+                        {{ t('Reject', 'مسترد کریں') }}
                     </button>
 
                 </form>

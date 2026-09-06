@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Vegetables | GrowSmart')
+@section('title', (is_urdu() ? 'سبزیاں' : 'Vegetables') . ' | GrowSmart')
 
 @push('styles')
 <style>
@@ -244,6 +244,44 @@
         margin: 0;
     }
 
+    .vegetable-crop-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .vegetable-crop-row > [class*="col-"] {
+        display: flex;
+    }
+
+    .vegetable-page[dir="rtl"] .vegetable-crop-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.5rem;
+        direction: rtl;
+    }
+
+    .vegetable-page[dir="rtl"] .vegetable-crop-row > [class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        display: flex;
+    }
+
+    .vegetable-page[dir="rtl"] .crop-card-link {
+        width: 100%;
+    }
+
+    .vegetable-page[dir="rtl"] .crop-view-badge {
+        right: auto;
+        left: 12px;
+    }
+
+    @media (max-width: 1199px) {
+        .vegetable-page[dir="rtl"] .vegetable-crop-row {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
     @media (max-width: 992px) {
 
         .crop-hero {
@@ -260,6 +298,10 @@
 
         .crop-image-wrapper {
             height: 210px;
+        }
+
+        .vegetable-page[dir="rtl"] .vegetable-crop-row {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
     }
 
@@ -312,6 +354,11 @@
 
         .crop-title {
             font-size: 15px;
+        }
+
+        .vegetable-page[dir="rtl"] .vegetable-crop-row {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
         }
     }
 
@@ -382,38 +429,43 @@
         .empty-state {
             padding: 40px 15px;
         }
+
+        .vegetable-page[dir="rtl"] .vegetable-crop-row {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
     }
 </style>
 @endpush
 
 @section('content')
 
-<div class="vegetable-page">
+<div class="vegetable-page" dir="{{ is_urdu() ? 'rtl' : 'ltr' }}">
 
-    <!-- Hero Section -->
     <div class="crop-hero">
 
         <div class="crop-hero-content">
 
             <div class="crop-badge">
                 <i class="bi bi-flower1"></i>
-                Vegetable Collection
+                {{ t('Vegetable Collection', 'سبزیوں کا مجموعہ') }}
             </div>
 
             <h1 class="crop-page-title">
-                Vegetables
+                {{ t('Vegetables', 'سبزیاں') }}
             </h1>
 
             <p class="crop-page-subtitle">
-                Explore a variety of vegetables and discover useful agricultural
-                information, growing details, and expert guidance for each crop.
+                {{ t(
+                    'Explore a variety of vegetables and discover useful agricultural information, growing details, and expert guidance for each crop.',
+                    'مختلف سبزیوں کو دیکھیں اور ہر فصل کے بارے میں مفید زرعی معلومات، کاشت کی تفصیلات اور ماہرین کی رہنمائی حاصل کریں۔'
+                ) }}
             </p>
 
         </div>
 
     </div>
 
-    <!-- Vegetable Crops Section -->
     <div class="crop-data-wrapper">
 
         <div class="crop-section-header">
@@ -421,19 +473,21 @@
             <div>
 
                 <h2 class="crop-section-title">
-                    Vegetable
+                    {{ t('Vegetable', 'سبزی') }}
                 </h2>
 
                 <p class="crop-section-text">
-                    Select a vegetable to view its complete agricultural details.
+                    {{ t(
+                        'Select a vegetable to view its complete agricultural details.',
+                        'مکمل زرعی تفصیلات دیکھنے کے لیے ایک سبزی منتخب کریں۔'
+                    ) }}
                 </p>
 
             </div>
 
         </div>
 
-        <!-- Crop Cards -->
-        <div class="row g-4">
+        <div class="row g-4 vegetable-crop-row">
 
             @forelse($crops as $crop)
 
@@ -446,34 +500,35 @@
 
                         <div class="crop-card">
 
-                            <!-- Crop Image -->
                             <div class="crop-image-wrapper">
 
                                 <img
                                     src="{{ asset('images/' . $crop->image) }}"
-                                    alt="{{ $crop->name }}"
+                                    alt="{{ local_text($crop, 'name') }}"
                                     loading="lazy"
                                 >
 
                                 <div class="crop-image-overlay"></div>
 
                                 <span class="crop-view-badge">
-                                    View Details
+                                    {{ t(
+                                        'View Details',
+                                        'تفصیلات دیکھیں'
+                                    ) }}
                                 </span>
 
                             </div>
 
-                            <!-- Crop Information -->
                             <div class="card-info">
 
                                 <div class="crop-title">
-                                    {{ $crop->name }}
+                                    {{ local_text($crop, 'name') }}
                                 </div>
 
                                 @if($crop->type)
 
                                     <div class="crop-type">
-                                        {{ ucfirst($crop->type) }}
+                                        {{ local_text($crop, 'type') }}
                                     </div>
 
                                 @endif
@@ -488,7 +543,6 @@
 
             @empty
 
-                <!-- Empty State -->
                 <div class="col-12">
 
                     <div class="empty-state text-center">
@@ -498,11 +552,17 @@
                         </div>
 
                         <h5>
-                            No Vegetables Available
+                            {{ t(
+                                'No Vegetables Available',
+                                'کوئی سبزیاں دستیاب نہیں ہیں'
+                            ) }}
                         </h5>
 
                         <p>
-                            There are currently no vegetables available to display.
+                            {{ t(
+                                'There are currently no vegetables available to display.',
+                                'اس وقت دکھانے کے لیے کوئی سبزی دستیاب نہیں ہے۔'
+                            ) }}
                         </p>
 
                     </div>

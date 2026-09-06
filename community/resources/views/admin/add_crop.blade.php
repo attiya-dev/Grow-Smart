@@ -124,10 +124,10 @@ body {
 </style>
 
 
-<div class="form-container">
+<div class="form-container" data-no-translate="true">
 
     <h1>
-        🌱 Add New Crop
+        🌱 {{ t('Add New Crop', 'نئی فصل شامل کریں') }}
     </h1>
 
 
@@ -164,7 +164,7 @@ body {
         <div class="form-group">
 
             <label>
-                Crop Image
+                {{ t('Crop Image', 'فصل کی تصویر') }}
             </label>
 
             <input
@@ -180,13 +180,13 @@ body {
         <div class="form-group">
 
             <label>
-                Crop Name
+                {{ t('Crop Name', 'فصل کا نام') }}
             </label>
 
             <input
                 type="text"
                 name="name"
-                placeholder="Example: Mango"
+                placeholder="{{ t('Example: Mango', 'مثال: آم') }}"
                 value="{{ old('name') }}"
                 required
             >
@@ -197,7 +197,7 @@ body {
         <div class="form-group">
 
             <label>
-                Category
+                {{ t('Category', 'زمرہ') }}
             </label>
 
             <select
@@ -206,28 +206,28 @@ body {
             >
 
                 <option value="">
-                    Select Category
+                    {{ t('Select Category', 'زمرہ منتخب کریں') }}
                 </option>
 
                 <option
                     value="fruit"
                     {{ old('category') == 'fruit' ? 'selected' : '' }}
                 >
-                    Fruit
+                    {{ t('Fruit', 'پھل') }}
                 </option>
 
                 <option
                     value="vegetable"
                     {{ old('category') == 'vegetable' ? 'selected' : '' }}
                 >
-                    Vegetable
+                    {{ t('Vegetable', 'سبزی') }}
                 </option>
 
                 <option
                     value="grain"
                     {{ old('category') == 'grain' ? 'selected' : '' }}
                 >
-                    Grain
+                    {{ t('Grain', 'اناج') }}
                 </option>
 
             </select>
@@ -238,7 +238,7 @@ body {
         <div class="form-group">
 
             <label>
-                Season
+                {{ t('Season', 'موسم') }}
             </label>
 
             <select
@@ -247,21 +247,21 @@ body {
             >
 
                 <option value="">
-                    Select Season
+                    {{ t('Select Season', 'موسم منتخب کریں') }}
                 </option>
 
                 <option
                     value="summer"
                     {{ old('season') == 'summer' ? 'selected' : '' }}
                 >
-                    Summer
+                    {{ t('Summer', 'موسم گرما') }}
                 </option>
 
                 <option
                     value="winter"
                     {{ old('season') == 'winter' ? 'selected' : '' }}
                 >
-                    Winter
+                    {{ t('Winter', 'موسم سرما') }}
                 </option>
 
             </select>
@@ -272,7 +272,7 @@ body {
         <div class="form-group">
 
             <label>
-                Type
+                {{ t('Type', 'قسم') }}
             </label>
 
             <select
@@ -280,21 +280,21 @@ body {
             >
 
                 <option value="">
-                    Select Type
+                    {{ t('Select Type', 'قسم منتخب کریں') }}
                 </option>
 
                 <option
                     value="indoor"
                     {{ old('type') == 'indoor' ? 'selected' : '' }}
                 >
-                    Indoor
+                    {{ t('Indoor', 'اندرونی') }}
                 </option>
 
                 <option
                     value="outdoor"
                     {{ old('type') == 'outdoor' ? 'selected' : '' }}
                 >
-                    Outdoor
+                    {{ t('Outdoor', 'بیرونی') }}
                 </option>
 
             </select>
@@ -308,7 +308,7 @@ body {
                 type="submit"
                 class="btn save"
             >
-                💾 Save Crop
+                💾 {{ t('Save Crop', 'فصل محفوظ کریں') }}
             </button>
 
 
@@ -316,7 +316,7 @@ body {
                 href="{{ route('admin.crops') }}"
                 class="btn back"
             >
-                Back
+                {{ t('Back', 'واپس') }}
             </a>
 
         </div>

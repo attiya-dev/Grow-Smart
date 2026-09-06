@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language() }}" dir="ltr" class="{{ is_urdu() ? 'urdu-mode' : '' }}">
 
 <head>
 
@@ -10,12 +10,10 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>GrowSmart | Login</title>
+    <title>{{ t('GrowSmart | Login', 'گرو اسمارٹ | داخلہ') }}</title>
 
 
-    <!-- =========================================================
-         FONT AWESOME
-    ========================================================= -->
+    
 
     <link
         rel="stylesheet"
@@ -23,9 +21,7 @@
     >
 
 
-    <!-- =========================================================
-         GOOGLE FONT
-    ========================================================= -->
+    
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -35,9 +31,7 @@
 
     <style>
 
-        /* =========================================================
-           BASIC SETTINGS
-        ========================================================= */
+        
 
         * {
 
@@ -62,9 +56,7 @@
         }
 
 
-        /* =========================================================
-           BODY BACKGROUND
-        ========================================================= */
+        
 
         body {
 
@@ -94,9 +86,7 @@
         }
 
 
-        /* =========================================================
-           BACKGROUND DECORATION
-        ========================================================= */
+        
 
         body::before {
 
@@ -146,9 +136,7 @@
         }
 
 
-        /* =========================================================
-           MAIN CONTAINER
-        ========================================================= */
+        
 
         .container {
 
@@ -184,9 +172,7 @@
         }
 
 
-        /* =========================================================
-           BOX ANIMATION
-        ========================================================= */
+        
 
         @keyframes boxAppear {
 
@@ -213,9 +199,7 @@
         }
 
 
-        /* =========================================================
-           LEFT SIDE
-        ========================================================= */
+        
 
         .left {
 
@@ -234,9 +218,7 @@
         }
 
 
-        /* =========================================================
-           GROWSMART BRAND
-        ========================================================= */
+        
 
         .brand {
 
@@ -285,9 +267,7 @@
         }
 
 
-        /* =========================================================
-           HEADING
-        ========================================================= */
+        
 
         h2 {
 
@@ -315,9 +295,7 @@
         }
 
 
-        /* =========================================================
-           INPUT GROUP
-        ========================================================= */
+        
 
         .input-group {
 
@@ -377,9 +355,7 @@
         }
 
 
-        /* =========================================================
-           INPUT ICON
-        ========================================================= */
+        
 
         .input-group > i.fa-envelope,
         .input-group > i.fa-lock {
@@ -402,9 +378,7 @@
         }
 
 
-        /* =========================================================
-           PASSWORD EYE
-        ========================================================= */
+        
 
         .eye {
 
@@ -435,9 +409,7 @@
         }
 
 
-        /* =========================================================
-           REMOVE BROWSER PASSWORD EYE
-        ========================================================= */
+        
 
         input[type="password"]::-ms-reveal,
         input[type="password"]::-ms-clear {
@@ -457,9 +429,7 @@
         }
 
 
-        /* =========================================================
-           FORGOT PASSWORD
-        ========================================================= */
+        
 
         .forgot-password {
 
@@ -491,9 +461,7 @@
         }
 
 
-        /* =========================================================
-           LOGIN BUTTON
-        ========================================================= */
+        
 
         button {
 
@@ -567,9 +535,7 @@
         }
 
 
-        /* =========================================================
-           REGISTER LINK
-        ========================================================= */
+        
 
         .register-text {
 
@@ -604,9 +570,7 @@
         }
 
 
-        /* =========================================================
-           RIGHT IMAGE SIDE
-        ========================================================= */
+        
 
         .right {
 
@@ -631,12 +595,7 @@
         }
 
 
-        /* =========================================================
-           LIGHT IMAGE OVERLAY
-           
-           IMPORTANT:
-           This is much lighter so the picture stays clear.
-        ========================================================= */
+        
 
         .right::before {
 
@@ -659,9 +618,7 @@
         }
 
 
-        /* =========================================================
-           DECORATIVE CIRCLE
-        ========================================================= */
+        
 
         .right::after {
 
@@ -688,9 +645,7 @@
         }
 
 
-        /* =========================================================
-           RIGHT CONTENT
-        ========================================================= */
+        
 
         .right-content {
 
@@ -713,9 +668,7 @@
         }
 
 
-        /* =========================================================
-           LEAF ICON
-        ========================================================= */
+        
 
         .leaf {
 
@@ -750,9 +703,7 @@
         }
 
 
-        /* =========================================================
-           RIGHT HEADING
-        ========================================================= */
+        
 
         .right-content h3 {
 
@@ -767,9 +718,7 @@
         }
 
 
-        /* =========================================================
-           RIGHT DESCRIPTION
-        ========================================================= */
+        
 
         .right-content p {
 
@@ -786,9 +735,7 @@
         }
 
 
-        /* =========================================================
-           ERROR MESSAGE
-        ========================================================= */
+        
 
         .error {
 
@@ -813,9 +760,7 @@
         }
 
 
-        /* =========================================================
-           SUCCESS MESSAGE
-        ========================================================= */
+        
 
         .success {
 
@@ -840,9 +785,7 @@
         }
 
 
-        /* =========================================================
-           TABLET
-        ========================================================= */
+        
 
         @media (max-width: 850px) {
 
@@ -878,9 +821,7 @@
         }
 
 
-        /* =========================================================
-           MOBILE
-        ========================================================= */
+        
 
         @media (max-width: 650px) {
 
@@ -967,9 +908,7 @@
         }
 
 
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
+        
 
         @media (max-width: 400px) {
 
@@ -1040,29 +979,37 @@
 
     </style>
 
+
+<style id="growsmart-urdu-design">
+html.urdu-mode, html.urdu-mode body { direction: ltr; }
+html.urdu-mode body { text-align: right; }
+html.urdu-mode .container, html.urdu-mode .container-fluid, html.urdu-mode .row, html.urdu-mode .d-flex, html.urdu-mode .navbar, html.urdu-mode .navbar-nav, html.urdu-mode footer, html.urdu-mode header { direction: ltr; }
+html.urdu-mode .row > *, html.urdu-mode .card, html.urdu-mode section, html.urdu-mode article, html.urdu-mode form, html.urdu-mode p, html.urdu-mode h1, html.urdu-mode h2, html.urdu-mode h3, html.urdu-mode h4, html.urdu-mode h5, html.urdu-mode h6, html.urdu-mode label, html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select, html.urdu-mode table, html.urdu-mode td, html.urdu-mode th { direction: rtl; text-align: right; }
+html.urdu-mode input, html.urdu-mode textarea, html.urdu-mode select { direction: rtl; text-align: right; }
+html.urdu-mode .text-start { text-align: right !important; }
+html.urdu-mode .text-end { text-align: left !important; }
+html.urdu-mode .brand { justify-content: flex-end; }
+html.urdu-mode .input-group > i.fa-envelope, html.urdu-mode .input-group > i.fa-lock { left: auto; right: 16px; }
+html.urdu-mode .input-group input { padding-left: 45px; padding-right: 45px; }
+html.urdu-mode .eye { right: auto; left: 15px; }
+</style>
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     MAIN CONTAINER
-========================================================= -->
+
 
 <div class="container">
 
 
-    <!-- =====================================================
-         LEFT SIDE
-    ====================================================== -->
+    
 
     <div class="left">
 
 
-        <!-- =================================================
-             GROWSMART LOGO
-        ================================================== -->
+        
 
         <div class="brand">
 
@@ -1073,31 +1020,27 @@
             >
 
             <span class="brand-name">
-                GrowSmart
+                {{ t('GrowSmart', 'گرو اسمارٹ') }}
             </span>
 
         </div>
 
 
-        <!-- =================================================
-             HEADING
-        ================================================== -->
+        
 
         <h2>
-            Welcome Back
+            {{ t('Welcome Back', 'خوش آمدید') }}
         </h2>
 
 
         <p class="subtitle">
 
-            Login to continue your smart agriculture journey.
+            {{ t('Log in to your account to continue your smart agriculture journey.', 'اپنے ذہین زرعی سفر کو جاری رکھنے کے لیے اپنے اکاؤنٹ میں داخل ہوں۔') }}
 
         </p>
 
 
-        <!-- =================================================
-             SESSION ERROR
-        ================================================== -->
+        
 
         @if(session('error'))
 
@@ -1105,16 +1048,14 @@
 
                 <i class="fa-solid fa-circle-exclamation"></i>
 
-                {{ session('error') }}
+                {{ auth_text(session('error')) }}
 
             </div>
 
         @endif
 
 
-        <!-- =================================================
-             VALIDATION ERROR
-        ================================================== -->
+        
 
         @if($errors->any())
 
@@ -1122,16 +1063,14 @@
 
                 <i class="fa-solid fa-circle-exclamation"></i>
 
-                {{ $errors->first() }}
+                {{ auth_text($errors->first()) }}
 
             </div>
 
         @endif
 
 
-        <!-- =================================================
-             SUCCESS
-        ================================================== -->
+        
 
         @if(session('success'))
 
@@ -1139,16 +1078,14 @@
 
                 <i class="fa-solid fa-circle-check"></i>
 
-                {{ session('success') }}
+                {{ auth_text(session('success')) }}
 
             </div>
 
         @endif
 
 
-        <!-- =================================================
-             LOGIN FORM
-        ================================================== -->
+        
 
         <form
             method="POST"
@@ -1158,7 +1095,7 @@
             @csrf
 
 
-            <!-- EMAIL -->
+            
 
             <div class="input-group">
 
@@ -1167,7 +1104,7 @@
                 <input
                     type="email"
                     name="email"
-                    placeholder="Email Address"
+                    placeholder="{{ is_urdu() ? 'ای میل پتہ' : 'Email Address' }}"
                     value="{{ old('email') }}"
                     required
                     autocomplete="email"
@@ -1176,7 +1113,7 @@
             </div>
 
 
-            <!-- PASSWORD -->
+            
 
             <div class="input-group">
 
@@ -1186,7 +1123,7 @@
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Password"
+                    placeholder="{{ is_urdu() ? 'پاس ورڈ' : 'Password' }}"
                     required
                     autocomplete="current-password"
                 >
@@ -1199,23 +1136,23 @@
             </div>
 
 
-            <!-- FORGOT PASSWORD -->
+            
 
             <a
                 href="{{ route('password.request') }}"
                 class="forgot-password"
             >
 
-                Forgot Password?
+                {{ t('Forgot Password?', 'پاس ورڈ بھول گئے؟') }}
 
             </a>
 
 
-            <!-- LOGIN BUTTON -->
+            
 
             <button type="submit">
 
-                Login
+                {{ t('Login', 'داخل ہوں') }}
 
                 <i class="fa-solid fa-arrow-right"></i>
 
@@ -1225,17 +1162,15 @@
         </form>
 
 
-        <!-- =================================================
-             REGISTER
-        ================================================== -->
+        
 
         <p class="register-text">
 
-            Don't have an account?
+            {{ t("Don't have an account?", 'کیا آپ کا ابھی تک اکاؤنٹ نہیں ہے؟') }}
 
             <a href="{{ route('register') }}">
 
-                Register
+                {{ t('Register', 'رجسٹر کریں') }}
 
             </a>
 
@@ -1245,9 +1180,7 @@
     </div>
 
 
-    <!-- =====================================================
-         RIGHT SIDE
-    ====================================================== -->
+    
 
     <div class="right">
 
@@ -1266,16 +1199,14 @@
 
                 Grow Smarter.<br>
 
-                Farm Better.
+                {{ t('Farm Better.', 'بہتر کاشت کاری کریں۔') }}
 
             </h3>
 
 
             <p>
 
-                Discover smarter agricultural knowledge,
-                better farming decisions and a connected
-                farming community with GrowSmart.
+                {{ t('Discover smarter agricultural knowledge, better farming decisions and a connected farming community with GrowSmart.', 'بہتر زرعی معلومات حاصل کریں، بہتر زرعی فیصلے کریں اور گرو اسمارٹ کی مربوط زرعی کمیونٹی سے جڑیں۔') }}
 
             </p>
 
@@ -1289,9 +1220,7 @@
 </div>
 
 
-<!-- =========================================================
-     PASSWORD SHOW / HIDE
-========================================================= -->
+
 
 <script>
 

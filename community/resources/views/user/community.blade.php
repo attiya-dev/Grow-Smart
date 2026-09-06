@@ -123,14 +123,14 @@
 
 </style>
 
-<div class="community-container">
+<div class="community-container" data-no-translate>
 
 <div class="community-title">
 
-    <h1>Community Forum</h1>
+    <h1>{{ is_urdu() ? 'کمیونٹی فورم' : 'Community Forum' }}</h1>
 
     <p>
-        Ask questions and get useful advice from agricultural experts.
+        {{ is_urdu() ? 'سوالات پوچھیں اور زرعی ماہرین سے مفید مشورے حاصل کریں۔' : 'Ask questions and get useful advice from agricultural experts.' }}
     </p>
 
 </div>
@@ -143,15 +143,14 @@
 
         <div class="overlay">
 
-            <h2>🌾 Crops</h2>
+            <h2>🌾 {{ is_urdu() ? 'فصلیں' : 'Crops' }}</h2>
 
             <p>
-                Ask questions about wheat, rice, cotton, sugarcane
-                and other crops.
+                {{ is_urdu() ? 'گندم، چاول، کپاس، گنے اور دوسری فصلوں کے بارے میں سوالات پوچھیں۔' : 'Ask questions about wheat, rice, cotton, sugarcane and other crops.' }}
             </p>
 
             <a href="{{ route('community.crop') }}" class="btnExplore">
-                Explore →
+                {{ is_urdu() ? 'دیکھیں →' : 'Explore →' }}
             </a>
 
         </div>
@@ -165,15 +164,14 @@
 
         <div class="overlay">
 
-            <h2>🍎 Fruits</h2>
+            <h2>🍎 {{ is_urdu() ? 'پھل' : 'Fruits' }}</h2>
 
             <p>
-                Ask questions about mango, apple, orange,
-                banana and other fruits.
+                {{ is_urdu() ? 'آم، سیب، مالٹے، کیلے اور دوسرے پھلوں کے بارے میں سوالات پوچھیں۔' : 'Ask questions about mango, apple, orange, banana and other fruits.' }}
             </p>
 
             <a href="{{ route('community.fruit') }}" class="btnExplore">
-                Explore →
+                {{ is_urdu() ? 'دیکھیں →' : 'Explore →' }}
             </a>
 
         </div>
@@ -187,15 +185,14 @@
 
         <div class="overlay">
 
-            <h2>🥕 Vegetables</h2>
+            <h2>🥕 {{ is_urdu() ? 'سبزیاں' : 'Vegetables' }}</h2>
 
             <p>
-                Get help about tomato, potato, onion,
-                carrot and other vegetables.
+                {{ is_urdu() ? 'ٹماٹر، آلو، پیاز، گاجر اور دوسری سبزیوں کے بارے میں مدد حاصل کریں۔' : 'Get help about tomato, potato, onion, carrot and other vegetables.' }}
             </p>
 
             <a href="{{ route('community.vegetable') }}" class="btnExplore">
-                Explore →
+                {{ is_urdu() ? 'دیکھیں →' : 'Explore →' }}
             </a>
 
         </div>
@@ -209,15 +206,14 @@
 
         <div class="overlay">
 
-            <h2>📋 My Questions</h2>
+            <h2>📋 {{ is_urdu() ? 'میرے سوالات' : 'My Questions' }}</h2>
 
             <p>
-                See your questions, their status and replies
-                from agricultural experts.
+                {{ is_urdu() ? 'اپنے سوالات، ان کی صورتحال اور زرعی ماہرین کے جوابات دیکھیں۔' : 'See your questions, their status and replies from agricultural experts.' }}
             </p>
 
             <a href="{{ route('my.questions') }}" class="btnExplore">
-                View →
+                {{ is_urdu() ? 'دیکھیں →' : 'View →' }}
             </a>
 
         </div>

@@ -106,23 +106,23 @@ body{
 
 </style>
 
-<div class="container">
+<div class="container" data-no-translate="true">
 
 <div class="title">
 
-<h1>Pending Community Questions</h1>
+<h1>{{ t('Pending Community Questions', 'کمیونٹی کے زیرِ التوا سوالات') }}</h1>
 
-<p>Select a category to review questions.</p>
+<p>{{ t('Select a category to review questions.', 'سوالات کا جائزہ لینے کے لیے ایک زمرہ منتخب کریں۔') }}</p>
 
 </div>
 
 <div class="cards">
 
-<!-- Crop -->
+
 
 <div class="card">
 
-<h2>🌾 Crop Questions</h2>
+<h2>🌾 {{ t('Crop Questions', 'فصلوں سے متعلق سوالات') }}</h2>
 
 @if($cropCount>0)
 
@@ -136,7 +136,7 @@ body{
 
 <div class="no-question">
 
-No Questions Asked
+{{ t('No Questions Asked', 'ابھی تک کوئی سوال نہیں پوچھا گیا۔') }}
 
 </div>
 
@@ -144,17 +144,17 @@ No Questions Asked
 
 <a href="{{ route('admin.crop.questions') }}" class="btn">
 
-Open
+{{ t('Open', 'کھولیں') }}
 
 </a>
 
 </div>
 
-<!-- Fruit -->
+
 
 <div class="card">
 
-<h2>🍎 Fruit Questions</h2>
+<h2>🍎 {{ t('Fruit Questions', 'پھلوں سے متعلق سوالات') }}</h2>
 
 @if($fruitCount>0)
 
@@ -168,7 +168,7 @@ Open
 
 <div class="no-question">
 
-No Questions Asked
+{{ t('No Questions Asked', 'ابھی تک کوئی سوال نہیں پوچھا گیا۔') }}
 
 </div>
 
@@ -176,17 +176,17 @@ No Questions Asked
 
 <a href="{{ route('admin.fruit.questions') }}" class="btn">
 
-Open
+{{ t('Open', 'کھولیں') }}
 
 </a>
 
 </div>
 
-<!-- Vegetable -->
+
 
 <div class="card">
 
-<h2>🥕 Vegetable Questions</h2>
+<h2>🥕 {{ t('Vegetable Questions', 'سبزیوں سے متعلق سوالات') }}</h2>
 
 @if($vegetableCount>0)
 
@@ -200,7 +200,7 @@ Open
 
 <div class="no-question">
 
-No Questions Asked
+{{ t('No Questions Asked', 'ابھی تک کوئی سوال نہیں پوچھا گیا۔') }}
 
 </div>
 
@@ -208,7 +208,7 @@ No Questions Asked
 
 <a href="{{ route('admin.vegetable.questions') }}" class="btn">
 
-Open
+{{ t('Open', 'کھولیں') }}
 
 </a>
 
